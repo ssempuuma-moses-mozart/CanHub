@@ -1,0 +1,117 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Google Fonts and Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Title Section -->
+<section id="title-section" class="title-section py-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1 class="display-4" style="font-family: 'Roboto', sans-serif;"></h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Title Section -->
+
+<!-- Campaign Section -->
+<section id="campaign" class="campaign py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-lg-8 mb-4 mb-lg-0">
+              <div class="position-relative">
+                <img src="{{campaign_image.url }}" class="img-fluid rounded mb-4" alt="Campaign Image">
+                <!-- Floating Badge -->
+                <div class="badge badge-primary position-absolute top-0 start-0 translate-middle mt-3 ms-3 rounded-pill p-2" style="background-color: #ff6b6b; color: #ffffff;">Status: {{ status }}</div>
+            </div>
+                <p class="text-muted" style="font-family: 'Roboto', sans-serif; font-weight: bold; display: flex;">
+                  <span><i class="fas fa-user"></i> Organized by {{ name }}</span>
+                  <span style="margin-left: auto; margin-right: auto;"><i class="fas fa-map-marker-alt"></i> {{ location }}</span>
+              </p>              
+              {% if campaign_video %}
+              <div class="embed-responsive embed-responsive-16by9 mb-4">
+                  <video class="embed-responsive-item" controls>
+                      <source src="{{ campaign_video.url}}" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+              </div>
+            {% else %}
+              <p>No video available.</p>
+            {% endif %}
+                
+               
+                <p class="text-muted">{{ description }}</p>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-lg mb-4">
+            
+                    <div class="card-body">
+                      
+                        <h3 class="card-title mb-3 text-success" style="font-family: 'Roboto', sans-serif;">
+                            {{ title }}
+                        </h3>
+                        <div class="progress">
+                          {% if unit.raised_amount >= unit.goal_amount %}
+                              <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                          {% else %}
+                              <div class="progress-bar bg-info" role="progressbar" style="width: {{ percentage_achieved_value  }}%;" aria-valuenow="{{ percentage_achieved_value }}" aria-valuemin="0" aria-valuemax="100">{{ percentage_achieved_value  }}%</div>
+                          {% endif %}
+                      </div>
+                      <p class="card-text"><span class="text-danger">UGX: {{ raised_amount }}/=</span> raised of <span class="text-primary">UGX: {{ goal_amount }}</span> goal</p>
+                        
+                        <p class="mb-4"><strong>Donations:</strong> {{ donation_count }}</p>
+                        <a href="{% url 'website-mobile_money' item_id=donation_id %}" class="btn btn-primary btn-lg btn-block mb-3">Donate Now</a>
+                        <a href="#" class="btn btn-secondary btn-lg btn-block mb-3">Share</a>
+                        
+                        <h4 class="mt-4">Top Donations</h4>
+                        <ul class="list-group">
+                            {% for donation in top_donations %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ donation.amount }}: UGX {{ donation.user.username }}
+                                    <span class="badge badge-primary badge-pill">UGX {{ donation.amount }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                     
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Campaign Section -->
+
+<!-- Custom CSS for hover effects -->
+<style>
+    .progress-bar {
+        transition: width 0.6s ease;
+    }
+
+    .btn-block {
+        font-size: 1.2rem;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+    }
+
+    .list-group-item .badge {
+        font-size: 0.9rem;
+    }
+
+    .card-title i {
+        margin-right: 0.5rem;
+    }
+</style>
+
+
+{% endblock content %}

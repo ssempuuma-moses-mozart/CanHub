@@ -1,0 +1,262 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanHub{% if title %} - {{ title }}{% endif %}</title>
+    <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'dash/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'dash/assets/css/style.css' %}" rel="stylesheet">
+
+    <!--Custom css-->
+
+    
+<style>
+.btn-group {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-group .btn {
+    margin-right: 5px; /* Adjust as needed */
+}
+
+/* Updated CSS for individual buttons */
+.btn-share {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-share:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styling for dropdown button */
+.btn-secondary.dropdown-toggle::after {
+    display: none;
+}
+/* Updated CSS for progress bar */
+.progress {
+    height: 20px; /* Adjust as needed */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Ensure overflow is hidden */
+}
+
+.progress-bar {
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Optional: Add animation for smoother progress transitions */
+.progress-bar {
+    transition: width 0.5s ease-in-out; /* Adjust duration and easing as needed */
+}
+
+</style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header" class="header fixed-top d-flex align-items-center" style="background-color: #2ecc40;">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="{% url 'website-home' %}" class="logo">
+                <img src="{% static 'img/logo-color.png' %}" width="150px" alt="CanHub Logo">
+            </a>
+            <form class="search-form d-flex" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" class="form-control">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+            </form>
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-search d-block d-lg-none"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell"></i><span class="badge bg-primary">4</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end notifications">
+                            <li class="dropdown-header">You have 4 new notifications</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="notification-item">
+                                <i class="bi bi-exclamation-circle text-warning"></i>
+                                <div>
+                                    <h4>Lorem Ipsum</h4>
+                                    <p>30 min. ago</p>
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-footer"><a href="#">Show all notifications</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-chat-left-text"></i><span class="badge bg-success">3</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end messages">
+                            <li class="dropdown-header">You have 3 new messages</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="message-item">
+                                <a href="#">
+                                    <img src="{% static 'assets/img/messages-1.jpg' %}" alt="Profile Image" class="rounded-circle" width="40">
+                                    <div>
+                                        <h4>Maria Hudson</h4>
+                                        <p>4 hrs. ago</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-footer"><a href="#">Show all messages</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                            <img src="{{ request.user.profile_pic.url }}" alt="Profile" class="rounded-circle" width="40">
+                            <span>{{ request.user.username | lower }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end profile">
+                            <li class="dropdown-header">
+                                <h6>{{ request.user.username | lower }}</h6>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'user_profile' user.id %}"><i class="bi bi-person"></i>My Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i>Account Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'index' %}"><i class="bi bi-question-circle"></i>Cancer Social Network</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-grid"></i>Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'campaigns' item_id=item_id %}"><i class="bi bi-megaphone"></i>Campaigns</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'my_donations' user.id %}"><i class="bi bi-menu-button-wide"></i>My Donations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-journal-text"></i>Donate Now</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-layout-text-window-reverse"></i>Message</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-bar-chart"></i>Send SMS</a>
+            </li>
+            <li class="nav-heading">Pages</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_profile' user.id %}"><i class="bi bi-person"></i>Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-question-circle"></i>Ask Our AI</a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'website-home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+
+        <section class="section dashboard">
+            <div class="row">
+                {% for unit in crowdfunding %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ unit.campaign_image.url }}" class="card-img-top" alt="Campaign Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ unit.title }}</h5>
+                            <p class="card-text">{{ unit.description|truncatewords:15 }}</p>
+                            <div class="progress mb-2">
+                                {% if unit.raised_amount >= unit.goal_amount %}
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                                {% else %}
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ unit.percentage_achieved|floatformat:'0' }}%;" aria-valuenow="{{ unit.percentage_achieved|floatformat:'0' }}" aria-valuemin="0" aria-valuemax="100">{{ unit.percentage_achieved|floatformat:'0' }}%</div>
+                                {% endif %}
+                            </div>
+                            <p class="card-text">UGX: {{ unit.raised_amount }}/= raised</p>
+                            <div class="btn-group" role="group">
+                                <a href="#" class="btn btn-primary">Donate</a>
+                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Share
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick="shareOnWhatsApp('{{ unit.share_url }}')">WhatsApp</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="shareOnFacebook('{{ unit.share_url }}')">Facebook</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="shareOnInstagram('{{ unit.share_url }}')">Instagram</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="shareOnTwitter('{{ unit.share_url }}')">Twitter</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'dash/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'dash/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'dash/assets/vendor/chart.js/chart.min.js' %}"></script>
+    <script src="{% static 'dash/assets/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'dash/assets/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'dash/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'dash/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'dash/assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'dash/assets/js/main.js' %}"></script>
+
+    <script>
+    function shareOnWhatsApp(url) {
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Check out this campaign: ' + url)}`, '_blank');
+    }
+
+    function shareOnFacebook(url) {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+    }
+
+    function shareOnInstagram(url) {
+        // Instagram does not have a direct web share link for posts
+        alert('Please copy the URL and share it on Instagram.');
+    }
+
+    function shareOnTwitter(url) {
+        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent('Check out this campaign!')}`, '_blank');
+    }
+    </script>
+</body>
+
+</html>
+{% endblock content %}

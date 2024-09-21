@@ -1,0 +1,490 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanHub</title>
+    <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/responsive-home.css' %}"/>
+</head>
+
+<body>
+
+    <!-- -----------Navigation bar-------------------- -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <a href="{% url 'website-home'%}" class="logo"><img src="{% static 'img/logo-color.png' %}" alt="logo" style="width: 120px; height: auto;"></a>
+                </div>
+                <div class="searchbar">
+                    <input type="text" name="Search" id="Searchbar" placeholder="Search">
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <ul>
+                    <li><a href="{% url 'index' %}"><img src="{% static 'img/Img/home.png' %}" class="menu-png">
+                            <span>Home</span></a></li>
+
+                    <li><a href="{% url 'my_network' %}"><img src="{% static 'img/Img/user.png' %}" class="menu-png"> <span>My Network</span></a></li>
+
+                    <li><a href="{% url 'groups' %}"><img src="{% static 'img/Img/briefcase.png' %}" class="menu-png"> <span>Groups</span></a></li>
+
+                    <li><a href="{% url 'messaging' %}"><img src="{% static 'img/Img/chat.png' %}" class="menu-png"> <span>Messaging</span></a></li>
+
+                    <li class="active-link"><a href="{% url 'notifications' %}"><img src="{% static 'img/Img/notification.png' %}" class="menu-png">
+                            <span>Notifications</span></a>
+                    </li>
+                    <li><a href="#">
+                            <img src="{{ user_profile_picture }}" class="menu-png" id="profile">
+                            <span>Me</span></a>
+                    </li>
+                    <li id="business-border"><a href="index.html"><img src="{% static 'img/Img/menu.png' %}" class="menu-png"> <span>For
+                                Business</span></a>
+                    </li>
+                    <li id="Premium-link"><a href="#"><span>Try Premium for Free</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ------------------------------Main content start------------------------- -->
+    
+    
+    <div class="container0">
+        <div class="container">
+
+
+            <!-- --------------------------------Left sidebar start---------------------------- -->
+            
+
+            <div class="left-sidebar">
+                <div class="profile-box">
+                {% if user.cover and user.cover.url %}
+                    <img class="img1" src="{{ user.cover.url }}" width="100%" height="100px">
+                 {% else %}
+                <img class="img1" src="{% static 'images/Background.png' %}" width="100%" height="100px">
+                 {% endif %}
+                    <div class="profile-info">
+                        <img src="{{ user_profile_picture }}" alt="">
+                        <h1>{{ full_name }}</h1>
+                        <h2>Development | CSE Student |</h2>
+                        <ul>
+                            <li>
+                                <p>Who's viewed your profile </p><span>68</span>
+                            </li>
+                            <li>
+                                <p>Impressions on last post </p><span>450</span>
+                            </li>
+                            <li>
+                                <p>Connections </p><span>995</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="my-items">
+                        <a href="#">
+                            <img src="{% static 'img/Img/Bookmark.png' %}" alt="Bookmark">
+                            <span>My Items</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h2>Recent</h2>
+                    <ul>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Web development</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>User interface</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>CanHub Learning</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Software Developer</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>HR circle</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Frontend Developers</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Jobs 4 devs</span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- --------------------------------Main content start---------------------------- -->
+            
+
+            <div class="main-content">
+
+
+                <!-- ---------------------Create post section----------------------- -->
+                
+
+                <div class="create-post">
+                    <div class="img-write-post">
+                        <div class="profile-img">
+                            <a href="#"><img src="{{ user_profile_picture }}" alt="Profile"></a>
+                        </div>
+                        <div class="writepost">
+                            <textarea name="writepost" id="write-post" placeholder="Add post" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="post-options">
+                            <a href="">
+                                <img src="{% static 'img/Img/photo.png' %}">
+                                <span>Media</span>
+                            </a>
+                        </div>
+                        <div class="post-options">
+                            <a href="">
+                                <img src="{% static 'img/Img/calendar.png' %}">
+                                <span>Event</span>
+                            </a>
+                        </div>
+                        <div class="post-options post">
+                            <button>
+                                <span>POST</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------Main post section 1----------------------- -->
+
+
+                <div class="main-post">
+                    <div class="user-info">
+                        <img src="{% static 'img/Profile photos\male20171085990978485.jpg' %}">
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">Max Waller(He/Him)</span>
+                            <span>Software developer at Microsoft</span>
+                            <span>1d</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+        
+                    </div>
+                    <div class="post-img">
+                        <img src="{% static 'img/Posts for linkedin\ben-kolde-bs2Ba7t69mM-unsplash.jpg' %}">
+                    </div>
+                    <div class="reactions">
+                        <span>Rohit and 15 others liked your post</span>
+                        <span>3 comments</span>
+                    </div>
+                    <div class="feed-options">
+                        <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                        <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------Main post section 2----------------------- -->
+
+
+                <div class="main-post">
+                    <div class="user-info">
+                        <img src="{% static 'img/Profile photos\male108525478553.jpg' %}">
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">Richard J Champion(He/Him)</span>
+                            <span>Software developer at Amazon</span>
+                            <span>11h</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iure, placeat voluptates reiciendis blanditiis assumenda inventore quo quisquam! Nemo expedita hic unde id repudiandae earum, minus, veniam consequatur, dolores impedit magnam nostrum repellendus ab quasi. Neque dolores ipsam et esse.<br><br>
+
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse beatae molestiae repellendus similique consectetur, temporibus magnam labore placeat debitis cumque aliquam fuga nisi quasi rerum exercitationem ratione voluptatem dolorum quis nulla quos? Atque aperiam, aspernatur labore facilis, voluptates pariatur unde magni minus quidem, perferendis magnam quibusdam delectus veritatis nihil totam.
+                    </div>
+                    <div class="post-img">
+                        <img src="{% static 'img/Posts for linkedin\christopher-gower-vjMgqUkS8q8-unsplash.jpg' %}" loading="lazy">
+                    </div>
+                    <div class="reactions">
+                        <span>Rohit and 15 others liked your post</span>
+                        <span>3 comments</span>
+                    </div>
+                    <div class="feed-options">
+                        <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                        <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------Main post section 3----------------------- -->
+
+
+                <div class="main-post">
+                    <div class="user-info">
+                        <img src="{% static 'img/Profile photos\male20171084030770721.jpg' %}" loading="lazy">
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">Gary B Harber(He/Him)</span>
+                            <span>Full Stack developer at Microsoft</span>
+                            <span>2d</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iure, placeat voluptates reiciendis blanditiis assumenda inventore quo quisquam! Nemo expedita hic unde id repudiandae earum, minus, veniam consequatur, dolores impedit magnam nostrum repellendus ab quasi. Neque dolores ipsam et esse.<br><br>
+
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse beatae molestiae repellendus similique consectetur, temporibus magnam labore placeat debitis cumque aliquam fuga nisi quasi rerum exercitationem ratione voluptatem dolorum quis nulla quos? Atque aperiam, aspernatur labore facilis, voluptates pariatur unde magni minus quidem, perferendis magnam quibusdam delectus veritatis nihil totam.
+                    </div>
+                    <div class="post-img">
+                        <img src="{% static 'img/Posts for linkedin\clark-tibbs-oqStl2L5oxI-unsplash.jpg' %}" loading="lazy">
+                    </div>
+                    <div class="reactions">
+                        <span>Rohit and 15 others liked your post</span>
+                        <span>3 comments</span>
+                    </div>
+                    <div class="feed-options">
+                        <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                        <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------Main post section 4----------------------- -->
+
+
+                <div class="main-post">
+                    <div class="user-info">
+                        <img src="{% static 'img/Profile photos\male1085370366516.jpg' %}">
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">Robert J Holmes(He/Him)</span>
+                            <span>Android developer at Microsoft</span>
+                            <span>5h</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iure, placeat voluptates reiciendis blanditiis assumenda inventore quo quisquam! Nemo expedita hic unde id repudiandae earum, minus, veniam consequatur, dolores impedit magnam nostrum repellendus ab quasi. Neque dolores ipsam et esse.<br><br>
+
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse beatae molestiae repellendus similique consectetur, temporibus magnam labore placeat debitis cumque aliquam fuga nisi quasi rerum exercitationem ratione voluptatem dolorum quis nulla quos? Atque aperiam, aspernatur labore facilis, voluptates pariatur unde magni minus quidem, perferendis magnam quibusdam delectus veritatis nihil totam.
+                    </div>
+                    <div class="post-img">
+                        <img src="{% static 'img/Posts for linkedin\ian-schneider-TamMbr4okv4-unsplash.jpg' %}" loading="lazy">
+                    </div>
+                    <div class="reactions">
+                        <span>Rohit and 15 others liked your post</span>
+                        <span>3 comments</span>
+                    </div>
+                    <div class="feed-options">
+                        <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                        <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------Main post section 5----------------------- -->
+
+
+                <div class="main-post">
+                    <div class="user-info">
+                        <img src="{% static 'img/Profile photos\male20151083665276093.jpg' %}">
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">Paul S Baker(He/Him)</span>
+                            <span>Software developer at Microsoft</span>
+                            <span>7h</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iure, placeat voluptates reiciendis blanditiis assumenda inventore quo quisquam! Nemo expedita hic unde id repudiandae earum, minus, veniam consequatur, dolores impedit magnam nostrum repellendus ab quasi. Neque dolores ipsam et esse.<br><br>
+
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse beatae molestiae repellendus similique consectetur, temporibus magnam labore placeat debitis cumque aliquam fuga nisi quasi rerum exercitationem ratione voluptatem dolorum quis nulla quos? Atque aperiam, aspernatur labore facilis, voluptates pariatur unde magni minus quidem, perferendis magnam quibusdam delectus veritatis nihil totam.
+                    </div>
+                    <div class="post-img">
+                        <img src="{% static 'img/Posts for linkedin\luca-bravo-XJXWbfSo2f0-unsplash.jpg' %}" loading="lazy">
+                    </div>
+                    <div class="reactions">
+                        <span>Rohit and 15 others liked your post</span>
+                        <span>3 comments</span>
+                    </div>
+                    <div class="feed-options">
+                        <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                        <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------Main post section 6----------------------- -->
+
+
+                <div class="main-post">
+                    <div class="user-info">
+                        <img src="{% static 'img/Profile photos\female20151024442450714.jpg' %}">
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">Lucy J Jones(She/Her)</span>
+                            <span>Software developer at Microsoft</span>
+                            <span>3d</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iure, placeat voluptates reiciendis blanditiis assumenda inventore quo quisquam! Nemo expedita hic unde id repudiandae earum, minus, veniam consequatur, dolores impedit magnam nostrum repellendus ab quasi. Neque dolores ipsam et esse.<br><br>
+
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse beatae molestiae repellendus similique consectetur, temporibus magnam labore placeat debitis cumque aliquam fuga nisi quasi rerum exercitationem ratione voluptatem dolorum quis nulla quos? Atque aperiam, aspernatur labore facilis, voluptates pariatur unde magni minus quidem, perferendis magnam quibusdam delectus veritatis nihil totam.
+                    </div>
+                    <div class="post-img">
+                        <img src="{% static 'img/Posts for linkedin\lum3n--RBuQ2PK_L8-unsplash.jpg' %}" loading="lazy">
+                    </div>
+                    <div class="reactions">
+                        <span>Rohit and 15 others liked your post</span>
+                        <span>3 comments</span>
+                    </div>
+                    <div class="feed-options">
+                        <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                        <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------Main post section 7----------------------- -->
+
+
+                <div class="main-post">
+                    <div class="user-info">
+                        <img src="{% static 'img/Profile photos\male20131086117243408.jpg' %}">
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">Mark M Spiller(He/Him)</span>
+                            <span>Software developer at Microsoft</span>
+                            <span>1h</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iure, placeat voluptates reiciendis blanditiis assumenda inventore quo quisquam! Nemo expedita hic unde id repudiandae earum, minus, veniam consequatur, dolores impedit magnam nostrum repellendus ab quasi. Neque dolores ipsam et esse.<br><br>
+
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse beatae molestiae repellendus similique consectetur, temporibus magnam labore placeat debitis cumque aliquam fuga nisi quasi rerum exercitationem ratione voluptatem dolorum quis nulla quos? Atque aperiam, aspernatur labore facilis, voluptates pariatur unde magni minus quidem, perferendis magnam quibusdam delectus veritatis nihil totam.
+                    </div>
+                    <div class="post-img">
+                        <img src="{% static 'img/Posts for linkedin\marvin-meyer-SYTO3xs06fU-unsplash.jpg' %}" loading="lazy">
+                    </div>
+                    <div class="reactions">
+                        <span>Rohit and 15 others liked your post</span>
+                        <span>3 comments</span>
+                    </div>
+                    <div class="feed-options">
+                        <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                        <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- --------------------------------Right sidebar start---------------------------- -->
+
+
+            <div class="right-sidebar">
+
+                <div class="linkedin-news">
+                    <div class="heading">
+                        <h2>CanHub News</h2>
+                        <img src="{% static 'img/Img/information-button.png' %}" alt="">
+                    </div>
+                    <div class="news-list">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Israel Hamas war: Latest Update</h3>
+                                    <h4>Top News &middot; 5600 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Fintech funding sees a surge</h3>
+                                    <h4>2h ago &middot; 350 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Green is in at FMCG firms</h3>
+                                    <h4>2d ago &middot; 560 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Samller cities lead festive buying</h3>
+                                    <h4>3h ago &middot; 610 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Hiring trends shift in IT</h3>
+                                    <h4>1d ago &middot; 2180 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp GenZ rethinks career paths</h3>
+                                    <h4>3d ago &middot; 730 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Big four battle for talent</h3>
+                                    <h4>7h ago &middot; 645 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Getting job ready for retail</h3>
+                                    <h4>4h ago &middot; 480 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp Israel Hamas War Impact on India</h3>
+                                    <h4>6h ago &middot; 3540 readers</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <h3>&#9679&nbsp MSFT wins $69B Activision deal</h3>
+                                    <h4>2d ago &middot; 3020 readers</h4>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer sticky">
+                    <div class="useful-links">
+                        <span>About</span>
+                        <span>Accessibility</span>
+                        <span>Help Center</span>
+                        <span>Privacy and Terms</span>
+                        <span>AD Choices</span>
+                        <span>Advertising</span>
+                        <span>Business services</span>
+                        <span>Get the CanHub app</span>
+                        <span>More</span>
+                        
+                    </div>
+                    <div class="footer-tag">CanHub&copy; 2024</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+
+</html>

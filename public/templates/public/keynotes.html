@@ -1,0 +1,169 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<link href="{% static 'card/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+<!-- Template Main CSS File -->
+<!-- <link href="{% static 'card/assets/css/style.css' %}" rel="stylesheet"> -->
+
+
+
+<!-- Stylesheets -->
+<link href="{% static 'card/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/slick.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/responsive.css' %}" rel="stylesheet">
+<!--Color Switcher Mockup-->
+<link href="{% static 'card/css/color-switcher-design.css' %}" rel="stylesheet">
+<!--Color Themes-->
+<link id="theme-color-file" href="{% static 'card/css/color-themes/default-theme.css' %}" rel="stylesheet">
+
+
+
+<style>
+body {
+    background: #dad8d8;
+    color: #666666;
+    font-family: "Open Sans", sans-serif;
+}
+
+.featured-services .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+.featured-services .icon-box::before {
+  content: "";
+  position: absolute;
+  background: #d9f1f2;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 100%;
+  transition: all 0.3s;
+  z-index: -1;
+}
+.featured-services .icon-box:hover::before {
+  background: #3fbbc0;
+  top: 0;
+  border-radius: 0px;
+}
+.featured-services .icon {
+  margin-bottom: 15px;
+}
+.featured-services .icon i {
+  font-size: 48px;
+  line-height: 1;
+  color: #3fbbc0;
+  transition: all 0.3s ease-in-out;
+}
+.featured-services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.featured-services .title a {
+  color: #111;
+}
+.featured-services .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+.featured-services .icon-box:hover .title a, .featured-services .icon-box:hover .description {
+  color: #fff;
+}
+.featured-services .icon-box:hover .icon i {
+  color: #fff;
+}
+
+</style>
+
+
+  <!-- ======= Featured Services Section ======= -->
+  <section id="featured-services" class="featured-services" style="margin-top: 2cm;">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+          <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+            <div class=""><i class=""></i></div>
+            <h4 class="title"><a href="">Smart Parking App Development</a></h4>
+            <p class="description" style="text-align: justify;">Create a mobile application that helps users find available parking spots in real-time, 
+                allowing them to reserve or navigate to the nearest available spot.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+          <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+            <div class=""><i class=""></i></div>
+            <h4 class="title"><a href="">IoT-Based Parking Sensors:</a></h4>
+            <p class="description">Develop a project that involves deploying IoT sensors in parking lots to detect and
+                 communicate parking spot availability to a central system or mobile app.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+          <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+            <div class=""><i class=""></i></div>
+            <h4 class="title"><a href="">Smart Payment Solutions:</a></h4>
+            <p class="description">Develop a payment system integrated into the parking app that allows users to pay seamlessly through 
+                various methods like mobile wallets or online payment gateways.</p>
+          </div>
+        </div>
+        <!-- icon   fas fa-dna -->
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+          <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+            <div class=""><i class=""></i></div>
+            <h4 class="title"><a href="">Parking Management System</a></h4>
+            <p class="description">Create a comprehensive system for managing parking lots, including entry/exit control, payment processing,
+                 and real-time monitoring of occupancy.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <!-- End Featured Services Section -->
+
+
+
+  <script src="{% static 'card/assets/vendor/purecounter/purecounter.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/php-email-form/validate.js' %}"></script>
+  <!-- Template Main JS File -->
+  <script src="{% static 'card/assets/js/main.js' %}"></script>
+  <!-- Custom template scripts -->
+  <script src="{% static 'card/assets/js/magister.js' %}"></script>
+
+
+
+  <script src="{% static 'card/js/jquery.js' %}"></script>
+  <script src="{% static 'card/js/popper.min.js' %}"></script>
+  <script src="{% static 'card/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.fancybox.js' %}"></script>
+  <script src="{% static 'card/js/appear.js' %}"></script>
+  <script src="{% static 'card/js/owl.js' %}"></script>
+  <script src="{% static 'card/js/wow.js' %}"></script>
+  <script src="{% static 'card/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'card/js/script.js' %}"></script>
+  <script src="{% static 'card/js/color-settings.js' %}"></script>
+
+{% endblock content %}

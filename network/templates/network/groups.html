@@ -1,0 +1,858 @@
+{% load custom_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CanHub</title>
+    <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/network.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive-network.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    
+    <script type="text/javascript" src="{% static 'network/layout.js' %}"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            margin-left: 60px;
+        }
+
+        .sidebar {
+            order: 1;
+            /* Ensures the sidebar is on the right */
+            width: 250px;
+            /* Adjust if needed */
+            padding-right: 0px;
+            margin-right: 0px;
+        }
+
+        .main-content {
+            position: relative;
+            order: 0;
+            flex: 1;
+            width: 850px;
+            padding-right: 30px;
+            padding-left: 0px;
+            margin-left: 10px;
+        }
+
+        .heading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: 20px;
+            margin-top: 10px;
+            /* Adjust as needed for spacing from the edges */
+            font-size: 14px;
+            /* Adjust as needed */
+            color: #333;
+            /* Adjust as needed */
+            background: rgba(255, 255, 255, 0.8);
+            /* Optional: Add a background to ensure text readability */
+            padding: 2px;
+            /* Optional: Add padding around the text */
+            border-radius: 5px;
+            /* Optional: Rounded corners for the background */
+        }
+
+        .invitations {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows the items to wrap to the next row */
+            gap: 20px;
+            /* Space between cards */
+            padding-top: 50px;
+        }
+
+
+
+        /* Ad section styling */
+        .ad {
+            position: relative;
+            /* Positioning context for the button */
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        /* Button styling */
+        .button-right {
+            position: absolute;
+            /* Position the button absolutely */
+            top: 20px;
+            /* Distance from the top of the container */
+            right: 20px;
+            /* Distance from the right of the container */
+            padding: 10px 20px;
+            background-color: #007bff;
+            /* Bootstrap primary color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Button hover effect */
+        .button-right:hover {
+            background-color: #0056b3;
+        }
+
+        /* Links styling */
+        .links {
+            margin-top: 5px;
+            /* Ensure there's space for the button */
+        }
+
+        .link {
+            margin-bottom: 5px;
+            /* Space between links */
+            text-decoration: none;
+            color: black;
+            /* Link color */
+            font-size: 16px;
+            padding-right: 20px;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Separator styling */
+        .separator {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 15px 0;
+            /* Add some space around the separator */
+        }
+
+        .description {
+            display: block;
+            /* Ensure it behaves as a block-level element */
+            margin-top: 15px;
+            /* Add some space above the paragraph */
+            font-size: 14px;
+            /* Adjust the font size as needed */
+            color: #333;
+            /* Set text color */
+        }
+
+        /* styles.css */
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            padding-top: 5px;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            align-items: center;
+            /* Center vertically */
+            justify-content: center;
+            /* Center horizontally */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            padding-top: 2px;
+            margin: 5% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            /* Width of the modal */
+            max-width: 600px;
+            /* Max width of the modal */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            /* Optional: shadow effect */
+            border-radius: 8px;
+            /* Optional: rounded corners */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+
+        .container2 {
+            width: 60%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .header {
+            position: relative;
+            background-color: #e6e6fa;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            height: 200px;
+            /* Adjust as necessary */
+            overflow: hidden;
+        }
+
+        .header img.cover-photo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+            /* Match border-radius with header */
+        }
+
+        .profile-section {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -50px;
+            /* To overlap the profile image */
+        }
+
+        .profile-section img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .pen-icon {
+            position: absolute;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .pen-icon.cover {
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+        }
+
+        .pen-icon.profile {
+            bottom: 0;
+            right: 200px;
+        }
+
+
+        .upload-icon {
+            position: absolute;
+            top: 70px;
+            left: 90px;
+            cursor: pointer;
+            color: #005580;
+            font-size: 20px;
+        }
+
+        .cover-upload-icon {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            color: #005580;
+            font-size: 20px;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 150px;
+            background-color: #e6e6fa;
+            margin-bottom: 20px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .add-industry-btn {
+            background-color: #0073b1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-industry-btn:hover {
+            background-color: #005580;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 20px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: block;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        .permissions {
+            margin: 20px 0;
+        }
+
+        /* For reducing the button size */
+        .btn.btn-primary {
+            font-size: 14px;
+            /* Decrease the text size */
+            padding: 8px 16px;
+            /* Adjust the padding for smaller button size */
+            background-color: #007bff;
+            /* Primary color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn.btn-primary:hover {
+            background-color: #0056b3;
+            /* Slightly darker shade on hover */
+        }
+
+        /* Position the button at the bottom-right */
+        .form-group.button-group {
+            display: flex;
+            justify-content: flex-end;
+            /* Aligns button to the right */
+            margin-top: 20px;
+            /* Add some spacing from above content */
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            /* Center align items vertically */
+            margin-bottom: 0px;
+            /* Space between user profiles */
+            padding: 10px;
+            padding-bottom: 0px;
+
+        }
+
+        .user-profile-pic {
+            width: 40px;
+            /* Adjust size as needed */
+            height: 40px;
+            /* Adjust size as needed */
+            border-radius: 50%;
+            /* Make the profile picture round */
+            margin-right: 10px;
+        }
+
+        .user-details {
+            flex: 1;
+            /* Allow the details to take the remaining space */
+        }
+
+        .user-details h1 {
+            font-size: 11px;
+            /* Font size for the user's name */
+            margin: 0;
+            /* Remove default margin */
+        }
+
+        .discover-content {
+            padding-top: 60px;
+            padding-bottom: 5px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .discover-content img {
+            width: 100px;
+            margin-right: 20px;
+        }
+
+
+        .button {
+            /* background-color: #007bff;  */
+            color: black;
+            /* White text color */
+            border: 1;
+            /* Remove default border */
+            border-radius: 15px;
+            /* Rounded corners for button */
+            padding: 5px 12px;
+            /* Padding inside the button */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            font-size: 14px;
+            /* Font size for button text */
+            margin-top: 5px;
+            /* Space between the name and the button */
+            align-items: center;
+            /* Center items vertically */
+            justify-content: center;
+            /* Center items horizontally */
+            margin-left: 70px;
+            /* Auto width to fit content */
+            background-color: transparent;
+            /* Remove background color */
+        }
+
+        .follow-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            /* Cursor to indicate the button is disabled */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- -----------Navigation bar-------------------- -->
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="{% url 'website-home'%}" class="logo"><img src="{% static 'img/logo-color.png' %}" alt="logo"
+                    style="width: 120px; height: auto;"></a>
+            <div class="search-box">
+                <img src="{% static 'images/search.png' %}">
+                <input type="text" placeholder="Search for anything">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="{% url 'index' %}"><img src="{% static 'images/home.png' %}" alt="home">
+                        <span>Home</span></a></li>
+                <li><a href="{% url 'my_network' %}"><img src="{% static 'images/network.png' %}" alt="network">
+                        <span>My Network</span></a></li>
+                <li><a href="{% url 'groups' %}" class="active-link"><img src="{% static 'images/jobs.png' %}" alt="jobs">
+                        <span>Groups</span></a></li>
+                <li><a href="{% url 'messaging' %}"><img src="{% static 'images/message.png' %}" alt="message">
+                        <span>Messaging</span></a></li>
+                <li><a href="{% url 'notifications' %}"><img src="{% static 'images/notification.png' %}"
+                            alt="notification"> <span>Notifications</span></a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <div class="online">
+                <img src="{{ user_profile_picture }}" class="nav-profile-img" onclick="toggleMenu()">
+            </div>
+        </div>
+        <!----Dropdown menu-->
+        <div class="profile-menu-wrap" id="profileMenu">
+            <div class="profile-menu">
+                <div class="user-info">
+                    <img src="{{ user_profile_picture }}">
+                    <div>
+                        <h3>{{ full_name }}</h3>
+                        <a href="#">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/feedback.png' %}">
+                    <p>Give Feedback</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/setting.png' %}">
+                    <p>Settings & Privacy</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/help.png' %}">
+                    <p>Help & Support</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/display.png' %}">
+                    <p>Display & Accessibility</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/logout.png' %}">
+                    <p>Logout</p>
+                    <span>></span>
+                </a>
+
+
+            </div>
+        </div>
+
+
+    </nav>
+
+    <!-- ------------------------------Main content start------------------------- -->
+
+    <div class="container0">
+        <div class="container">
+            <div class="sidebar">
+
+
+                <div class="heading">
+                    <h1>Manage my network</h1>
+                </div>
+                <div class="reference-links">
+
+                    <h1 style="font-size: 14px;">Groups you might be interested in</h1>
+
+                    {% for group in groups %}
+                    <a href="{% url 'group_detail' group.id %}">
+                        <div class="user-profile">
+
+                            {% if group.profile_image %}
+                            <img src="{{ group.profile_image.url }}" alt="{{ group.group_name }}"
+                                class="user-profile-pic">
+                            {% else %}
+                            <img src="{% static 'images/Background.png' %}" class="user-profile-pic">
+                            {% endif %}
+
+                            <div class="user-details">
+                                <h1>{{ group.group_name }}</h1>
+                                <p style="font-size: 11px;">{{ group.industry }} <br> {{ group.description }} </p>
+                            </div>
+
+                        </div>
+
+                        {% if is_logged_in %}
+                        {% if is_member|get_item:group.id %}
+                        <button class="button" disabled>Member</button>
+                        {% else %}
+                        <form method="POST" action="{% url 'group_detail' group.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button" style="width: 100px;">+ Join</button>
+                        </form>
+                        {% endif %}
+                        {% endif %}
+                        <!-- <button type="submit" class="follow-button" name="action" value="follow" data-user-id="{{ followed_user.id }}">
+                            <span>connect</span>  
+                        </button> -->
+                    </a>
+                    {% empty %}
+                    <p>No users found.</p>
+                    {% endfor %}
+
+                </div>
+
+                <div class="footer">
+                    <div class="useful-links">
+                        <span>About</span>
+                        <span>Accessibility</span>
+                        <span>Help Center</span>
+                        <span>Privacy and Terms</span>
+                        <span>AD Choices</span>
+                        <span>Advertising</span>
+                        <span>Business services</span>
+                        <span>Get the CanHub app</span>
+                        <span>More</span>
+                    </div>
+                    <div class="footer-tag">CanHub&copy; 2024</div>
+                </div>
+            </div>
+
+
+            <div class="main-content">
+                <div class="ad">
+                    <div class="links">
+                        <a href="#" class="link">Your Groups</a>
+                        <a href="#" class="link">Requested</a>
+                    </div>
+                    <hr class="separator">
+                    <button id="openModalBtn" class="button-right">Create group</button>
+
+
+                    <div class="description">
+
+
+
+
+                        <div class="discover-content">
+                            <img src="{% static 'images/teamwork.png' %}" alt="Person working" width="40%">
+                            <div class="discover-items">
+                                <h3 style="padding: 15px;">"Hey there! Discover Exciting New Groups!"</h3>
+                                <p style="padding-top: 15px; padding-bottom: 20px;">Find other trusted communities that
+                                    share and support your goals.</p>
+                                <button style="margin-top: 5px; margin-bottom: 80px;">Discover</button>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- The Modal -->
+                        <!-- Modal HTML -->
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Create Group</h2>
+
+                                <form id="profileForm" method="post" enctype="multipart/form-data"
+                                    action="{% url 'groups' %}">
+                                    {% csrf_token %}
+                                    <!-- Cover Photo Section -->
+                                    <div class="header">
+                                        <img id="cover-photo" class="cover-photo"
+                                            src="{% static 'images/default-cover.jpg' %}" alt="Cover Image">
+                                        <!-- Cover Photo Upload Icon -->
+                                        <label for="cover-input" class="pen-icon cover">
+                                            <i class="fas fa-pen" style="font-size: 20px;"></i>
+                                        </label>
+                                        <input type="file" id="cover-input" name="cover_photo" style="display: none;"
+                                            onchange="loadCoverImage(event)">
+                                    </div>
+
+                                    <!-- Profile Image Section -->
+                                    <div class="profile-section">
+                                        <img id="profile-image" src="{% static 'images/default-profile.png' %}"
+                                            alt="Group Profile">
+                                        <!-- Profile Photo Upload Icon -->
+                                        <label for="profile-input" class="pen-icon profile">
+                                            <i class="fas fa-pen" style="font-size: 20px;"></i>
+                                        </label>
+                                        <input type="file" id="profile-input" name="profile_image"
+                                            style="display: none;" onchange="loadProfileImage(event)">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="group-name">Group Name*</label>
+                                        <input type="text" id="group-name" name="group_name"
+                                            placeholder="Inspiring Entrepreneurs in DC" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="description">Description*</label>
+                                        <textarea id="description" name="description" rows="5"
+                                            placeholder="What is the purpose of your group?"  required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="industry">Industry (Add your Industry)</label>
+                                        <input type="text" id="industry" name="industry"
+                                            placeholder="Add any of your industry" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="location">Location*</label>
+                                        <input type="text" id="location" name="location"
+                                            placeholder="Add a location to your group" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="rules">Rules*</label>
+                                        <textarea id="rules" name="rules" rows="5"
+                                            placeholder="Set the tone and expectations of your group" required></textarea>
+                                    </div>
+
+                                    <!-- Group Type (Public/Private) -->
+                                    <div class="radio-group">
+                                        <label>Group Type*</label>
+                                        <label>
+                                            <input type="radio" name="group_type" value="public">
+                                            <strong>Public</strong><br>
+                                            <small>Anyone, on or off Canhub can see posts in the group. The group
+                                                appears in search results and is visible to others on members’
+                                                profiles.</small>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="group_type" value="private">
+                                            <strong>Private</strong><br>
+                                            <small>Only group members can see posts in the group.</small>
+                                        </label>
+                                    </div>
+
+                                    <div class="ad" style="margin-bottom: 0px; padding: 5px;">
+                                        <p>
+                                            <li class="fas fa-question-circle"></li> Group type can’t be changed once
+                                            it’s created. <a href="#" style="color: #005580;">Learn more</a>
+                                        </p>
+                                    </div>
+
+                                    <!-- Permissions -->
+                                    <div class="checkbox-group permissions">
+                                        <label><strong>Permissions</strong></label>
+                                        <label>
+                                            <input type="checkbox" name="permissions" value="allow_invite">
+                                            Allow members to invite their connections<br>
+                                            <small>Group members can invite 1st degree connections to the group. All
+                                                requests to join will still require admin approval.</small>
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="permissions" value="post_review">
+                                            Require new posts to be reviewed by admins<br>
+                                            <small>Members’ posts will require admin approval within 14 days before they
+                                                become visible to others.</small>
+                                        </label>
+                                    </div>
+
+                                    <!-- Button Group -->
+                                    <div class="form-group button-group">
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <!-- Success message display -->
+    {% if success_message %}
+    <div class="alert alert-success" role="alert">
+        {{ success_message }}
+    </div>
+    {% endif %}
+
+
+
+    <!-- JavaScript to handle modal functionality -->
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openModalBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <script>
+        // Modal display logic
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Preview the cover image when uploaded
+        function loadCoverImage(event) {
+            var image = document.getElementById('cover-photo');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        // Preview the profile image when uploaded
+        function loadProfileImage(event) {
+            var image = document.getElementById('profile-image');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+    </script>
+
+</body>
+
+</html>

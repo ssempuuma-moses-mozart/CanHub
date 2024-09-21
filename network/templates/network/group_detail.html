@@ -1,0 +1,1044 @@
+{% load custom_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanHub</title>
+    <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive-home.css' %}" />
+
+    <script type="text/javascript" src="{% static 'network/layout.js' %}"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .post-img {
+            padding: 0 2.8%;
+        }
+
+        .post-img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            /* Center align items vertically */
+            margin-bottom: 0px;
+            /* Space between user profiles */
+            padding: 10px;
+            padding-bottom: 0px;
+
+        }
+
+        .user-profile-pic {
+            width: 40px;
+            /* Adjust size as needed */
+            height: 40px;
+            /* Adjust size as needed */
+            border-radius: 50%;
+            /* Make the profile picture round */
+            margin-right: 10px;
+        }
+
+        .user-details {
+            flex: 1;
+            /* Allow the details to take the remaining space */
+        }
+
+        .user-details h1 {
+            font-size: 11px;
+            /* Font size for the user's name */
+            margin: 0;
+            /* Remove default margin */
+        }
+
+        .group-detail {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .group-profile-pic {
+            width: 150px;
+            /* Adjust as needed */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            /* Aligns the button inline */
+            padding: 5px 10px;
+            margin: 5px 5px;
+            /* Space inside the button */
+            font-size: 16px;
+            /* Font size */
+            color: #fff;
+            /* Text color */
+            background-color: #007bff;
+            /* Background color */
+            border: none;
+            /* No border */
+            border-radius: 5px;
+            /* Rounded corners */
+            text-align: center;
+            /* Center the text */
+            text-decoration: none;
+            /* Remove underline from links */
+            transition: background-color 0.3s, transform 0.2s;
+            /* Smooth transitions */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            /* Darker background on hover */
+            transform: scale(1.05);
+            /* Slightly enlarge the button */
+        }
+
+        .button:active {
+            transform: scale(0.95);
+            /* Shrink on click */
+        }
+
+        .button:disabled {
+            background-color: #ccc;
+            /* Gray background when disabled */
+            cursor: not-allowed;
+            /* Not-allowed cursor */
+        }
+
+
+        /* General styling for the upload label container */
+        .video-upload-label {
+            display: flex;
+            /* Align items in a row */
+            align-items: center;
+            /* Vertically center items */
+            cursor: pointer;
+            /* Change cursor to pointer for better UX */
+            font-size: 14px;
+            /* Adjust font size */
+            color: #007bff;
+            /* Blue color, change as needed */
+            margin: 5px 0;
+            /* Margin for spacing between items */
+        }
+
+        /* Style the video upload icon */
+        .video-upload-label img {
+            width: 24px;
+            /* Adjust width */
+            height: 24px;
+            /* Adjust height */
+            margin-right: 8px;
+            /* Space between icon and text */
+        }
+
+        /* Hide the file input element */
+        .video-upload-label input[type="file"] {
+            display: none;
+            /* Hide file input to use custom label */
+        }
+
+        /* Optional: Add some hover effect */
+        .video-upload-label:hover {
+            color: #0056b3;
+            /* Darker blue on hover */
+            /* text-decoration: underline; */
+        }
+
+        .icon {
+
+            width: 21px;
+        }
+
+        .group-posts {
+            margin: 20px;
+        }
+
+        .main-post {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+
+        .post-img img,
+        .post-video video {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .reactions,
+        .feed-options {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .follow-button {
+            /* background-color: #007bff;  */
+            color: black;
+            /* White text color */
+            border: 1;
+            /* Remove default border */
+            border-radius: 15px;
+            /* Rounded corners for button */
+            padding: 5px 12px;
+            /* Padding inside the button */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            font-size: 14px;
+            /* Font size for button text */
+            margin-top: 5px;
+            /* Space between the name and the button */
+            align-items: center;
+            /* Center items vertically */
+            justify-content: center;
+            /* Center items horizontally */
+            margin-left: 70px;
+            /* Auto width to fit content */
+            background-color: transparent;
+            /* Remove background color */
+        }
+
+        .follow-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            /* Cursor to indicate the button is disabled */
+        }
+
+
+
+
+
+
+        /* General styling for the feed options (like, comment, send buttons) */
+        .feed-options {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            /* background-color: #f9f9f9;
+            border-top: 1px solid #ddd; */
+        
+        }
+
+        .post-activity-icons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .post-activity-link {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .post-activity-link img {
+            margin-right: 5px;
+        }
+
+         /* Hide comment section initially */
+         .comment-section {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .user-comment {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            width: 96%;
+        }
+
+        /* Avatar image for user comments */
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Input field for adding comments */
+        .comment-input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            width: 100%;
+            /* Full width inside the container */
+        }
+
+        .comment-input:focus {
+            border-color: #007bff;
+        }
+
+        /* Styling for the post comment button */
+        .post-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+            display: none;
+            /* Initially hidden until text is entered */
+            margin-top: 5px;
+        }
+
+        .post-button:hover {
+            background-color: #0056b3;
+        }
+
+        .comment-list {
+            max-width: 500px;
+            margin-top: 0px;
+            margin-bottom: -20px;
+            /* background-color: white; */
+            padding-left: 20px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+
+            /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+        }
+
+        .message-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .message-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        /* #f2f2f2 */
+        .message-content {
+            flex-grow: 1;
+            border-radius: 10px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            /* Ensure padding inside the message content */
+        }
+
+        .message-content h4 {
+            margin: 0 0 5px 0;
+            /* Add margin-bottom to ensure space below */
+            font-size: 16px;
+        }
+
+        .message-content p {
+            color: #666;
+            margin: 5px 0;
+            /* Ensure space above and below */
+            font-size: 12px;
+            text-align: justify;
+        }
+
+        .message-time {
+            display: block;
+            /* Ensure the time is on its own line */
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 5px;
+            /* Optional: Add margin if needed for spacing */
+        }
+
+        /* Comment toggle button */
+        .comment-toggle {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+
+       
+    </style>
+
+</head>
+
+<body>
+
+    <!-- -----------Navigation bar-------------------- -->
+
+   
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="{% url 'website-home'%}" class="logo"><img src="{% static 'img/logo-color.png' %}" alt="logo"
+                    style="width: 120px; height: auto;"></a>
+            <div class="search-box">
+                <img src="{% static 'images/search.png' %}">
+                <input type="text" placeholder="Search for anything">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="{% url 'index' %}"><img src="{% static 'images/home.png' %}" alt="home">
+                        <span>Home</span></a></li>
+                <li><a href="{% url 'my_network' %}"><img src="{% static 'images/network.png' %}" alt="network">
+                        <span>My Network</span></a></li>
+                <li><a href="{% url 'groups' %}"  class="active-link"><img src="{% static 'images/jobs.png' %}" alt="jobs">
+                        <span>Groups</span></a></li>
+                <li><a href="{% url 'messaging' %}"><img src="{% static 'images/message.png' %}" alt="message">
+                        <span>Messaging</span></a></li>
+                <li><a href="{% url 'notifications' %}"><img src="{% static 'images/notification.png' %}"
+                            alt="notification"> <span>Notifications</span></a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <div class="online">
+                <img src="{{ user_profile_picture }}" class="nav-profile-img" onclick="toggleMenu()">
+            </div>
+        </div>
+        <!----Dropdown menu-->
+        <div class="profile-menu-wrap" id="profileMenu">
+            <div class="profile-menu">
+                <div class="user-info">
+                    <img src="{{ user_profile_picture }}">
+                    <div>
+                        <h3>{{ full_name }}</h3>
+                        <a href="#">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/feedback.png' %}">
+                    <p>Give Feedback</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/setting.png' %}">
+                    <p>Settings & Privacy</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/help.png' %}">
+                    <p>Help & Support</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/display.png' %}">
+                    <p>Display & Accessibility</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="profile-menu-link">
+                    <img src="{% static 'images/logout.png' %}">
+                    <p>Logout</p>
+                    <span>></span>
+                </a>
+
+
+            </div>
+        </div>
+
+
+    </nav>
+
+
+    <!-- ------------------------------Main content start------------------------- -->
+
+
+    <div class="container0">
+        <div class="container">
+
+
+            <!-- --------------------------------Left sidebar start---------------------------- -->
+
+
+            <div class="left-sidebar">
+                <div class="profile-box">
+                    {% if user.cover and user.cover.url %}
+                    <img class="img1" src="{{ user.cover.url }}" width="100%" height="100px">
+                    {% else %}
+                    <img class="img1" src="{% static 'images/Background.png' %}" width="100%" height="100px">
+                    {% endif %}
+                    <div class="profile-info">
+                        <img src="{{ user_profile_picture }}" alt="">
+                        <h1>{{ full_name }}</h1>
+                        <h2>Development | CSE Student |</h2>
+                        <ul>
+                            <li>
+                                <p>Who's viewed your profile </p><span>68</span>
+                            </li>
+                            <li>
+                                <p>Impressions on last post </p><span>450</span>
+                            </li>
+                            <li>
+                                <p>Connections </p><span>995</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="my-items">
+                        <a href="#">
+                            <img src="{% static 'img/Img/Bookmark.png' %}" alt="Bookmark">
+                            <span>My Items</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h2>Recent</h2>
+                    <ul>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Groups</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Events</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Followed
+                                    Hashtags</span></a></li>
+                        <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Following
+                                    Hashtags</span></a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- --------------------------------Main content start---------------------------- -->
+
+
+            <div class="main-content">
+
+
+                <!-- ---------------------Create post section----------------------- -->
+
+
+                <!-- <div class="create-post">
+                    <div class="img-write-post">
+                        <div class="profile-img">
+                            <a href="#"><img src="{{ user_profile_picture }}" alt="Profile"></a>
+                        </div>
+                        <div class="writepost">
+                            <textarea name="writepost" id="write-post" placeholder="Add post" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="post-options">
+                            <a href="">
+                                <img src="{% static 'img/Img/photo.png' %}">
+                                <span>Media</span>
+                            </a>
+                        </div>
+                        <div class="post-options">
+                            <a href="">
+                                <img src="{% static 'img/Img/calendar.png' %}">
+                                <span>Event</span>
+                            </a>
+                        </div>
+                        <div class="post-options post">
+                            <button>
+                                <span>POST</span>
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!-- ---------------------Main post section 1----------------------- -->
+
+                <div class="main-post" style="margin-top: 0px; padding-top: 0px;">
+                    <!-- Cover Photo -->
+                    {% if group.cover_photo %}
+                    <img src="{{ group.cover_photo.url }}" alt="{{ group.group_name }} Cover Photo" class="cover-photo"
+                        style="width: 100%; height: auto;">
+                    {% else %}
+                    <img src="{% static 'images/Background.png' %}" alt="Default Profile" class="profile-pic">
+                    {% endif %}
+
+                    <div class="user-info">
+                        {% if group.profile_image %}
+                        <img src="{{ group.profile_image.url }}" alt="{{ group.group_name }} Profile Picture"
+                            class="profile-pic">
+                        {% else %}
+                        <img src="{% static 'images/Background.png' %}" alt="Default Profile" class="profile-pic">
+                        {% endif %}
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">{{ group.group_name }}</span>
+                            <span>{{ group.industry }} &nbsp; <span>{{ group.group_type }}</span></span>
+                            <span>{{ group.created_at|timesince }} ago</span>
+                            <span>{{ number_of_members }} Members</span>
+                        </div>
+                    </div>
+
+                    <div class="post-article">
+                        <p style="font-size: 11px;">{{ group.description }}</p>
+                    </div>
+
+                    {% if is_logged_in %}
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        {% if is_member %}
+                        <p style="padding: 20px;">Welcome to the group! You’re now a member!</p>
+                        <p style="padding: 20px;">Feel free to reach out if you have any questions or if there's
+                            anything you’d like to share. Looking forward to collaborating together!</p>
+                        {% else %}
+                        <button type="submit" class="button">Join Group</button>
+                        {% endif %}
+                    </form>
+                    {% endif %}
+
+
+                    {% if is_logged_in %}
+                    {% if is_member %}
+                    <div class="create-post">
+                        <form method="post" action="{% url 'group_detail' group.id %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="img-write-post">
+                                <div class="profile-img">
+                                    <a href="#"><img src="{{ user_profile_picture }}" alt="Profile"></a>
+                                </div>
+                                <div class="writepost">
+                                    <textarea name="content_text" id="write-post" placeholder="Add post" rows="1"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="options">
+                                <div class="post-options">
+                                    <!-- Photo Upload -->
+                                    <label for="photo-upload" class="upload-label">
+                                        <img src="{% static 'img/Img/photo.png' %}" alt="Photo" class="icon"><span
+                                            style="padding: 5px; padding-bottom: 25px;">Media</span>
+                                        <input type="file" id="photo-upload" name="content_image" accept="image/*"
+                                            hidden>
+                                    </label>
+                                    <!-- <a href="">
+                                    <img src="{% static 'img/Img/photo.png' %}">
+                                    <span>Media</span>
+                                </a> -->
+                                </div>
+                                <div class="post-options">
+                                    <!-- Video Upload -->
+                                    <label for="video-upload" class="upload-label">
+                                        <img src="{% static 'img/Img/calendar.png' %}" alt="Video" class="icon"><span
+                                            style="padding: 5px; padding-bottom: 25px;">Video</span>
+                                        <input type="file" id="video-upload" name="content_video" accept="video/*"
+                                            hidden>
+                                    </label>
+                                    <!-- <a href="">
+                                        <img src="{% static 'img/Img/calendar.png' %}">
+                                        <span>Event</span>
+                                    </a> -->
+                                </div>
+                                <div class="post-options post">
+                                    <button type="submit" class="post-btn"> <span>POST</span></button>
+                                    <!-- <button>
+                                        <span>POST</span>
+                                    </button> -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    {% else %}
+                    <div class="create-post" style="display:none;">
+                        <div class="img-write-post">
+                            <div class="profile-img">
+                                <a href="#"><img src="{{ user_profile_picture }}" alt="Profile"></a>
+                            </div>
+                            <div class="writepost">
+                                <textarea name="writepost" id="write-post" placeholder="Add post" rows="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <div class="post-options">
+                                <a href="">
+                                    <img src="{% static 'img/Img/photo.png' %}">
+                                    <span>Media</span>
+                                </a>
+                            </div>
+                            <div class="post-options">
+                                <a href="">
+                                    <img src="{% static 'img/Img/calendar.png' %}">
+                                    <span>Event</span>
+                                </a>
+                            </div>
+                            <div class="post-options post">
+                                <button>
+                                    <span>POST</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                    {% else %}
+                    <p>Please log in to join the group and post.</p>
+                    {% endif %}
+
+
+
+                </div>
+
+
+
+                {% if is_logged_in and is_member %}
+                {% for post in posts %}
+                <div class="main-post">
+                    <div class="user-info">
+                        {% if group.profile_image %}
+                        <img src="{{ post.creater.profile_pic.url }}" alt="{{ group.group_name }} Profile Picture"
+                            class="profile-pic">
+                        {% else %}
+                        <img src="{% static 'images/Background.png' %}" alt="Default Profile" class="profile-pic">
+                        {% endif %}
+                        <!-- <img src="{{ post.creator.profile_pic.url }}" alt="Profile Picture"> -->
+                        <div class="user-info-span">
+                            <span class="post-name" style="font-size: 18px;">{{ post.creater.get_full_name }}</span>
+                            <span>{{ user.bio}}</span>
+                            <span>{{ post.date_created|timesince }} ago</span>
+                        </div>
+                    </div>
+                    <div class="post-article">
+                        {{ post.content_text|linebreaks }} <!-- Display post content -->
+                    </div>
+                    {% if post.content_image %}
+                    <div class="post-img">
+                        <img src="{{ post.content_image.url }}" loading="lazy"> <!-- Display post image -->
+                    </div>
+                    {% endif %}
+                    {% if post.content_video %}
+                    <div class="post-video">
+                        <video controls>
+                            <source src="{{ post.content_video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video> <!-- Display post video -->
+                    </div>
+                    {% endif %}
+                    <div class="reactions">
+                        <span>{{ post.likers.count }} liked this post</span>
+                        <span>{{ post.num_comments }} comments</span>
+            
+                    </div>
+                    <div class="feed-options">
+                        <div class="post-activity-icons">
+                        <img id="like-btn" data-post-id="{{ post.id }}" src="{% static 'img/Img/like.png' %}"
+                            style="cursor: pointer; width: 24px; height: auto; padding-left: 25px;">
+                        <span id="like-count">{{ post.likers.count }}</span> Likes
+
+                        <!-- Comment Button -->
+                        <div class="post-activity-link">
+                            <a href="javascript:void(0);" class="comment-icon">
+                                <img src="{% static 'images/comment.png' %}">
+                                <span>Comment</span>
+                            </a>
+                        </div>
+
+                        <!-- <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a> -->
+                        <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+
+                     </div>
+
+                        <!-- Hidden comment section (appears when comment icon is clicked) -->
+                        <div class="comment-section" style="display:none;">
+                            <div class="user-comment">
+                                <img src="{{ user_profile_picture }}" alt="User Avatar" class="user-avatar">
+                                <input type="text" class="comment-input" placeholder="Add a comment...">
+                            </div>
+                            <button class="post-button" data-post-id="{{ post.id }}" style="display:none;">Post</button>
+
+                            {% for comment in post.group_comments.all %}
+                            <!-- messages-container -->
+                            <div class="comment-list">
+                                <div class="message-item">
+                                    {% if comment.commenter.profile_pic %}
+                                    <img src="{{ comment.commenter.profile_pic.url }}" alt="User Avatar"
+                                        class="user-avatar"><br>
+                                    {% endif %}
+                                    <div class="message-content">
+                                        <h4>{{ comment.commenter.get_full_name }} <br> <span>
+                                                <p>{{ comment.comment_content }}</p>
+                                            </span><span class="message-time">{{ comment.comment_time }}</span></h4>
+                                        <!-- <p>{{ comment.comment_content }}</p>
+                                    <span class="message-time">{{ comment.comment_time }}</span> -->
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>This content is only visible to group members. Please join the group to view the posts.</p>
+                {% endif %}
+
+
+            </div>
+
+
+            <!-- --------------------------------Right sidebar start---------------------------- -->
+
+            <div class="right-sidebar">
+
+                <div class="linkedin-news">
+
+                    <h1 style="font-size: 14px;">Groups you might be interested in</h1>
+
+                    {% for group in groups %}
+                    <a href="{% url 'group_detail' group.id %}">
+                        <div class="user-profile">
+
+                            {% if group.profile_image %}
+                            <img src="{{ group.profile_image.url }}" alt="{{ group.group_name }}"
+                                class="user-profile-pic">
+                            {% else %}
+                            <img src="{% static 'images/Background.png' %}" class="user-profile-pic">
+                            {% endif %}
+
+                            <div class="user-details">
+                                <h1>{{ group.group_name }}</h1>
+                                <p style="font-size: 11px;">{{ group.industry }} <br> {{ group.description }} </p>
+
+
+                                {% if is_logged_in %}
+                                {% if membership_status|get_item:group.id %}
+                                <button class="button" disabled>Member</button>
+                                {% else %}
+                                <form method="POST" action="{% url 'group_detail' group.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="button">Join Group</button>
+                                </form>
+                                {% endif %}
+                                {% endif %}
+
+
+
+                            </div>
+                        </div>
+
+
+                    </a>
+
+
+                    {% empty %}
+                    <p>No users found.</p>
+                    {% endfor %}
+
+                </div>
+
+                <div class="footer sticky">
+                    <div class="useful-links">
+                        <span>About</span>
+                        <span>Accessibility</span>
+                        <span>Help Center</span>
+                        <span>Privacy and Terms</span>
+                        <span>AD Choices</span>
+                        <span>Advertising</span>
+                        <span>Business services</span>
+                        <span>Get the CanHub app</span>
+                        <span>More</span>
+
+                    </div>
+                    <div class="footer-tag">CanHub&copy; 2024</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        // Like button functionality
+        document.querySelectorAll("#like-btn").forEach(likeBtn => {
+            likeBtn.addEventListener("click", function () {
+                var postId = this.getAttribute("data-post-id");
+                var csrftoken = "{{ csrf_token }}";
+
+                fetch(`/like_group/${postId}/`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": csrftoken
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.liked) {
+                            this.classList.add("liked");
+                        } else {
+                            this.classList.remove("liked");
+                        }
+                        this.nextElementSibling.innerText = data.like_count; // Update the like count
+                    });
+            });
+        });
+    </script>
+
+    <script>
+        // Comment section toggle and post comment
+        document.querySelectorAll('.comment-icon').forEach(commentIcon => {
+            commentIcon.addEventListener('click', function () {
+                const commentSection = this.closest('.feed-options').querySelector('.comment-section');
+                commentSection.style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.comment-input').forEach(inputField => {
+            inputField.addEventListener('input', function () {
+                const postButton = this.closest('.comment-section').querySelector('.post-button');
+
+                if (this.value.trim() !== '') {
+                    postButton.style.display = 'block';
+                } else {
+                    postButton.style.display = 'none';
+                }
+            });
+        });
+
+        document.querySelectorAll('.post-button').forEach(postButton => {
+            postButton.addEventListener('click', function () {
+                const commentSection = this.closest('.comment-section');
+                if (!commentSection) {
+                    console.error('No comment section found.');
+                    return;
+                }
+
+                const commentInput = commentSection.querySelector('.comment-input');
+                if (!commentInput) {
+                    console.error('No comment input found.');
+                    return;
+                }
+
+                const commentContent = commentInput.value.trim();
+                const postId = this.getAttribute('data-post-id');
+                if (!postId) {
+                    console.error('No post ID found.');
+                    return;
+                }
+
+                console.log('Post button clicked');
+                console.log('Comment Content:', commentContent);
+
+                if (!commentContent) {
+                    alert('Comment cannot be empty');
+                    return;
+                }
+
+                // Clear input field and hide elements
+                commentInput.value = '';
+                this.style.display = 'none';
+                commentSection.style.display = 'none';
+                console.log('Input cleared and section hidden');
+
+                fetch(`/group-comment/${postId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: JSON.stringify({ comment_content: commentContent })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Server error:', data.error);
+                            alert('An error occurred while posting your comment.');
+                            return;
+                        }
+
+                        const postActivity = this.closest('.feed-options');
+                        if (!postActivity) {
+                            console.error('No post activity found.');
+                            return;
+                        }
+
+                        const commentSection = postActivity.querySelector('.comment-list');
+                        if (!commentSection) {
+                            console.error('No comment list found.');
+                            return;
+                        }
+
+                        const newCommentElement = document.createElement('div');
+                        newCommentElement.innerHTML = `<strong>${data.commenter.username}:</strong> ${data.comment_content} <em>${data.timestamp}</em>`;
+                        commentSection.appendChild(newCommentElement);
+
+                        // Optionally, you can also scroll to the new comment
+                        commentSection.scrollTop = commentSection.scrollHeight;
+
+                        console.log('Comment posted and UI updated');
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Fetch error:', error);
+                        alert('An error occurred while posting your comment.');
+                    });
+            });
+        });
+
+
+        document.querySelectorAll('.comment-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function () {
+                const postId = this.getAttribute('data-post-id');
+                const commentSection = document.querySelector(`#comments-${postId}`);
+
+                // Toggle the visibility of the comment section
+                if (commentSection.style.display === 'none' || commentSection.style.display === '') {
+                    commentSection.style.display = 'block';
+
+                    // Fetch comments for this post if not already fetched
+                    if (commentSection.querySelector('.comment-list').childElementCount === 0) {
+                        fetch(`/get-comments/${postId}/`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const commentList = commentSection.querySelector('.comment-list');
+
+                                // Clear the comment list before adding new ones
+                                commentList.innerHTML = '';
+
+                                // Populate the comment section with fetched comments
+                                data.comments.forEach(comment => {
+                                    const newComment = document.createElement('div');
+                                    newComment.classList.add('comment');
+                                    newComment.innerHTML = `
+                            <strong>${comment.commenter}</strong>: ${comment.content} 
+                            <em>${comment.timestamp}</em>`;
+                                    commentList.appendChild(newComment);
+                                });
+                            })
+                            .catch(error => console.error('Error fetching comments:', error));
+                    }
+                } else {
+                    // Hide the comment section
+                    commentSection.style.display = 'none';
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

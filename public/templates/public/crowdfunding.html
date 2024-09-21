@@ -1,0 +1,1141 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link href="{% static 'ccs/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="{% static 'ccs/css/style.css' %}" rel="stylesheet">
+
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dropdown/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.theme.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.transitions.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/meanmenu/meanmenu.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/wave/waves.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/wave/button.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/scrollbar/jquery.mCustomScrollbar.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/notika-custom-icon.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/style.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/responsive.css' %}">
+<script src="{% static 'dropdown/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-oVh2AxkA5qrj5nzEq7B/vDJcO+fV+UKFqVx3XMzO0vCoGNn8U7tpr/gUq6na0fjIgZ1F7arC/MI9jmk3BRwX6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    body {
+        color: #666666;
+        font-family: "Poppins", sans-serif;
+        padding-top: 70px;
+    }
+
+    .profile-card {
+        border-radius: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 105%;
+        width: 105%;
+        max-height:90%;
+        animation: slide-up 0.5s ease-out;
+    }
+
+    .profile-header, .profile-body {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .profile-header h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .profile-header .location {
+        color: #666;
+        margin-top: 8px;
+    }
+
+    .profile-body .specialty {
+        font-weight: bold;
+        color: #555;
+        margin-top: 16px;
+    }
+
+    .profile-body .description {
+        color: #777;
+        margin-top: 8px;
+    }
+
+    @keyframes slide-up {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .img-container {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .img-container img {
+        width: 100%;
+        height: 150px; /* Ensure uniform height */
+        object-fit: cover; /* Cover the area without distortion */
+        transition: transform 0.3s ease;
+    }
+
+    .img-container:hover img {
+        transform: scale(1.2);
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 0.5rem;
+        
+        margin-top: -10px;
+    }
+
+    .card-text {
+        font-size: o.5rem;
+        color: #555;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 3px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .search-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        background: #ffffff;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        margin-top: -70px; /* Move the filter bar closer to the hero section */
+    }
+
+    .search-bar input[type="text"] {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        outline: none;
+        background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/svgs/solid/search.svg');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 20px;
+    }
+
+    .search-bar select,
+    .search-bar input[type="range"],
+    .search-bar button {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+    .search-bar input[type="range"] {
+        flex: 2;
+    }
+
+    .search-bar input[type="text"]:focus,
+    .search-bar select:focus,
+    .search-bar input[type="range"]:focus,
+    .search-bar button:focus {
+        border-color: #007bff;
+    }
+
+    .search-bar button {
+        background: #007bff;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+    }
+
+    .search-bar button:hover {
+        background: #0056b3;
+    }
+
+    .search-bar #amount-label {
+        flex: 0;
+        margin-left: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #333;
+    }
+
+ 
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 470px; /* Adjust the height value as needed */
+  /* padding: 140px 0 100px 0; */
+  padding: 20px 0 10px 0; /* Adjust these values as needed */
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+#hero::before {
+  content: "";
+  position: absolute;
+  right: -100%;
+  top: 20%;
+  width: 250%;
+  height: 200%;
+  z-index: -1;
+  background-color: #e8ecf5;
+  transform: skewY(135deg);
+}
+#hero h1 {
+  margin: 0 0 10px 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 56px;
+  color: #5777ba;
+  font-family: "Poppins", sans-serif;
+}
+#hero h2 {
+  color: #515f7d;
+  margin-bottom: 50px;
+  font-size: 20px;
+}
+#hero .download-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  display: inline-block;
+  padding: 8px 24px 10px 46px;
+  border-radius: 3px;
+  transition: 0.5s;
+  color: #fff;
+  background: #47536e;
+  position: relative;
+}
+#hero .download-btn:hover {
+  background: #5777ba;
+}
+#hero .download-btn i {
+  font-size: 20px;
+  position: absolute;
+  left: 18px;
+  top: 8.5px;
+}
+#hero .download-btn + .download-btn {
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  #hero {
+    text-align: center;
+  }
+  #hero .download-btn + .download-btn {
+    margin: 0 10px;
+  }
+  #hero .hero-img {
+    text-align: center;
+  }
+  #hero .hero-img img {
+    width: 60%;
+  }
+}
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+  #hero .hero-img img {
+    width: 70%;
+  }
+}
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
+}
+
+
+    .filter-group {
+        margin-bottom: 20px;
+    }
+
+    .filter-group label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .filter-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            max-width: 100%;
+            border-right: none;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .main-content {
+            max-width: 100%;
+            padding-top: 0;
+        }
+
+        .hm-searchbox {
+            flex-direction: column;
+            align-items: stretch;
+            height: auto;
+        }
+
+        .hm-searchbox input {
+            margin-bottom: 10px;
+        }
+
+        .hm-searchbox button {
+            width: 100%;
+        }
+    }
+
+    /*--------------------------------------------------------------
+# App Features
+--------------------------------------------------------------*/
+.features .content {
+  padding: 30px 0;
+}
+.features .content .icon-box {
+  margin-top: 25px;
+}
+.features .content .icon-box h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 5px 0 10px 60px;
+}
+.features .content .icon-box i {
+  font-size: 48px;
+  float: left;
+  color: #5777ba;
+}
+.features .content .icon-box p {
+  font-size: 15px;
+  color: #979aa1;
+  margin-left: 60px;
+}
+@media (max-width: 991px) {
+  .features .image {
+    text-align: center;
+  }
+  .features .image img {
+    max-width: 80%;
+  }
+}
+@media (max-width: 667px) {
+  .features .image img {
+    max-width: 100%;
+  }
+}
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-bg {
+  background-color: #f2f5fa;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top: 0px;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  color: #5777ba;
+  font-family: "Poppins", sans-serif;
+}
+.section-title p {
+  margin-bottom: 0;
+}
+
+/*Header Middle*/
+.header-middle {
+	padding: 30px;
+}
+.hm-searchbox {
+	display: flex;
+	position: relative;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e1e1e1;
+	min-width: 638px;
+	height: 45px;
+	float: left;
+}
+.hm-searchbox .nice-select.select-search-category {
+	width: auto;
+	line-height: 43px;
+	height: 43px;
+	margin: 0;
+	border: 0;
+	padding: 0 28px 0 25px;
+	color: #242424;
+	font-size: 13px;
+	border-radius: 15px 0 0 15px;
+	font-family: 'Rubik',sans-serif;
+	font-weight: 400;
+	position: relative;
+}
+.select-search-category ul.list {
+	height: 440px;
+	overflow-y: auto;
+	overscroll-behavior-x: none;
+}
+.hm-searchbox .current::after {
+	content: "";
+	position: absolute;
+	display: block;
+	height: 22px;
+	width: 1px;
+	background: #e1e1e1;
+	top: 10px;
+	right: -10px;
+	font-size: 13px;
+}
+.hm-searchbox .nice-select.select-search-category::before {
+		right: 30px;
+		top: 25px;
+		color: #7e7e7e;
+}
+.hm-searchbox input {
+		font-size: 13px;
+		color: #a5a5a5;
+		height: 45px;
+		background: transparent;
+		border: none;
+		width: 100%;
+		padding: 0 60px 0 33px;
+}
+/*Header Middle Right*/
+.header-middle-right {
+		display: flex;
+		justify-content: flex-end;
+}
+/*Header Middle Wishlist*/
+.hm-wishlist {
+	float: left;
+	margin-right: 25px;
+	position: relative;
+}
+.hm-wishlist > a {
+	border: 1px solid #e1e1e1;
+	font-size: 20px;
+	color: #242424;
+	width: 45px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+.hm-wishlist > a:hover {
+	border-color: #fed700;
+	color: #fed700;
+}
+/*Header Middle Minicart*/
+.hm-minicart {
+		display: inline-block;
+		position: relative;
+}
+.hm-minicart-trigger {
+		border-radius: 2px;
+		background: #e80f0f;
+		color: #fff;
+		height: 45px;
+		cursor: pointer;
+		display: block;
+		position: relative;
+		padding: 0 15px 0 55px;
+}
+
+
+.li-btn-2 {
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 40px;
+	border: none;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #fed700;
+	padding: 0 20px;
+	text-transform: uppercase;
+	display: inline-block;
+}
+.li-btn-2:focus {
+	background-color: #fed700;
+}
+.li-btn-2:hover {
+	color: #ffffff;
+	background-color: #242424;
+}
+
+
+.new-table-design {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.new-table-design th, .new-table-design td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+.new-table-design thead th {
+    background-color: #f7f7f7;
+    color: #333333;
+    font-weight: bold;
+}
+
+.new-table-design tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.new-table-design tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.new-table-design tfoot th {
+    background-color: #f7f7f7;
+    color: #333333;
+    font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+ /* styles.css */
+        /* The Modal (background) */
+        .modal2 {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            padding-top: 5px;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            align-items: center;
+            /* Center vertically */
+            justify-content: center;
+            /* Center horizontally */
+        }
+
+        /* Modal Content/Box */
+        .modal-content2 {
+            background-color: #fefefe;
+            padding-top: 2px;
+            margin: 5% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            /* Width of the modal */
+            max-width: 600px;
+            /* Max width of the modal */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            /* Optional: shadow effect */
+            border-radius: 8px;
+            /* Optional: rounded corners */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black background with opacity */
+            justify-content: center;
+            align-items: center;
+            overflow: auto; /* Enable scroll if needed */
+        }
+
+        /* Modal content styling */
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            overflow-y: auto; /* Enable vertical scroll */
+        }
+
+        /* Close button */
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Form styles */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .profile-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #eee;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            margin-top: 15px;
+        }
+
+        .profile-desc {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .profile-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        .container2 {
+            width: 60%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .header {
+            position: relative;
+            background-color: #e6e6fa;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            height: 200px;
+
+            overflow: hidden;
+        }
+
+        .header img.cover-photo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+
+        }
+
+
+
+        .header2 {
+            position: relative;
+            background-color: #e6e6fa;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            height: 100px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .header2 img.cover-photo2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+
+        }
+
+        .profile-section {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -50px;
+
+        }
+
+        .profile-section img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .pen-icon {
+            position: absolute;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .pen-icon.cover {
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+        }
+
+        .pen-icon.profile {
+            bottom: 0;
+            right: 200px;
+        }
+
+
+        .upload-icon {
+            position: absolute;
+            top: 70px;
+            left: 90px;
+            cursor: pointer;
+            color: #005580;
+            font-size: 20px;
+        }
+
+        .cover-upload-icon {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            color: #005580;
+            font-size: 20px;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 150px;
+            background-color: #e6e6fa;
+            margin-bottom: 20px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+     
+
+
+
+
+</style>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center" style="background-color: #028DC9;">
+
+    <div class="">
+      <div class="row">
+        <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+          <div class="container" style="padding-right: 450px; margin-right: 12px;">
+            <h1 style="font-size: 28px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">crowd funding Platform for You</h1>
+            <p style="color: white;  text-transform: lowercase; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">Join Us in Making a Meaningful Impact and Saving Lives Through Crowdfunding Efforts. Together, we can create positive change and provide essential support where it's needed most.</p>
+            <!-- <a href="#" class="download-btn"><i class="bx bxl-play-store"></i> Google Play</a>
+            <a href="#" class="download-btn"><i class="bx bxl-apple"></i> App Store</a> -->
+          </div>
+        </div>
+        <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+          <img src="{% static 'img/home/crdfdg.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 600%;">
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- End Hero -->
+
+<div class="container mt-5" style="margin-top: 0px;">
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search campaigns...">
+        <select class="form-control" id="location" name="location">
+            <option value="">All Locations</option>
+            <option value="Abim">Abim</option>
+            <!-- More options here -->
+        </select>
+        <select class="form-control" id="category" name="category">
+            <option value="">All Categories</option>
+            <option value="Medical Costs">Medical Costs</option>
+            <!-- More options here -->
+        </select>
+        <select class="form-control" id="cancer-type" name="cancer_type">
+            <option value="">All Cancer Types</option>
+            <option value="Breast Cancer">Breast Cancer</option>
+            <!-- More options here -->
+        </select>
+        <select class="form-control" id="donation-type" name="donation_type">
+            <option value="">Any Type</option>
+            <option value="lunch">Lunch</option>
+            <option value="gifts">Gifts</option>
+            <option value="cash">Cash</option>
+        </select>
+        <button type="button" onclick="applyFilters()">Search</button>
+    </div>
+    <div class="row" id="campaign-results" style="margin-top: 20px;">
+        {% for unit in crowdfunding %}
+        <div class="col-md-3 mb-3">
+            <div class="card profile-card" >
+                <div class="img-container">
+                    <img src="{{ unit.campaign_image.url }}" class="card-img-top" alt="{{ unit.title }}">
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'campaign-info' item_id=unit.id %}">{{ unit.title }}</a>
+                    <p class="card-text" ><span class="text-danger" >UGX: {{ unit.goal_amount }}/=</span> Goal </p>
+                     <div class="progress">
+                        {% if unit.raised_amount >= unit.goal_amount %}
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                        {% else %}
+                        <div class="progress-bar bg-info" role="progressbar" style="width: {{ unit.percentage_achieved|floatformat:"0" }}%;" aria-valuenow="{{ unit.percentage_achieved|floatformat:"0" }}" aria-valuemin="0" aria-valuemax="100">{{ unit.percentage_achieved|floatformat:"0" }}%</div>
+                        {% endif %}
+                        
+                    </div>
+                    <p class="card-text"><small class="text-muted">Closing Date: {{ unit.closing_date }}</small></p>
+                    <a href="{% url 'website-donate' item_id=unit.id %}" class="btn btn-primary">Donate Now</a>
+                   <!-- Links for demonstration -->
+<!-- Links for demonstration -->
+{% if request.user.is_authenticated %}
+    <a href="{% url 'dashboad' item_id=unit.id %}" class="d-block mt-2 text-success">Go to Dashboard</a>
+{% else %}
+    <a href="#" onclick="showLoginModal(); return false;" class="d-block mt-2 text-danger">Create or Login Into Your Account</a>
+{% endif %}
+                
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeLoginModal()">&times;</span>
+    <h1 style="font-size: 18px; padding: 2px;">Welcome Back</h1>
+    <h2 style="font-size: 14px; padding: 2px;">Log in or sign up to get smarter</h2>
+    <form action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" class="input-field" required>
+      <input type="password" name="password" placeholder="Password" class="input-field" required>
+      <button type="submit" class="btn">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" onclick="switchToSignUp()">Create Account</a></p>
+  </div>
+</div>
+
+   <!-- Sign Up Modal -->
+   <div id="signUpModal" class="modal" style="margin-top: 30px;">
+    <div class="modal-content">
+        <span class="close" onclick="closeSignUpModal()">&times;</span>
+        <h2>Sign Up for Network</h2>
+        <form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+            <div class="header2">
+
+                <!-- <img id="cover-photo" class="cover-photo" src="" alt="Cover Image"> -->
+                <img id="coverPreview"  class="cover-photo2" src="" alt="Cover Picture Preview"
+                    style="display:none;">
+                <!-- Cover Photo Upload Icon -->
+                <label for="cover" class="pen-icon cover">
+                    <i class="fas fa-pen" style="font-size: 20px;"></i>
+                </label>
+                <!-- cover_photo -->
+                <input type="file" name="cover" class="form-control custom-file-input" id="cover"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                onchange="previewImage(event, 'coverPreview')" data-focusable="true"
+                aria-describedby="inputGroupFileAddon01">
+            </div>
+
+             <!-- Profile Image Section -->
+             <div class="profile-section" style="display: flex; flex-direction: column; align-items: center;">
+                <img id="profilePreview" src="" alt="Profile Picture Preview"
+                style="display:none;">
+                <!-- Profile Photo Upload Icon -->
+                <label for="profile" class="pen-icon profile">
+                    <i class="fas fa-pen" style="font-size: 20px;"></i>
+                </label>
+                <!-- profile_image -->
+                <input type="file" name="profile" class="form-control custom-file-input" id="profile"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    onchange="previewImage(event, 'profilePreview')" data-focusable="true"
+                    aria-describedby="inputGroupFileAddon01">
+            </div>
+           
+
+            <input type="text" name="firstname" placeholder="First Name" class="input-field" required>
+            <input type="text" name="lastname" placeholder="Last Name" class="input-field" required>
+            <input type="text" name="username" placeholder="Username" class="input-field" required>
+            <input type="email" name="email" placeholder="Email Address" class="input-field" required>
+            <input type="password" name="password" placeholder="Password" class="input-field" required>
+            <input type="password" name="confirmation" placeholder="Confirm Password" class="input-field" required>
+
+                    
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+    </div>
+</div>
+
+
+<script>
+  // Function to display the login modal on page load if user is not authenticated
+  window.onload = function() {
+      var isLoggedIn = "{{ request.user.is_authenticated|yesno:'true,false' }}"; // Django template variable
+      if (isLoggedIn === "false") {
+          document.getElementById("loginModal").style.display = "flex"; // Show login modal
+      }
+  };
+
+  // Function to show the login modal
+  function showLoginModal() {
+      document.getElementById("loginModal").style.display = "flex";
+  }
+
+  // Function to close the login modal
+  function closeLoginModal() {
+      document.getElementById("loginModal").style.display = "none";
+  }
+
+  // Function to close the sign-up modal
+  function closeSignUpModal() {
+      document.getElementById("signUpModal").style.display = "none";
+  }
+
+  // Switch from login modal to sign-up modal
+  function switchToSignUp() {
+      closeLoginModal();
+      document.getElementById("signUpModal").style.display = "flex";
+  }
+
+  // Switch from sign-up modal to login modal
+  function switchToLogin() {
+      closeSignUpModal();
+      document.getElementById("loginModal").style.display = "flex";
+  }
+
+  // Close modal if clicked outside
+  window.onclick = function(event) {
+      var loginModal = document.getElementById("loginModal");
+      var signUpModal = document.getElementById("signUpModal");
+      if (event.target == loginModal) {
+          loginModal.style.display = "none";
+      }
+      if (event.target == signUpModal) {
+          signUpModal.style.display = "none";
+      }
+  };
+</script>
+
+<!-- JavaScript Libraries -->
+<script src="{% static 'ccs/lib/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'ccs/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'ccs/lib/wow/wow.min.js' %}"></script>
+<script src="{% static 'ccs/lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'ccs/lib/waypoints/waypoints.min.js' %}"></script>
+<script src="{% static 'ccs/lib/counterup/counterup.min.js' %}"></script>
+<script src="{% static 'ccs/lib/parallax/parallax.min.js' %}"></script>
+
+<script>
+    function updateAmountLabel(value) {
+        document.getElementById('amount-label').textContent = value;
+    }
+
+    function applyFilters() {
+        // Implement the logic to apply filters to the campaigns
+    }
+</script>
+
+
+<script>
+  function previewImage(event, previewId) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+          const img = document.getElementById(previewId);
+          img.src = e.target.result;
+          img.style.display = 'block';
+      };
+
+      if (file) {
+          reader.readAsDataURL(file);
+      }
+  }
+</script>
+
+<!-- Template Javascript -->
+<script src="{% static 'ccs/js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,495 @@
+{% extends "public/base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% if title %}
+        <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+        <title>CanHub - {{ title }}</title>
+    {% else %}
+        <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+        <title>CanHub</title>
+    {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'dash/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'dash/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'dash/assets/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+ 
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar" style="margin-top: 20px; height: 75%;">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+         <li class="nav-item" style="padding-top: 16px;">
+            <a class="nav-link " href="{% url 'website-home' %}">
+                <i class="bi bi-grid"></i>
+                <span style="font-size: 14px;">Go Back Home</span>
+            </a>
+         </li>
+         
+
+         <!-- <li class="nav-item">
+          <a class="nav-link " href="#">
+              <i class="bi bi-grid"></i>
+              <span>Dashboard</span>
+          </a>
+       </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link " href="#" id="definition-link">
+              <i class="bi bi-journal-text"></i>
+              <span style="font-size: 14px;">Definition the Cancer</span>
+            </a>
+        
+          </li>
+            <!-- End Campaigns Nav -->
+
+          <li class="nav-item">
+            <a class="nav-link " href="#" id="description-link">
+              <i class="bi bi-journal-text"></i>
+              <span style="font-size: 14px;">Description about Cancer</span>
+            </a>
+        
+          </li>
+            <!-- End create campaign form Nav -->
+        
+
+            <li class="nav-item">
+              <a class="nav-link " href="#" id="causes-link">
+                <i class="bi bi-journal-text"></i>
+                <span style="font-size: 14px;">What Causes this Cancer</span>
+              </a>
+          
+            </li>
+
+      
+          <li class="nav-item">
+              <a class="nav-link" href="#" id="symptoms-link">
+                  <i class="bi bi-journal-text"></i>
+                  <span style="font-size: 14px;">What are the Symptoms</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#" id="diagnosed-link">
+                  <i class="bi bi-layout-text-window-reverse"></i>
+                  <span style="font-size: 14px;">How is it Diagnosed</span>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="treatment-link">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span style="font-size: 14px;">The Treatment Options</span>
+            </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="prevented-link">
+              <i class="bi bi-layout-text-window-reverse"></i>
+              <span style="font-size: 14px;">Can it be Prevented</span>
+          </a>
+      </li>
+        
+          <!-- <li class="nav-heading">Pages</li> -->
+
+          <!-- <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <i class="bi bi-question-circle"></i>
+                  <span>Ask Our AI</span>
+              </a>
+          </li> -->
+      </ul>
+  </aside>
+
+  <main id="main" class="main" style="margin-top: 20px;">
+      <div class="pagetitle">
+          <nav>
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'website-home' %}">Home</a></li>
+                  <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+          </nav>
+      </div>
+      <section class="section dashboard" style="margin-left: 300px;">
+          <div class="row">
+              <!-- Left side columns -->
+              <div class="col-lg-8">
+                  <div class="row">
+                      
+               
+                      <!-- Customers Card -->
+                      <div class="col-xxl-4 col-xl-12">
+                          <div class="card info-card customers-card">
+                              <div class="filter">
+                                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                      <li class="dropdown-header text-start">
+                                          <h6>Filter</h6>
+                                      </li>
+                                      <li><a class="dropdown-item" href="#">Today</a></li>
+                                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                                  </ul>
+                              </div>
+                              <div class="card-body" id="definition">
+                                  <h5 class="card-title">What is {{ cancertype }}<span>| <span style="color: green;">Answer</span></span></h5>
+                                  <div class="d-flex align-items-center">
+                                      <div class="d-flex align-items-center justify-content-center">
+                                          <i class="bi"></i>
+                                      </div>
+                                      <div class="ps-3">
+                                          
+                                          <span class="text-muted small pt-2 ps-1">{{ definition }}</span>
+                                      </div>
+                                  </div>
+                              </div>
+
+
+                              <div class="card-body" id="description">
+                                <h5 class="card-title">Description about {{ cancertype }}?<span>| <span style="color: green;">Answer</span></span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="bi"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        
+                                        <span class="text-muted small pt-2 ps-1">{{ description }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body" id="causes">
+                              <h5 class="card-title">What Causes {{ cancertype }}?<span>| <span style="color: green;">Answer</span></span></h5>
+                              <div class="d-flex align-items-center">
+                                  <div class="d-flex align-items-center justify-content-center">
+                                      <i class="bi"></i>
+                                  </div>
+                                  <div class="ps-3">
+                                      
+                                      <span class="text-muted small pt-2 ps-1">{{ causes }}</span>
+                                  </div>
+                              </div>
+                          </div>
+
+
+                          <div class="card-body" id="symptoms">
+                            <h5 class="card-title">What are the symptoms of {{ cancertype }}?<span>| <span style="color: green;">Answer</span></span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <i class="bi"></i>
+                                </div>
+                                <div class="ps-3">
+                                    
+                                    <span class="text-muted small pt-2 ps-1">{{ symptoms }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body" id="diagnosed">
+                          <h5 class="card-title">How is {{ cancertype }} diagnosed?<span>| <span style="color: green;">Answer</span></span></h5>
+                          <div class="d-flex align-items-center">
+                              <div class="d-flex align-items-center justify-content-center">
+                                  <i class="bi"></i>
+                              </div>
+                              <div class="ps-3">
+                                  
+                                  <span class="text-muted small pt-2 ps-1">{{ diagnosed }}</span>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card-body" id="treatment">
+                        <h5 class="card-title">What are the treatment options for {{ cancertype }}?<span>| <span style="color: green;">Answer</span></span></h5>
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="bi"></i>
+                            </div>
+                            <div class="ps-3">
+                                
+                                <span class="text-muted small pt-2 ps-1">{{ treatment }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body" id="prevented">
+                      <h5 class="card-title">Can {{ cancertype }} be prevented?<span>| <span style="color: green;">Answer</span></span></h5>
+                      <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center justify-content-center">
+                              <i class="bi"></i>
+                          </div>
+                          <div class="ps-3">
+                              
+                              <span class="text-muted small pt-2 ps-1">{{ prevented }}?</span>
+                          </div>
+                      </div>
+                  </div>
+
+                          </div>
+                      </div>
+                      
+                    
+                     
+                      <!-- Recent Sales -->
+                      <div class="col-12">
+                          <div class="card recent-sales">
+                              <div class="filter">
+                                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                      <li class="dropdown-header text-start">
+                                          <h6>Filter</h6>
+                                      </li>
+                                      <li><a class="dropdown-item" href="#">Today</a></li>
+                                      <li><a class="dropdown-item" href="#">This Month</a></li>
+                                      <li><a class="dropdown-item" href="#">This Year</a></li>
+                                  </ul>
+                              </div>
+                            
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Right side columns -->
+              <div class="col-lg-4">
+                   <!-- Recent Activity -->
+          <div class="card">
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+            
+              <div class="py-0" >
+               
+             
+                <div style="height:700px; overflow: auto; padding: 5px; padding-left: 0px;">
+                    <!-- <a class="twitter-timeline" href="https://x.com/UgandaCancerIns">Tweets -->
+                        <a class="twitter-timeline" href="https://twitter.com/UgandaCancerIns">Tweets
+                        by
+                        Uganda Cancer Institute</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <hr>
+            </div>
+
+            </div>
+          </div><!-- End Recent Activity -->
+         
+    
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main>
+  <!-- End #main -->
+
+
+
+  <!-- Vendor JS Files -->
+<script src="{% static 'dash/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'dash/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'dash/assets/vendor/chart.js/chart.min.js' %}"></script>
+<script src="{% static 'dash/assets/vendor/echarts/echarts.min.js' %}"></script>
+<script src="{% static 'dash/assets/vendor/quill/quill.min.js' %}"></script>
+<script src="{% static 'dash/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+<script src="{% static 'dash/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'dash/assets/vendor/php-email-form/validate.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'dash/assets/js/main.js' %}"></script>
+  
+
+
+
+<script src="{% static 'dropdown/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'dropdown/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'dropdown/js/wow.min.js' %}"></script>
+<script src="{% static 'dropdown/js/jquery-price-slider.js' %}"></script>
+<script src="{% static 'dropdown/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'dropdown/js/jquery.scrollUp.min.js' %}"></script>
+<script src="{% static 'dropdown/js/meanmenu/jquery.meanmenu.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/waypoints.min.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/counterup-active.js' %}"></script>
+<script src="{% static 'dropdown/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script src="{% static 'dropdown/js/sparkline/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'dropdown/js/sparkline/sparkline-active.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/jquery.flot.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/flot-active.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/jquery.knob.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/jquery.appear.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/knob-active.js' %}"></script>
+<script src="{% static 'dropdown/js/jasny-bootstrap.min.js' %}"></script>
+<script src="{% static 'dropdown/js/icheck/icheck.min.js' %}"></script>
+<script src="{% static 'dropdown/js/icheck/icheck-active.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/jquery-ui-1.10.4.custom.min.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/jquery-ui-touch-punch.min.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/rangle-active.js' %}"></script>
+<script src="{% static 'dropdown/js/datapicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'dropdown/js/datapicker/datepicker-active.js' %}"></script>
+<script src="{% static 'dropdown/js/bootstrap-select/bootstrap-select.js' %}"></script>
+<script src="{% static 'dropdown/js/color-picker/farbtastic.min.js' %}"></script>
+<script src="{% static 'dropdown/js/color-picker/color-picker-active.js' %}"></script>
+<script src="{% static 'dropdown/js/notification/bootstrap-growl.min.js' %}"></script>
+<script src="{% static 'dropdown/js/notification/notification-active.js' %}"></script>
+<script src="{% static 'dropdown/js/summernote/summernote-updated.min.js' %}"></script>
+<script src="{% static 'dropdown/js/summernote/summernote-active.js' %}"></script>
+<script src="{% static 'dropdown/js/dropzone/dropzone.js' %}"></script>
+<script src="{% static 'dropdown/js/wave/waves.min.js' %}"></script>
+<script src="{% static 'dropdown/js/wave/wave-active.js' %}"></script>
+<script src="{% static 'dropdown/js/chosen/chosen.jquery.js' %}"></script>
+<script src="{% static 'dropdown/js/chat/jquery.chat.js' %}"></script>
+<script src="{% static 'dropdown/js/todo/jquery.todo.js' %}"></script>
+<script src="{% static 'dropdown/js/plugins.js' %}"></script>
+<script src="{% static 'dropdown/js/data-table/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'dropdown/js/data-table/data-table-act.js' %}"></script>
+<script src="{% static 'dropdown/js/main.js' %}"></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const definitionLink = document.getElementById('definition-link');
+      const descriptionLink = document.getElementById('description-link');
+      const causesLink = document.getElementById('causes-link');
+      const symptomsLink = document.getElementById('symptoms-link');
+      const diagnosedLink = document.getElementById('diagnosed-link');
+      const treatmentLink = document.getElementById('treatment-link');
+      const preventedLink = document.getElementById('prevented-link');
+      const definitionSection = document.getElementById('definition');
+      const descriptionSection = document.getElementById('description');
+      const causesSection = document.getElementById('causes');
+      const symptomsSection = document.getElementById('symptoms');
+      const diagnosedSection = document.getElementById('diagnosed');
+      const treatmentSection = document.getElementById('treatment');
+      const preventedSection = document.getElementById('prevented');
+
+      // Initially hide all sections except Definition
+      descriptionSection.style.display = 'none';
+      causesSection.style.display = 'none';
+      symptomsSection.style.display = 'none';
+      diagnosedSection.style.display = 'none';
+      treatmentSection.style.display = 'none';
+      preventedSection.style.display = 'none';
+
+      // Add click event listener for definition link
+      definitionLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(definitionSection);
+      });
+
+      // Add click event listener for description link
+      descriptionLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(descriptionSection);
+      });
+
+      // Add click event listener for causes link
+      causesLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(causesSection);
+      });
+
+      // Add click event listener for symptoms link
+      symptomsLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(symptomsSection);
+      });
+
+      // Add click event listener for diagnosed link
+      diagnosedLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(diagnosedSection);
+      });
+
+      // Add click event listener for treatment link
+      treatmentLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(treatmentSection);
+      });
+
+      // Add click event listener for prevented link
+      preventedLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showSection(preventedSection);
+      });
+
+      // Function to show a specific section and hide others
+      function showSection(sectionToShow) {
+          const allSections = [definitionSection, descriptionSection, causesSection, symptomsSection, diagnosedSection, treatmentSection, preventedSection];
+          allSections.forEach(section => {
+              if (section === sectionToShow) {
+                  section.style.display = 'block';
+              } else {
+                  section.style.display = 'none';
+              }
+          });
+      }
+  });
+</script>
+
+
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const definitionLink = document.getElementById('definition-link');
+      const descriptionLink = document.getElementById('description-link');
+      const causesLink = document.getElementById('causes-link');
+      const definitionSection = document.getElementById('definition');
+      const descriptionSection = document.getElementById('description');
+      const causesSection = document.getElementById('causes');
+
+      // Initially hide the description and causes sections
+      descriptionSection.style.display = 'none';
+      causesSection.style.display = 'none';
+
+      // Add click event listener for definition link
+      definitionLink.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent default link behavior
+          definitionSection.style.display = 'block';
+          descriptionSection.style.display = 'none';
+          causesSection.style.display = 'none';
+      });
+
+      // Add click event listener for description link
+      descriptionLink.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent default link behavior
+          descriptionSection.style.display = 'block';
+          definitionSection.style.display = 'none';
+          causesSection.style.display = 'none';
+      });
+
+      // Add click event listener for causes link
+      causesLink.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent default link behavior
+          causesSection.style.display = 'block';
+          definitionSection.style.display = 'none';
+          descriptionSection.style.display = 'none';
+      });
+  });
+</script> -->
+
+    
+    {% endblock content %}
+                                

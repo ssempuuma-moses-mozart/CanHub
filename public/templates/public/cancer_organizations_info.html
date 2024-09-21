@@ -1,0 +1,101 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Google Fonts and Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Details Section -->
+<section id="details" class="details py-5" style="margin-top: 100px; background-color: #f5f7fa;">
+    <div class="container">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="profile-image mb-4">
+                    <img src="{% static 'img/home/logo44.jpg' %}" alt="Profile Image">
+                </div>
+                <div class="profile-details">
+                  <h2 class="font-weight-bold mb-3">{{ name }}</h2>
+                    <p class="text-muted mb-3">
+                        <span class="d-inline-block mr-3"><i class="fas fa-user"></i> Organized by {{ name }}</span>
+                        <span class="d-inline-block"><i class="fas fa-map-marker-alt"></i> {{ location }}</span>
+                    </p>
+                    <p class="text-muted">{{ description }}</p>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-lg mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title mb-3 text-success" style="font-family: 'Roboto', sans-serif;">
+                            <i class="fas fa-trophy"></i> Top Donations
+                        </h3>
+                        <p class="card-text">Here you can highlight the top donations or achievements related to this unit.</p>
+                        <ul class="list-group">
+                            <!-- Example donations -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                
+                              Donation 1
+                                <span class="badge badge-primary badge-pill">$500</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Donation 2
+                                <span class="badge badge-primary badge-pill">$300</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Donation 3
+                                <span class="badge badge-primary badge-pill">$200</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Details Section -->
+
+<!-- Custom CSS for hover effects -->
+<style>
+    .profile-image img {
+        width: 100%;
+        height: auto;
+        max-width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 5px solid #f5f5f5;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-image img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+    }
+
+    .list-group-item .badge {
+        font-size: 0.9rem;
+    }
+
+    .card-title i {
+        margin-right: 0.5rem;
+    }
+</style>
+
+{% endblock content %}

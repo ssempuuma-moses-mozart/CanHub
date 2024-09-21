@@ -1,0 +1,1328 @@
+{% load custom_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CanHub</title>
+    <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/network.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive-network.css' %}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            margin-left: 60px;
+        }
+
+        .sidebar {
+            order: 1;
+            /* Ensures the sidebar is on the right */
+            width: 250px;
+            /* Adjust if needed */
+            padding-right: 0px;
+            margin-right: 0px;
+        }
+
+        .main-content {
+            position: relative;
+            order: 0;
+            flex: 1;
+            width: 850px;
+            padding-right: 30px;
+            padding-left: 0px;
+            margin-left: 10px;
+        }
+
+        .heading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: 20px;
+            margin-top: 10px;
+            /* Adjust as needed for spacing from the edges */
+            font-size: 14px;
+            /* Adjust as needed */
+            color: #333;
+            /* Adjust as needed */
+            background: rgba(255, 255, 255, 0.8);
+            /* Optional: Add a background to ensure text readability */
+            padding: 2px;
+            /* Optional: Add padding around the text */
+            border-radius: 5px;
+            /* Optional: Rounded corners for the background */
+        }
+
+        .invitations {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows the items to wrap to the next row */
+            gap: 20px;
+            /* Space between cards */
+            padding-top: 50px;
+        }
+
+
+
+        /* Ad section styling */
+        .ad {
+            position: relative;
+            /* Positioning context for the button */
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        /* Button styling */
+        .button-right {
+            position: absolute;
+            /* Position the button absolutely */
+            top: 20px;
+            /* Distance from the top of the container */
+            right: 20px;
+            /* Distance from the right of the container */
+            padding: 10px 20px;
+            background-color: #007bff;
+            /* Bootstrap primary color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Button hover effect */
+        .button-right:hover {
+            background-color: #0056b3;
+        }
+
+        /* Links styling */
+        .links {
+            margin-top: 5px;
+            /* Ensure there's space for the button */
+        }
+
+        .link {
+            margin-bottom: 5px;
+            /* Space between links */
+            text-decoration: none;
+            color: black;
+            /* Link color */
+            font-size: 16px;
+            padding-right: 20px;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Separator styling */
+        .separator {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 15px 0;
+            /* Add some space around the separator */
+        }
+
+        .description {
+            display: block;
+            /* Ensure it behaves as a block-level element */
+            margin-top: 15px;
+            /* Add some space above the paragraph */
+            font-size: 14px;
+            /* Adjust the font size as needed */
+            color: #333;
+            /* Set text color */
+        }
+
+        /* styles.css */
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            padding-top: 5px;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            align-items: center;
+            /* Center vertically */
+            justify-content: center;
+            /* Center horizontally */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            padding-top: 2px;
+            margin: 5% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            /* Width of the modal */
+            max-width: 600px;
+            /* Max width of the modal */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            /* Optional: shadow effect */
+            border-radius: 8px;
+            /* Optional: rounded corners */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+
+        .container2 {
+            width: 60%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .pen-icon {
+            position: absolute;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .pen-icon.cover {
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+        }
+
+        .pen-icon.profile {
+            bottom: 0;
+            right: 200px;
+        }
+
+
+        .upload-icon {
+            position: absolute;
+            top: 70px;
+            left: 90px;
+            cursor: pointer;
+            color: #005580;
+            font-size: 20px;
+        }
+
+        .cover-upload-icon {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            color: #005580;
+            font-size: 20px;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 150px;
+            background-color: #e6e6fa;
+            margin-bottom: 20px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .add-industry-btn {
+            background-color: #0073b1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-industry-btn:hover {
+            background-color: #005580;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 20px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: block;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        .permissions {
+            margin: 20px 0;
+        }
+
+        /* For reducing the button size */
+        .btn.btn-primary {
+            font-size: 14px;
+            /* Decrease the text size */
+            padding: 8px 16px;
+            /* Adjust the padding for smaller button size */
+            background-color: #007bff;
+            /* Primary color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn.btn-primary:hover {
+            background-color: #0056b3;
+            /* Slightly darker shade on hover */
+        }
+
+        /* Position the button at the bottom-right */
+        .form-group.button-group {
+            display: flex;
+            justify-content: flex-end;
+            /* Aligns button to the right */
+            margin-top: 20px;
+            /* Add some spacing from above content */
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            /* Center align items vertically */
+            margin-bottom: 0px;
+            /* Space between user profiles */
+            padding: 10px;
+            padding-bottom: 0px;
+
+        }
+
+        .user-profile-pic {
+            width: 40px;
+            /* Adjust size as needed */
+            height: 40px;
+            /* Adjust size as needed */
+            border-radius: 50%;
+            /* Make the profile picture round */
+            margin-right: 10px;
+        }
+
+        .user-details {
+            flex: 1;
+            /* Allow the details to take the remaining space */
+        }
+
+        .user-details h1 {
+            font-size: 11px;
+            /* Font size for the user's name */
+            margin: 0;
+            /* Remove default margin */
+        }
+
+        .discover-content {
+            padding-top: 60px;
+            padding-bottom: 5px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .discover-content img {
+            width: 100px;
+            margin-right: 20px;
+        }
+
+
+        .button {
+            /* background-color: #007bff;  */
+            color: black;
+            /* White text color */
+            border: 1;
+            /* Remove default border */
+            border-radius: 15px;
+            /* Rounded corners for button */
+            padding: 5px 12px;
+            /* Padding inside the button */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            font-size: 14px;
+            /* Font size for button text */
+            margin-top: 5px;
+            /* Space between the name and the button */
+            align-items: center;
+            /* Center items vertically */
+            justify-content: center;
+            /* Center items horizontally */
+            margin-left: 70px;
+            /* Auto width to fit content */
+            background-color: transparent;
+            /* Remove background color */
+        }
+
+        .follow-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            /* Cursor to indicate the button is disabled */
+        }
+
+
+
+        .img1 {
+            object-fit: cover;
+            width: 100%;
+            height: 100px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+
+        .profile-info {
+            padding: 20px;
+            text-align: center;
+            margin-top: -60px;
+        }
+
+        .profile-info img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 2px solid #ccc;
+        }
+
+        .profile-info h1 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .profile-info h2 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .profile-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .profile-info ul li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-info ul li p {
+            margin: 0;
+            color: #333;
+        }
+
+        .profile-info ul li span {
+            font-weight: bold;
+        }
+
+        .my-items {
+            padding: 5px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .my-items a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .my-items img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .my-items span {
+            font-weight: bold;
+        }
+
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .messaging-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        .header {
+            background-color: #f4f4f4;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h4 {
+            margin: 0;
+        }
+
+        .header span {
+            font-size: 20px;
+        }
+
+        .messages {
+            display: none;
+            border-top: 1px solid #ccc;
+        }
+
+        .messages input[type="text"] {
+            width: 90%;
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .tab {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .tablinks {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .tablinks.active {
+            color: green;
+            border-bottom: 2px solid green;
+        }
+
+        .message-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            display: block;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-item img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .message-details {
+            flex-grow: 1;
+        }
+
+        .message-time {
+            color: gray;
+            font-size: 12px;
+            float: right;
+        }
+
+        /* Button to open New Message Widget */
+        .open-widget-btn {
+
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .open-widget-btn:hover {
+            background-color: darkblue;
+        }
+
+
+        .new-message-widget-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .new-message-widget {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+
+
+        .new-message-widget .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .new-message-widget .header h4 {
+            margin: 0;
+        }
+
+        .new-message-widget .close-btn {
+            cursor: pointer;
+            font-size: 20px;
+            color: red;
+        }
+
+        .new-message-content input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .new-message-content textarea {
+            width: 100%;
+            height: 100px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .new-message-widget .send-btn {
+            width: auto;
+            /* Make the button auto-sized instead of 100% */
+            background-color: green;
+            color: white;
+            padding: 8px 16px;
+            /* Smaller padding for a more compact button */
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            float: right;
+            /* Align it to the right side */
+            margin-top: 10px;
+            /* Add space between the textarea and the button */
+        }
+
+
+        .new-message-widget .send-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .img-write-post {
+            display: flex;
+            align-items: center;
+            /* Align items in the center vertically */
+            gap: 10px;
+            /* Add some space between the image and the textarea */
+        }
+
+        .profile-img img {
+            width: 40px;
+            /* Small size for the profile image */
+            height: 40px;
+            border-radius: 50%;
+            /* Make the image round */
+        }
+
+        .writepost textarea {
+            width: 400px;
+            /* Small width for the textarea */
+            padding: 5px;
+            resize: none;
+            /* Prevent resizing */
+        }
+
+        @media (max-width: 600px) {
+
+            /* Optional: Adjust for smaller screens */
+            .writepost textarea {
+                width: 150px;
+            }
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+            z-index: 100;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            flex-direction: row;
+            min-height: 100%;
+            width: 1128px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 5px;
+        }
+
+        .logo a img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .searchbar {
+            width: 100%;
+        }
+
+        .nav-left {
+            width: 40%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #Searchbar {
+            background-image: url(Img/magnifying-glass.png);
+            background-repeat: no-repeat;
+            background-position: left 16px top 10px;
+            background-size: 15px;
+            width: 70%;
+            padding: 0px 40px;
+            border: none;
+            box-sizing: border-box;
+            background-color: #e0e9ec;
+            border-radius: 2px;
+            height: 34px;
+        }
+
+        .nav-left {
+            /* padding: 0px 5px; */
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-png {
+            width: 22px;
+            height: 22px;
+        }
+
+        #profile {
+            border-radius: 50%;
+        }
+
+        .nav-right ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            /* Align items to the left */
+            gap: 30px;
+            /* Reduce space between the list items */
+            flex-wrap: nowrap;
+            /* Ensure all items stay on one line */
+            padding-left: 0;
+            /* Remove padding from the left */
+            margin-left: 0;
+            /* Remove margin from the left */
+            width: 100%;
+            /* Ensure the container uses the full width */
+        }
+
+        .nav-right ul li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            min-height: 50px;
+            min-width: 80px;
+            border-bottom: 2px solid white;
+        }
+
+        .nav-right ul li a {
+            display: flex;
+            flex-direction: row;
+            /* Horizontal alignment */
+            align-items: center;
+            /* Center the image and text vertically */
+            justify-content: center;
+            font-size: 13px;
+            gap: 5px;
+            /* Space between the image and text */
+        }
+
+        .nav-right ul li a span {
+            color: #434343;
+        }
+
+        .nav-right ul li:hover,
+        .nav-right ul li.active-link {
+            color: black;
+            border-bottom: 2px solid black;
+        }
+
+
+        /* Dropdown styling */
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .user-item {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .user-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+
+
+        .user-list {
+            margin: 10px 0;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .user-item img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- -----------Navigation bar-------------------- -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <a href="{% url 'website-home'%}" class="logo"><img src="{% static 'img/logo-color.png' %}"
+                            alt="logo" style="width: 120px; height: auto;"></a>
+                </div>
+                <div class="searchbar">
+                    <input type="text" name="Search" id="Searchbar" placeholder="Search" />
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <ul>
+                    <li>
+                        <a href="{% url 'index' %}"><img src="{% static 'img/Img/home.png' %}" class="menu-png" />
+                            <span>Home</span></a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'my_network' %}"><img src="{% static 'img/Img/user.png' %}" class="menu-png" />
+                            <span>My Network</span></a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'groups' %}"><img src="{% static 'img/Img/briefcase.png' %}" class="menu-png" />
+                            <span>Groups</span></a>
+                    </li>
+
+                    <li class="active-link">
+                        <a href="{% url 'messaging' %}"><img src="{% static 'img/Img/chat.png' %}" class="menu-png" />
+                            <span>Messaging</span></a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'notifications' %}"><img src="{% static 'img/Img/notification.png' %}"
+                                class="menu-png" />
+                            <span>Notifications</span></a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="{% static 'img/Img/Profile.jpg' %}" class="menu-png" id="profile" />
+                            <span>Me</span></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ------------------------------Main content start------------------------- -->
+
+    <div class="container0">
+        <div class="container">
+
+            <div class="sidebar">
+
+
+                <div class="profile-box">
+                    {% if user.cover and user.cover.url %}
+                    <img class="img1" src="{{ user.cover.url }}" width="100%" height="100px">
+                    {% else %}
+                    <img class="img1" src="{% static 'images/Background.png' %}" width="100%" height="100px">
+                    {% endif %}
+                    <div class="profile-info">
+                        <img src="{{ user.profile_pic.url }}" alt="">
+                        <h1>{{ full_name }}</h1>
+                        <h2>Development | CSE Student |</h2>
+                        <!-- <ul>
+                                    <li>
+                                        <p>Who's viewed your profile </p><span>68</span>
+                                    </li>
+                                    <li>
+                                        <p>Impressions on last post </p><span>450</span>
+                                    </li>
+                                    <li>
+                                        <p>Connections </p><span>995</span>
+                                    </li>
+                                </ul> -->
+                    </div>
+                    <div class="my-items">
+                        <a href="#">
+                            <img src="{% static 'img/Img/Bookmark.png' %}" alt="Bookmark">
+                            <span>My Items</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="useful-links">
+                        <span>About</span>
+                        <span>Accessibility</span>
+                        <span>Help Center</span>
+                        <span>Privacy and Terms</span>
+                        <span>AD Choices</span>
+                        <span>Advertising</span>
+                        <span>Business services</span>
+                        <span>Get the CanHub app</span>
+                        <span>More</span>
+                    </div>
+                    <div class="footer-tag">CanHub&copy; 2024</div>
+                </div>
+            </div>
+
+
+            <div class="main-content">
+                <div class="ad">
+                    <div class="links" style="margin-bottom: -10px; margin-top: -10px;">
+                        <div class="create-post">
+                            <div class="img-write-post">
+                                <div class="profile-img">
+                                    <a href="#"><img src="{{ user.profile_pic.url }}" alt="Profile"></a>
+                                </div>
+                                <div class="writepost">
+                                    <textarea name="writepost" id="write-post" placeholder="Search Messages"
+                                        rows="1"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr class="separator">
+                    <button class="open-widget-btn button-right" onclick="openNewMessage()">Messaging</button>
+                    <div class="description">
+
+
+                        <div class="discover-content">
+                            <img src="{% static 'images/sms.png' %}" alt="Person working" width="40%">
+                            <div class="discover-items">
+                                <h3 style="padding: 15px;">"Hey there! Message your family and friends!"</h3>
+                                <p style="padding-top: 15px; padding-bottom: 20px;">Find other trusted communities that
+                                    share and support your goals.</p>
+                                <button style="margin-top: 5px; margin-bottom: 80px;">Discover</button>
+                            </div>
+
+
+
+                        </div>
+                        <!-- The Modal -->
+                        <!-- Modal HTML -->
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Write Messsage</h2>
+
+                                <form id="profileForm" method="post" enctype="multipart/form-data"
+                                    action="{% url 'messaging' %}">
+                                    {% csrf_token %}
+
+                                    <div class="form-group">
+                                        <label for="rules">Message</label>
+                                        <textarea id="rules" name="rules" rows="5"
+                                            placeholder="Set the tone and expectations of your group"></textarea>
+                                    </div>
+
+                                    <!-- Button Group -->
+                                    <div class="form-group button-group">
+                                        <button type="submit" class="btn btn-primary">Send</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="messaging-widget" id="widget">
+                <div class="header" onclick="toggleWidget()">
+                    <h4>Messaging</h4>
+                    <span id="toggleArrow">&#x25BC;</span> <!-- Arrow pointing down -->
+                </div>
+                <div class="messages" id="messageBox">
+                    <input type="text" placeholder="Search messages">
+                    <div class="tab">
+                        <button class="tablinks active">Focused</button>
+                        <button class="tablinks">Other</button>
+                    </div>
+                    <div class="message-list">
+                        <div class="message-item">
+                            {% for user in users %}
+                            <div class="user-item" data-username="{{ user.username }}" onclick="selectRecipient(this)">
+                                <img src="{{ user.profile_pic.url }}" alt="{{ user.username }}" class="profile-pic" />
+                                <div class="message-details">
+                                <span>{{ user.first_name }} {{ user.last_name }}</span>
+                                <p>You: hello</p>
+                                <span class="message-time">10:56 AM</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                           
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- New Message Widget (centered modal) -->
+            <div class="new-message-widget-overlay" id="newMessageOverlay">
+                <div class="new-message-widget">
+                    <div class="header">
+                        <h4>New Message</h4>
+                        <span class="close-btn" onclick="closeNewMessage()">&#x2716;</span>
+                    </div>
+                    <div class="new-message-content">
+                        <input type="text" id="user-search" placeholder="Search recipient" onfocus="showUserList()" />
+
+                        <!-- The user list, initially hidden -->
+                        <div class="user-list" id="user-list" style="display:none;">
+
+                            {% for user in users %}
+                            <div class="user-item" data-username="{{ user.username }}" onclick="selectRecipient(this)">
+                                <img src="{{ user.profile_pic.url }}" alt="{{ user.username }}" class="profile-pic" />
+                                <span>{{ user.first_name }} {{ user.last_name }}</span>
+                            </div>
+                            {% endfor %}
+                        
+                        </div>
+
+                        <!-- Display selected recipient -->
+                        <div id="selected-recipient" style="display:none; margin-top: 10px;">
+                            <strong>Selected Recipient:</strong> <span id="recipient-name"></span>
+                        </div>
+
+                        <textarea placeholder="Type your message here..."></textarea>
+                        <button class="send-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <!-- Success message display -->
+    {% if success_message %}
+    <div class="alert alert-success" role="alert">
+        {{ success_message }}
+    </div>
+    {% endif %}
+
+
+
+    <!-- JavaScript to handle modal functionality -->
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openModalBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <script>
+        // Modal display logic
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Preview the cover image when uploaded
+        function loadCoverImage(event) {
+            var image = document.getElementById('cover-photo');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        // Preview the profile image when uploaded
+        function loadProfileImage(event) {
+            var image = document.getElementById('profile-image');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+    </script>
+
+
+
+    <script>
+        // Toggle Messaging Widget
+        function toggleWidget() {
+            const messageBox = document.getElementById("messageBox");
+            const toggleArrow = document.getElementById("toggleArrow");
+
+            if (messageBox.style.display === "none") {
+                messageBox.style.display = "block";
+                toggleArrow.innerHTML = "&#x25BC;"; // Down arrow
+            } else {
+                messageBox.style.display = "none";
+                toggleArrow.innerHTML = "&#x25B2;"; // Up arrow
+            }
+        }
+
+        // Open New Message Widget (modal)
+        function openNewMessage() {
+            document.getElementById("newMessageOverlay").style.display = "flex";
+        }
+
+        // Close New Message Widget
+        function closeNewMessage() {
+            document.getElementById("newMessageOverlay").style.display = "none";
+        }
+
+        // Default open state for main widget
+        window.onload = function () {
+            document.getElementById("messageBox").style.display = "none"; // Default open
+            document.getElementById("newMessageOverlay").style.display = "none"; // Default closed
+        };
+    </script>
+
+
+
+    <script>
+        // Show the user list when the input is clicked
+        function showUserList() {
+            document.getElementById('user-list').style.display = 'block';
+        }
+
+        // Search functionality for the user list
+        const searchInput = document.getElementById('user-search');
+        searchInput.addEventListener('input', function () {
+            const filter = searchInput.value.toLowerCase();
+            const users = document.querySelectorAll('.user-item');
+
+            users.forEach(user => {
+                const username = user.querySelector('span').innerText.toLowerCase();
+                if (username.includes(filter)) {
+                    user.style.display = '';
+                } else {
+                    user.style.display = 'none';
+                }
+            });
+        });
+
+        // Select recipient when a user is clicked
+        function selectRecipient(userItem) {
+            const recipientName = userItem.dataset.username;
+            document.getElementById('recipient-name').innerText = recipientName;
+            document.getElementById('selected-recipient').style.display = 'block';
+
+            // Optionally hide the user list after selecting
+            document.getElementById('user-list').style.display = 'none';
+        }
+
+        // Function to close the New Message modal
+        function closeNewMessage() {
+            document.getElementById('newMessageOverlay').style.display = 'none';
+        }
+    </script>
+
+
+</body>
+
+</html>

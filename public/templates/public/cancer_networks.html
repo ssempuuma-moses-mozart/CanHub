@@ -1,0 +1,1086 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dropdown/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.theme.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.transitions.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/meanmenu/meanmenu.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/wave/waves.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/wave/button.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/scrollbar/jquery.mCustomScrollbar.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/notika-custom-icon.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/style.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/responsive.css' %}">
+<script src="{% static 'dropdown/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-oVh2AxkA5qrj5nzEq7B/vDJcO+fV+UKFqVx3XMzO0vCoGNn8U7tpr/gUq6na0fjIgZ1F7arC/MI9jmk3BRwX6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+
+<style>
+    body {
+        background: #f9f9f9;
+        color: #666;
+        font-family: "Roboto", sans-serif;
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .sidebar {
+        flex: 1;
+        max-width: 300px;
+        padding: 20px;
+        background: #fff;
+        border-right: 1px solid #e1e1e1;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        flex: 3;
+        padding: 20px;
+        background: #fff;
+        min-width: 0; /* Fixes flexbox overflow issue */
+    }
+
+    .hm-searchbox {
+        display: flex;
+        position: relative;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #e1e1e1;
+        width: 100%;
+        max-width: 700px;
+        height: 45px;
+        margin-bottom: 20px;
+    }
+
+    .hm-searchbox input {
+        font-size: 13px;
+        color: #a5a5a5;
+        height: 45px;
+        background: transparent;
+        border: none;
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .hm-searchbox button {
+        border: 1px solid #e1e1e1;
+        font-size: 20px;
+        color: #242424;
+        width: 45px;
+        height: 45px;
+        text-align: center;
+        background: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hm-searchbox button:hover {
+        border-color: #fed700;
+        color: #fed700;
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    #data-table-basic {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+    #data-table-basic th, 
+    #data-table-basic td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    #data-table-basic thead th {
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    #data-table-basic tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    #data-table-basic tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    #data-table-basic tfoot th {
+        background-color: #f1f1f1;
+        color: #333;
+        border: none;
+    }
+
+    #data-table-basic td {
+        border-bottom: 1px solid #ddd;
+    }
+
+
+  #heroCarousel {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 470px; /* Adjust the height value as needed */
+  /* padding: 140px 0 100px 0; */
+  padding: 20px 0 10px 0; /* Adjust these values as needed */
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 470px; /* Adjust the height value as needed */
+  /* padding: 140px 0 100px 0; */
+  padding: 20px 0 10px 0; /* Adjust these values as needed */
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+#hero::before {
+  content: "";
+  position: absolute;
+  right: -100%;
+  top: 20%;
+  width: 250%;
+  height: 200%;
+  z-index: -1;
+  background-color: #e8ecf5;
+  transform: skewY(135deg);
+}
+#hero h1 {
+  margin: 0 0 10px 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 56px;
+  color: #5777ba;
+  font-family: "Poppins", sans-serif;
+}
+#hero h2 {
+  color: #515f7d;
+  margin-bottom: 50px;
+  font-size: 20px;
+}
+#hero .download-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  display: inline-block;
+  padding: 8px 24px 10px 46px;
+  border-radius: 3px;
+  transition: 0.5s;
+  color: #fff;
+  background: #47536e;
+  position: relative;
+}
+#hero .download-btn:hover {
+  background: #5777ba;
+}
+#hero .download-btn i {
+  font-size: 20px;
+  position: absolute;
+  left: 18px;
+  top: 8.5px;
+}
+#hero .download-btn + .download-btn {
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  #hero {
+    text-align: center;
+  }
+  #hero .download-btn + .download-btn {
+    margin: 0 10px;
+  }
+  #hero .hero-img {
+    text-align: center;
+  }
+  #hero .hero-img img {
+    width: 60%;
+  }
+}
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+  #hero .hero-img img {
+    width: 70%;
+  }
+}
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
+}
+
+
+    .filter-group {
+        margin-bottom: 20px;
+    }
+
+    .filter-group label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .filter-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            max-width: 100%;
+            border-right: none;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .main-content {
+            max-width: 100%;
+            padding-top: 0;
+        }
+
+        .hm-searchbox {
+            flex-direction: column;
+            align-items: stretch;
+            height: auto;
+        }
+
+        .hm-searchbox input {
+            margin-bottom: 10px;
+        }
+
+        .hm-searchbox button {
+            width: 100%;
+        }
+    }
+
+    /*--------------------------------------------------------------
+# App Features
+--------------------------------------------------------------*/
+.features .content {
+  padding: 30px 0;
+}
+.features .content .icon-box {
+  margin-top: 25px;
+}
+.features .content .icon-box h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 5px 0 10px 60px;
+}
+.features .content .icon-box i {
+  font-size: 48px;
+  float: left;
+  color: #5777ba;
+}
+.features .content .icon-box p {
+  font-size: 15px;
+  color: #979aa1;
+  margin-left: 60px;
+}
+@media (max-width: 991px) {
+  .features .image {
+    text-align: center;
+  }
+  .features .image img {
+    max-width: 80%;
+  }
+}
+@media (max-width: 667px) {
+  .features .image img {
+    max-width: 100%;
+  }
+}
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-bg {
+  background-color: #f2f5fa;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top: 0px;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  color: #5777ba;
+  font-family: "Poppins", sans-serif;
+}
+.section-title p {
+  margin-bottom: 0;
+}
+
+/*Header Middle*/
+.header-middle {
+	padding: 30px;
+}
+.hm-searchbox {
+	display: flex;
+	position: relative;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e1e1e1;
+	min-width: 638px;
+	height: 45px;
+	float: left;
+}
+.hm-searchbox .nice-select.select-search-category {
+	width: auto;
+	line-height: 43px;
+	height: 43px;
+	margin: 0;
+	border: 0;
+	padding: 0 28px 0 25px;
+	color: #242424;
+	font-size: 13px;
+	border-radius: 15px 0 0 15px;
+	font-family: 'Rubik',sans-serif;
+	font-weight: 400;
+	position: relative;
+}
+.select-search-category ul.list {
+	height: 440px;
+	overflow-y: auto;
+	overscroll-behavior-x: none;
+}
+.hm-searchbox .current::after {
+	content: "";
+	position: absolute;
+	display: block;
+	height: 22px;
+	width: 1px;
+	background: #e1e1e1;
+	top: 10px;
+	right: -10px;
+	font-size: 13px;
+}
+.hm-searchbox .nice-select.select-search-category::before {
+		right: 30px;
+		top: 25px;
+		color: #7e7e7e;
+}
+.hm-searchbox input {
+		font-size: 13px;
+		color: #a5a5a5;
+		height: 45px;
+		background: transparent;
+		border: none;
+		width: 100%;
+		padding: 0 60px 0 33px;
+}
+/*Header Middle Right*/
+.header-middle-right {
+		display: flex;
+		justify-content: flex-end;
+}
+/*Header Middle Wishlist*/
+.hm-wishlist {
+	float: left;
+	margin-right: 25px;
+	position: relative;
+}
+.hm-wishlist > a {
+	border: 1px solid #e1e1e1;
+	font-size: 20px;
+	color: #242424;
+	width: 45px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+.hm-wishlist > a:hover {
+	border-color: #fed700;
+	color: #fed700;
+}
+/*Header Middle Minicart*/
+.hm-minicart {
+		display: inline-block;
+		position: relative;
+}
+.hm-minicart-trigger {
+		border-radius: 2px;
+		background: #e80f0f;
+		color: #fff;
+		height: 45px;
+		cursor: pointer;
+		display: block;
+		position: relative;
+		padding: 0 15px 0 55px;
+}
+
+
+.li-btn-2 {
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 40px;
+	border: none;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #fed700;
+	padding: 0 20px;
+	text-transform: uppercase;
+	display: inline-block;
+}
+.li-btn-2:focus {
+	background-color: #fed700;
+}
+.li-btn-2:hover {
+	color: #ffffff;
+	background-color: #242424;
+}
+
+
+.new-table-design {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.new-table-design th, .new-table-design td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+.new-table-design thead th {
+    background-color: #f7f7f7;
+    color: #333333;
+    font-weight: bold;
+}
+
+.new-table-design tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.new-table-design tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.new-table-design tfoot th {
+    background-color: #f7f7f7;
+    color: #333333;
+    font-weight: bold;
+}
+
+
+
+
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+
+.profile-container {
+    text-align: center;
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #f5f5f5;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profile-details {
+    margin-top: 15px;
+}
+
+.profile-details h2 {
+    font-size: 14px;
+    margin: 10px 0 5px 0;
+    color: black;
+    transition: font-weight 0.3s ease;
+}
+
+.profile-details h2:hover {
+    font-weight: bold;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    color: black;
+}
+
+.profile-details .location {
+    color: black;
+    cursor: pointer;
+}
+
+
+/* Title styling */
+.title {
+    font-size: 48px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #007BC3; /* Blue color for "WHO Afro" */
+}
+
+.subtitle {
+    font-size: 38px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #007BC3; /* Blue color for "Marketplace" */
+    /* margin-top: -30px; */
+    text-align: center;
+}
+
+.description {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #4F4F4F; /* Dark gray color for the description text */
+    line-height: 1.5;
+}
+/* .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+
+.profile-container {
+    text-align: center;
+}
+
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #f5f5f5;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.profile-details {
+    margin-top: 15px;
+}
+
+.profile-details h2 {
+    font-size: 24px;
+    margin: 10px 0 5px 0;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    color: #666666;
+}
+
+.profile-details .location {
+    color: #007bff;
+    cursor: pointer;
+} */
+
+
+</style>
+
+
+<!-- ======= Hero Section ======= -->
+<!-- <section id="hero" class="d-flex align-items-center" style="background-color: #028DC9;">
+
+    <div class="">
+      <div class="row">
+        <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+          <div class="container" style="padding-right: 450px; margin-right: 12px;">
+            <h1 style="font-size: 28px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">Where to find Cancer Networks</h1>
+            <p style="color: white;  text-transform: lowercase; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">These networks help everyone involved work better and faster to beat cancer.</p>
+           
+          </div>
+        </div>
+        <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+          <img src="{% static 'img/home/1.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 600%;">
+        </div>
+      </div>
+    </div>
+
+  </section> -->
+  <!-- End Hero -->
+
+  <!-- ======= Hero Section ======= -->
+<!-- <section id="hero" class="d-flex align-items-center" style="background-color: #028DC9;">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+        <div class="container" style="padding-right: 450px; margin-right: 12px;">
+          <h1 style="font-size: 21px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif; margin-right: 65px;">Please locate cancer services next to you</h1>
+          <p style="color: white; text-transform: lowercase; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">
+            Find cancer units offering Pathology, Lab testing, Imaging, Surgical Treatment, Radiotherapy, Palliative Care, Bedside, Nursing, and General Screening
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static 'img/home/4.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 600%;">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'img/home/5.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 600%;">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section> -->
+<!-- End Hero -->
+
+
+<!-- ======= Hero Section Carousel ======= -->
+<section id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <!-- First Slide -->
+    <div class="carousel-item active" style="background-color: #028DC9;">
+      <div class="">
+        <div class="row">
+          <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+            <div class="container" style="padding-right: 520px; margin-right: 12px; padding-left: 120px;">
+              <h1 style="font-size: 21px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">
+                What are cancer Networks?
+              </h1>
+              <p style="color: white; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">
+                Collaborative systems involving Healthcare professionals, researchers, patients, policy makers, etc.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+            <img src="{% static 'img/home/logo55.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 95%;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Slide -->
+    <div class="carousel-item" style="background-color: #028DC9;">
+      <div class="">
+        <div class="row">
+          <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+            <div class="container" style="padding-right: 555px; margin-right: 12px; margin-left: 21px; padding-left: 100px;">
+              <h1 style="font-size: 21px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">
+                What do cancer Networks do?
+              </h1>
+              <p style="color: white; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">
+               These work together to address various aspects of cancer prevention, diagnosis, treatment and support.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+            <img src="{% static 'img/home/logo22.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 95%;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Third Slide -->
+     <div class="carousel-item" style="background-color: #028DC9;">
+      <div class="">
+        <div class="row">
+          <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+            <div class="container" style="padding-right: 555px; margin-right: 12px; margin-left: 21px; padding-left: 100px;">
+              <h1 style="font-size: 21px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">
+                Where are cancer Networks based?
+              </h1>
+              <p style="color: white; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">
+               These networks can take on various forms from local community based inititives to large international collaborations.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+            <img src="{% static 'img/home/logo44.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 95%;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Carousel Controls -->
+  <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</section>
+<!-- End Hero Section Carousel -->
+
+
+  <!-- ======= App Features Section ======= -->
+  <section id="features" class="features" style="margin-top: -100px;">
+    <div class="container">
+
+      <div class="section">
+        <h2 class="subtitle" style="font-size: 32px;">Cancer Networks</h2>
+        <!-- <h2 style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 21px;">Cancer Networks</h2> -->
+        <p style="font-family: Verdana, Arial, Helvetica, sans-serif; text-align: justify;">
+          In the context of healthcare, cancer networks aim to improve the coordination and quality of cancer
+          care by facilitating communication among different healthcare providers, ensuring that patients
+          receive timely and comprehensive treatment. They also play a crucial role in disseminating 
+          knowledge about the latest advancements in cancer research and treatment modalities, helping 
+          to standardize best practices across institutions.
+        
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- End App Features Section -->
+
+  <section style="padding-top: 0px; margin-top: -60px; padding-bottom: 25px;">
+    <div class="">
+        <div class="content-wrapper" style="display: flex; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
+
+          <aside class="container" style="height: 5%; max-width: 100%; margin-left: 250px; margin-bottom: 0px;">
+            <!-- <p style="margin-bottom: 10px; font-family: Verdana, Arial, Helvetica, sans-serif;">Filter by</p> -->
+            <form id="sidebar-filter-form" style="display: flex; flex-direction: row; align-items: center;">
+              <div class="filter-group" style="margin-right: 10px;">
+                <label for="name-select" style="margin-right: 5px; font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif;">Filter by Name of the Network</label>
+                <select id="name-select" name="name" class="form-select" onchange="this.form.submit()">
+                    <option value="0">All</option>
+                    {% for name in names %}
+                        <option value="{{ name }}" {% if name == selected_name %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+                <div class="filter-group" style="margin-right: 10px;">
+                  <label for="location-select" style="margin-right: 5px; font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif;">Filter by Location</label>
+                  <select id="location-select" name="location" class="form-select" onchange="this.form.submit()">
+                      <option value="0">All</option>
+                      {% for location in locations %}
+                          <option value="{{ location }}" {% if location == selected_location %}selected{% endif %}>{{ location }}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+            
+                <!-- <button type="submit" class="btn btn-primary mt-3"><i class="fa fa-search"></i> Apply Filters</button> -->
+                {% if user.is_superuser or user.is_staff %}
+                <a class="btn btn-primary" href="{% url 'upload_file' %}"><i class="fas fa-upload mt-3"></i> Upload Cancer Network</a>
+                {% endif %}
+       
+            </form>
+        </aside>
+   
+            <!-- <div class="" style="margin-top: -10px;">
+                <header style="display: flex; justify-content: center; display: none;">
+                    <div style="margin-left: auto;">
+                        <form id="filter-form" class="hm-searchbox" style="display: flex; align-items: center;">
+                            <input id="filter-input" type="text" placeholder="General Search ..." style="margin-right: 10px;">
+                            <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-secondary" type="reset"><i class="fa fa-times"></i></button>
+                        </form>
+                    </div>
+                </header>
+
+                <div class="data-table-area mg-t-0 mg-b-40">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><span class="table-project-n"> The Registered Cancer Units</span></h1>
+                                            <div class="sparkline13-outline-icon">
+                                                <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                                <span><i class="fa fa-wrench"></i></span>
+                                                <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sparkline13-graph">
+                                        <div class="datatable-dashv1-list custom-datatable-overright">
+                                            <div id="toolbar">
+                                                <select class="form-control">
+                                                    <option value="">Export Basic</option>
+                                                    <option value="all">Export All</option>
+                                                    <option value="selected">Export Selected</option>
+                                                </select>
+                                            </div>
+                                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-field="state" data-checkbox="true"></th>
+                                                        <th data-field="name" data-editable="false">Name</th>
+                                                        <th data-field="category" data-editable="false">Category</th>
+                                                        <th data-field="location" data-editable="false">Location</th>
+                                                        <th data-field="description" data-editable="false">Description</th>
+                                                      
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                             
+                                                    {% for unit in cancer_networks %}
+                                                    <tr data-category="{{ unit.category }}" data-location="{{ unit.location }}">
+                                                        <td></td>
+                                                        <td>{{ unit.name }}</td>
+                                                        <td>{{ unit.category }}</td>
+                                                        <td>{{ unit.location }}</td>
+                                                        <td>{{ unit.description |truncatewords_html:20 }}</td>
+                                                       
+                                                    </tr>
+                                                    {% endfor %}
+                                        
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+       
+            <div class="profile-grid">
+              {% for unit in cancer_networks %}
+              <div class="profile-container">
+                  <div class="profile-image">
+                      <img src="{% static 'img/home/logo44.jpg' %}" alt="Profile Image">
+                  </div>
+                  <div class="profile-details">
+                    <a href="{% url 'website-cancer_networks_info' item_id=unit.id %}"><h2 style="font-size: 16px;">{{ unit.name }}</h2></a>
+                      <p class="location">{{ unit.location }}</p>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+       
+          </div>
+    </div>
+</section>
+
+
+<script src="{% static 'dropdown/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'dropdown/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'dropdown/js/wow.min.js' %}"></script>
+<script src="{% static 'dropdown/js/jquery-price-slider.js' %}"></script>
+<script src="{% static 'dropdown/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'dropdown/js/jquery.scrollUp.min.js' %}"></script>
+<script src="{% static 'dropdown/js/meanmenu/jquery.meanmenu.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/waypoints.min.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/counterup-active.js' %}"></script>
+<script src="{% static 'dropdown/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script src="{% static 'dropdown/js/sparkline/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'dropdown/js/sparkline/sparkline-active.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/jquery.flot.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/flot-active.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/jquery.knob.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/jquery.appear.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/knob-active.js' %}"></script>
+<script src="{% static 'dropdown/js/jasny-bootstrap.min.js' %}"></script>
+<script src="{% static 'dropdown/js/icheck/icheck.min.js' %}"></script>
+<script src="{% static 'dropdown/js/icheck/icheck-active.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/jquery-ui-1.10.4.custom.min.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/jquery-ui-touch-punch.min.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/rangle-active.js' %}"></script>
+<script src="{% static 'dropdown/js/datapicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'dropdown/js/datapicker/datepicker-active.js' %}"></script>
+<script src="{% static 'dropdown/js/bootstrap-select/bootstrap-select.js' %}"></script>
+<script src="{% static 'dropdown/js/color-picker/farbtastic.min.js' %}"></script>
+<script src="{% static 'dropdown/js/color-picker/color-picker-active.js' %}"></script>
+<script src="{% static 'dropdown/js/notification/bootstrap-growl.min.js' %}"></script>
+<script src="{% static 'dropdown/js/notification/notification-active.js' %}"></script>
+<script src="{% static 'dropdown/js/summernote/summernote-updated.min.js' %}"></script>
+<script src="{% static 'dropdown/js/summernote/summernote-active.js' %}"></script>
+<script src="{% static 'dropdown/js/dropzone/dropzone.js' %}"></script>
+<script src="{% static 'dropdown/js/wave/waves.min.js' %}"></script>
+<script src="{% static 'dropdown/js/wave/wave-active.js' %}"></script>
+<script src="{% static 'dropdown/js/chosen/chosen.jquery.js' %}"></script>
+<script src="{% static 'dropdown/js/chat/jquery.chat.js' %}"></script>
+<script src="{% static 'dropdown/js/todo/jquery.todo.js' %}"></script>
+<script src="{% static 'dropdown/js/plugins.js' %}"></script>
+<script src="{% static 'dropdown/js/data-table/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'dropdown/js/data-table/data-table-act.js' %}"></script>
+<script src="{% static 'dropdown/js/main.js' %}"></script>
+
+
+
+<!-- <script>
+  document.getElementById('uploadButton').addEventListener('click', function(event) {
+      event.preventDefault();  // Prevent default anchor behavior
+      document.getElementById('fileInput').click();  // Trigger file input click
+  });
+
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+      var file = event.target.files[0];
+      if (file) {
+          // Create FormData object to hold the file
+          var formData = new FormData();
+          formData.append('file', file);
+
+          // Send the file using AJAX
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '{% url "upload_file" %}', true);  // URL to the upload view
+          xhr.onload = function() {
+              if (xhr.status === 200) {
+                  // Handle success
+                  alert('File uploaded successfully');
+              } else {
+                  // Handle error
+                  alert('File upload failed');
+              }
+          };
+          xhr.send(formData);
+      }
+  });
+</script> -->
+
+
+
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const categorySelect = document.getElementById('category-select');
+      const locationSelect = document.getElementById('location-select');
+      const profiles = document.querySelectorAll('.profile-container');
+      
+      function filterProfiles() {
+          const selectedCategory = categorySelect.value;
+          const selectedLocation = locationSelect.value;
+          
+          profiles.forEach(profile => {
+              const category = profile.querySelector('.profile-details p').innerText;
+              const location = profile.querySelector('.location').innerText;
+              
+              const categoryMatches = selectedCategory === '0' || category === selectedCategory;
+              const locationMatches = selectedLocation === '0' || location === selectedLocation;
+              
+              if (categoryMatches && locationMatches) {
+                  profile.style.display = '';
+              } else {
+                  profile.style.display = 'none';
+              }
+          });
+      }
+      
+      categorySelect.addEventListener('change', filterProfiles);
+      locationSelect.addEventListener('change', filterProfiles);
+  });
+  </script> -->
+
+<!-- <script>
+    document.getElementById('category-select').addEventListener('change', filterTable);
+    document.getElementById('location-select').addEventListener('change', filterTable);
+
+    document.getElementById('filter-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        filterTable();
+    });
+
+    document.getElementById('filter-form').addEventListener('reset', function() {
+        document.getElementById('filter-input').value = '';
+        filterTable();
+    });
+
+    function filterTable() {
+        var category = document.getElementById('category-select').value.toLowerCase();
+        var location = document.getElementById('location-select').value.toLowerCase();
+        var filterInput = document.getElementById('filter-input').value.toLowerCase();
+        var rows = document.querySelectorAll('#table tbody tr');
+
+        rows.forEach(function(row) {
+            var rowCategory = row.dataset.category.toLowerCase();
+            var rowLocation = row.dataset.location.toLowerCase();
+            var textContent = row.textContent.toLowerCase();
+            var categoryMatch = category === '0' || rowCategory === category;
+            var locationMatch = location === '0' || rowLocation === location;
+            var textMatch = textContent.includes(filterInput);
+
+            if (categoryMatch && locationMatch && textMatch) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+</script> -->
+
+{% endblock content %}

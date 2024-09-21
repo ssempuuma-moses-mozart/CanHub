@@ -1,0 +1,399 @@
+{% extends 'network/index.html' %}
+
+{% load static %}
+
+{% block profile %}
+
+<style>
+    /* Styling for the popup container */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;   /* Position 50% from the top of the viewport */
+    left: 50%;  /* Position 50% from the left of the viewport */
+    transform: translate(-50%, -50%); /* Center aligning trick */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Maximum width of the popup */
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000; /* Ensure the popup is above other content */
+}
+
+/* Styling for the popup content */
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* Styling for the close button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.sale-statistic-inner, .statistic-right-area, .email-statis-inner, .recent-post-wrapper, .blog-inner-list, .realtime-wrap, .add-todo-list, .notika-chat-list, .recent-signup-inner, .ongoing-task-inner, .contact-inner, .contact-form, .widget-tabs-int, .visitor-sv-tm-int, .search-engine-int, .alert-inner, .color-wrap, .wizard-wrap-int, .dropdown-list, .modals-list, .accordion-wn-wp, .tooltips-inner, .popovers-list, .typography-list, .typography-heading, .typography-inline-pro, .tpgp-helper, .contact-list, .inbox-left-sd, .inbox-text-list, .view-mail-list, .normal-table-list, .data-table-list, .form-element-list, .range-slider-wrap, .datepicker-int, .colorpicker-int, .summernote-wrap, .dropdone-nk, .form-example-wrap, .invoice-wrap, .google-map-single, .data-map-single, .image-cropper-wp, .nk-cd-ed-wp, .bar-chart-wp, .line-chart-wp, .area-chart-wp, .flot-chart-wp, .wb-traffic-inner, .notika-icon-int{
+	padding:20px;
+	background:#fff;
+}
+</style>
+
+    <div class="profile-view" data-user="{{username.username}}">
+        <div class="cover-image" style="background-image: url(/media/{{username.cover}})"></div>
+        <div class="profile-image" style="background-image: url(/media/{{username.profile_pic}})"></div>
+        <div class="profile-details">
+            <div>
+                {% if user.username == username.username %}
+                    <button class="btn btn-outline-success float-right" id="edit-profile-btn">Edit Profile</button>
+                {% elif is_follower %}
+                    <button class="btn btn-success float-right" onclick="unfollow_user(this,'{{username.username}}','edit_page')" id="following-btn">Following</button>
+                {% else %}
+                    <button class="btn btn-outline-success float-right" onclick="follow_user(this,'{{username.username}}','edit_page')" id="follow-btn">Follow</button>
+                {% endif %}
+            </div>
+            <div class="details-data">
+                <h5>{{username.first_name}} {{username.last_name}}</h5>
+                <div class="grey">@{{username.username}}</div>
+                <div class="bio row">
+                    {% if username.bio is not None %}
+                    <div class="col-lg-6">
+                       <span style="color: Green;">Bio Data</span><br>
+                        {{username.bio}}<br>
+                       <span style="color: Green;">Nickname</span> {{username.nickname}}<br>
+                       <span style="color: Green;">Location</span> {{username.location}}<br>
+                       </div>
+                       <div class="col-lg-6">
+                       <span style="color: Green;">Patient Or CareTaker</span> {{username.who}}<br>
+                       <span style="color: Green;">Gender</span> {{username.gender}}<br>
+                       <span style="color: Green;">Age</span> {{username.age}}<br>
+                       <span style="color: Green;">CancerType</span> {{username.cancertype}}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="grey" style="padding: 8px 0px;">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                        <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    &nbsp;Joined {{username.date_joined | date:"F Y"}}
+                </div>
+                <div>
+                    <strong>
+                        {{posts_count}}
+                    </strong>
+                    &nbsp;<span class="grey">Posts</span>
+                    &ensp;
+                    <a href="#">
+                        <strong id="following__count">{{following_count | default:0}}</strong>&nbsp;<span class="grey">Following</span>
+                    </a>
+                    &ensp;
+                    <a href="#">
+                        <strong id="follower__count">{{follower_count | default:0}}</strong>&nbsp;<span class="grey">Followers</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space"></div>
+
+    <div class="row popup"id="edit-profile-popup">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-element-list mg-t-30">
+                <div class="cmp-tb-hd">
+                    <span style="padding: 10px;" class="close" id="close-popup">&times;</span>
+                    <h2>Edit your Profile</h2>
+                    <p>You can now update your profile changing the username, bio data and other details</p>
+                </div>
+                <form id="edit-profile-form">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">First Name</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-support"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="first_name" name="first_name" class="form-control" data-mask="999 999 999 9999" value="{{ username.first_name }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">Last Name</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-mail"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="last_name" name="last_name" class="form-control" data-mask="999 999 999 9999" value="{{ username.last_name }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">User Name</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-tax"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="username" name="username" class="form-control" data-mask="999 999 999 9999" value="{{ username.username }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14PX;">Nickname</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-dollar"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="nickname" name="nickname" class="form-control" data-mask="999 999 999 9999" value="{{ username.nickname }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14PX;">Location</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-calendar"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="location" name="location" class="form-control" data-mask="999 999 999 9999" value="{{ username.location }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">Cancer Type</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int form-elet-mg">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-credit-card"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="cancertype" name="cancertype"  class="form-control" data-mask="999 999 999 9999" value="{{ username.cancertype }}">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">Patient or Caretaker</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int form-elet-mg res-mg-fcs">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-star"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="who" name="who" class="form-control" data-mask="999 999 999 9999" value="{{ username.who }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">Gender</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int form-elet-mg res-mg-fcs">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-ip-locator"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" id="gender" name="gender" class="form-control" data-mask="999 999 999 9999" value="{{ username.gender }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">Age</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int form-elet-mg">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-credit-card"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <input type="text" class="form-control" data-mask="999 999 999 9999" placeholder="Credit Card">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="nk-int-mk">
+                            <h2 style="font-size: 14px;">Bio Data</h2>
+                        </div>
+                        <div class="form-group ic-cmp-int">
+                            <div class="form-ic-cmp">
+                                <i class="notika-icon notika-phone"></i>
+                            </div>
+                            <div class="nk-int-st">
+                                <textarea id="bio" name="bio" class="form-control" data-mask="999 999 999 9999" >{{ username.bio }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="margin-top: 40px;">
+                    <button type="submit" class="btn btn-outline-success float-right" id="update-profile-btn" style="font-size: 12px;">Update Profile</button>
+                
+                    </div>
+                
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden popup form -->
+<!-- <div id="edit-profile-popup" class="popup">
+    <div class="popup-content">
+        <span class="close" id="close-popup">&times;</span>
+        <h2>Edit My Profile</h2>
+        <form id="edit-profile-form">
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ username.first_name }}">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ username.last_name }}">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ username.username }}">
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio">{{ username.bio }}</textarea>
+            <label for="nickname">Nickname:</label>
+            <input type="text" id="nickname" name="nickname" value="{{ username.nickname }}">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="{{ username.location }}">
+            <label for="who">Patient Or CareTaker:</label>
+            <input type="text" id="who" name="who" value="{{ username.who }}">
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" value="{{ username.gender }}">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" value="{{ username.age }}">
+            <label for="cancertype">Cancer Type:</label>
+            <input type="text" id="cancertype" name="cancertype" value="{{ username.cancertype }}">
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</div> -->
+
+
+<!-- Hidden popup form -->
+<!-- <div id="edit-profile-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <span class="close" id="close-popup">&times;</span>
+        <h2>Edit My Profile</h2>
+        <form id="edit-profile-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio"></textarea>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</div> -->
+{% endblock %}
+
+{% block emptyprofile %}
+    <center>
+        <br>
+        <strong style="font-size: 1.2em;">@{{username}} hasn't posted</strong>
+        <div class="grey" style="font-size: .9em;">When they do, their posts will show up here.</div>
+    </center>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const editProfileBtn = document.getElementById('edit-profile-btn');
+    const editProfilePopup = document.getElementById('edit-profile-popup');
+    const closePopupBtn = document.getElementById('close-popup');
+    const usernameInput = document.getElementById('username');
+    const bioInput = document.getElementById('bio');
+    
+    // Function to display the popup form with username and bio
+    function displayEditProfilePopup() {
+        // Example data fetching - replace with actual logic to fetch username and bio
+        const username = "{{ username.username }}"; // Replace with actual username fetching logic
+        const bio = "{{ username.bio }}"; // Replace with actual bio fetching logic
+        
+        // Set the values in the popup form
+        usernameInput.value = username;
+        bioInput.value = bio;
+        
+        // Display the popup form
+        editProfilePopup.style.display = "block";
+    }
+    
+    // Event listener for the Edit Profile button
+    editProfileBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default behavior (form submission, link following, etc.)
+        displayEditProfilePopup();
+    });
+    
+    // Event listener to close the popup form
+    closePopupBtn.addEventListener('click', function() {
+        editProfilePopup.style.display = "none";
+    });
+    
+    // Optional: Close the popup form when clicking outside of it
+    window.addEventListener('click', function(event) {
+        if (event.target === editProfilePopup) {
+            editProfilePopup.style.display = "none";
+        }
+    });
+    
+    // Prevent form submission (you can handle this according to your needs)
+    document.getElementById('edit-profile-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Handle form submission (e.g., send data to backend)
+        // You can add AJAX request here to update the profile data
+        // After successful submission, you may want to close the popup form
+        editProfilePopup.style.display = "none";
+    });
+});
+    </script>
+
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const editProfileBtn = document.getElementById('edit-profile-btn');
+    const editProfilePopup = document.getElementById('edit-profile-popup');
+    const closePopupBtn = document.getElementById('close-popup');
+    const usernameInput = document.getElementById('username');
+    const bioInput = document.getElementById('bio');
+    
+    // Function to display the popup form with username and bio
+    function displayEditProfilePopup() {
+        // Example data fetching - replace with actual logic to fetch username and bio
+        const username = "SampleUser"; // Replace with actual username fetching logic
+        const bio = "Lorem ipsum dolor sit amet..."; // Replace with actual bio fetching logic
+        
+        // Set the values in the popup form
+        usernameInput.value = username;
+        bioInput.value = bio;
+        
+        // Display the popup form
+        editProfilePopup.style.display = "block";
+    }
+    
+    // Event listener for the Edit Profile button
+    editProfileBtn.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default behavior (form submission, link following, etc.)
+        displayEditProfilePopup();
+    });
+});
+
+</script> -->
+
+{% endblock %}

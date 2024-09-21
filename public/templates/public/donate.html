@@ -1,0 +1,849 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'ccs/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'ccs/css/style.css' %}" rel="stylesheet">
+
+
+    <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/responsive-home.css' %}"/>
+
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'style_landing_page.css' %}"> -->
+
+
+<style>
+
+body {
+    background-image: url('{% static "img/donate.jpg" %}');
+    /* background: #dad8d8; */
+    color: #666666;
+    font-family: "Open Sans", sans-serif;
+}
+
+.profile {
+    /* background-color: #f9f9f9; */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    max-width: 400px;
+}
+
+.profile-header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.profile-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.location {
+    color: #666;
+    margin: 5px 0;
+}
+
+.specialty, .description {
+    margin: 10px 0;
+}
+
+.profile-body {
+    color: #555;
+}
+
+    .data-table-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+
+    .profile-card {
+        border-radius: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 400px;
+        width: 100%;
+        animation: slide-up 0.5s ease-out;
+    }
+
+    .profile-header, .profile-body {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .profile-header h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .profile-header .location {
+        color: #666;
+        margin-top: 8px;
+    }
+
+    .profile-body .specialty {
+        font-weight: bold;
+        color: #555;
+        margin-top: 16px;
+    }
+
+    .profile-body .description {
+        color: #777;
+        margin-top: 8px;
+    }
+
+    @keyframes slide-up {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+     /* Add the initial styling for the image */
+     .img-container {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .img-container img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    /* Add the CSS for the hover effect */
+    .img-container:hover img {
+      transform: scale(2.2);
+      /* Scale the image up on hover */
+    }
+    
+
+    
+/* Services Section
+--------------------------------*/
+#services {
+  background-size: cover;
+  padding: 60px 0 40px 0;
+}
+#services .box {
+  margin-bottom: 30px;
+}
+#services .icon {
+  float: left;
+}
+#services .icon i {
+  color: #611943;
+  font-size: 36px;
+  line-height: 0;
+  transition: 0.5s;
+}
+#services .title {
+  margin-left: 60px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+#services .title a {
+  color: #111;
+}
+#services .box:hover .title a {
+  color: #611943;
+}
+#services .description {
+  font-size: 14px;
+  margin-left: 60px;
+  line-height: 24px;
+  margin-bottom: 0;
+}
+
+
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.service-box {
+  /* background-color: #fff; */
+  padding: 2.5rem 1.3rem;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.service-box:hover .ico-circle {
+  transition: all 500ms ease;
+  color: #fff;
+  background-color: #0078ff;
+  box-shadow: 0 0 0 10px #cde1f8;
+}
+.service-box .service-ico {
+  margin-bottom: 1rem;
+  color: #1e1e1e;
+}
+.service-box .ico-circle {
+  transition: all 500ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-box .ico-circle i {
+  line-height: 0;
+  font-size: 40px;
+}
+.service-box .s-title {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.4rem 0;
+}
+.service-box .s-description {
+  color: #4e4e4e;
+}
+
+
+
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.services .icon-box {
+  text-align: center;
+  padding: 40px 20px;
+  transition: all ease-in-out 0.3s;
+  background: #fff;
+}
+.services .icon-box .icon {
+  margin: 0 auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 50px;
+  border: 1px solid #009970;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: ease-in-out 0.3s;
+  color: #009970;
+}
+.services .icon-box .icon i {
+  font-size: 28px;
+}
+.services .icon-box h4 {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+.services .icon-box h4 a {
+  color: #36343a;
+  transition: ease-in-out 0.3s;
+}
+.services .icon-box p {
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.services .icon-box:hover {
+  border-color: #fff;
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+}
+.services .icon-box:hover h4 a {
+  color: #009970;
+}
+.services .icon-box:hover .icon {
+  color: #fff;
+  background: #009970;
+}
+
+
+
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.services .icon-box {
+  text-align: center;
+  border: 1px solid #d5e1ed;
+  padding: 80px 20px;
+  transition: all ease-in-out 0.3s;
+}
+.services .icon-box .icon {
+  margin: 0 auto;
+  width: 64px;
+  height: 64px;
+  background: #1977cc;
+  border-radius: 5px;
+  transition: all 0.3s ease-out 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transform-style: preserve-3d;
+}
+.services .icon-box .icon i {
+  color: #fff;
+  font-size: 28px;
+}
+.services .icon-box .icon::before {
+  position: absolute;
+  content: "";
+  left: -8px;
+  top: -8px;
+  height: 100%;
+  width: 100%;
+  background: #badaf7;
+  border-radius: 5px;
+  transition: all 0.3s ease-out 0s;
+  transform: translateZ(-1px);
+}
+.services .icon-box h4 {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+.services .icon-box h4 a {
+  color: #2c4964;
+}
+.services .icon-box p {
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.services .icon-box:hover {
+  background: #1977cc;
+  border-color: #1977cc;
+}
+.services .icon-box:hover .icon {
+  background: #fff;
+}
+.services .icon-box:hover .icon i {
+  color: #1977cc;
+}
+.services .icon-box:hover .icon::before {
+  background: #3291e6;
+}
+.services .icon-box:hover h4 a, .services .icon-box:hover p {
+  color: #fff;
+}
+
+.overlay {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.description {
+    text-align: center;
+}
+
+.details-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.details-grid-item {
+    margin-bottom: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.featured-services .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+.featured-services .icon-box::before {
+  content: "";
+  position: absolute;
+  background: #d9f1f2;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 100%;
+  transition: all 0.3s;
+  z-index: -1;
+}
+.featured-services .icon-box:hover::before {
+  background: #3fbbc0;
+  top: 0;
+  border-radius: 0px;
+}
+.featured-services .icon {
+  margin-bottom: 15px;
+}
+.featured-services .icon i {
+  font-size: 48px;
+  line-height: 1;
+  color: #3fbbc0;
+  transition: all 0.3s ease-in-out;
+}
+.featured-services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.featured-services .title a {
+  color: #111;
+}
+.featured-services .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+.featured-services .icon-box:hover .title a, .featured-services .icon-box:hover .description {
+  color: #fff;
+}
+.featured-services .icon-box:hover .icon i {
+  color: #fff;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container2 {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-section {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image img {
+    flex-basis: 8%;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 5px 5px;
+}
+
+.product-details {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-details p {
+    margin: 5px 0;
+}
+
+.flash-sale {
+    background-color: #ffe5e5;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.new-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e60000;
+    margin-right: 10px;
+}
+
+.old-price {
+    font-size: 18px;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.discount {
+    font-size: 18px;
+    color: #007bff;
+}
+
+.stock-info {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.time-left {
+    font-size: 14px;
+    font-weight: bold;
+    color: #e60000;
+}
+
+.add-to-cart {
+    background-color: #ff9900;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background-color: #ff7700;
+}
+.linkedin-news{
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-section {
+    /* background-color: #fff; */
+    padding: 20px;
+    margin-top: 5px;
+    border-radius: 10px;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.location-select {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+select {
+    padding: 8px;
+    margin-left: 10px;
+}
+
+.delivery-options p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+
+</style>
+
+
+
+
+<div class="container0">
+  <div class="container"  style="margin-top: 10%; margin-bottom: 1cm;">
+
+
+      <!-- --------------------------------Left sidebar start---------------------------- -->
+      
+
+      <div class="left-sidebar">
+          <div class="profile-box">
+          <img class="img" src="{{ campaign_image.url }}"  style="width: 100%; height: auto;">
+              <div class="profile-info">
+                  <img src="{{ campaign_image.url }}" alt="">
+                  <h1>{{ title }}</h1>
+                  <h2>{{ description }}</h2>
+                  <!-- <ul>
+                      <li style="padding-bottom: 0px; margin-bottom: -10px;">
+                          <h2>We have raised UGX: </h2><span>{{ raised_amount }}</span>
+                      </li>
+                      <li  style="padding-bottom: 0px; margin-bottom: -10px;">
+                          <h2>Our target Goal is UGX: </h2><span>{{ goal_amount }}</span>
+                      </li>
+                      <li style="padding-bottom: 0px; margin-bottom: -10px;">
+                          <h2>Now we need only: </h2><span>{{ balance_amount }}</span>
+                      </li>
+                  </ul> -->
+              </div>
+              <div class="my-items">
+                  <a href="#">
+                      <img src="{% static 'img/Img/Bookmark.png' %}" alt="Bookmark">
+                      <span>My Items</span>
+                  </a>
+              </div>
+          </div>
+
+          <div class="activity">
+              <h2>Recent</h2>
+              <ul>
+                  <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Web development</span></a></li>
+                  <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>User interface</span></a></li>
+                  <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>CanHub Learning</span></a></li>
+                  <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Software Developer</span></a></li>
+                  <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>HR circle</span></a></li>
+                  <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Frontend Developers</span></a></li>
+                  <li><a href="#"><img src="{% static 'img/Img/group.png' %}" alt=""><span>Jobs 4 devs</span></a></li>
+              </ul>
+          </div>
+      </div>
+
+
+      <!-- --------------------------------Main content start---------------------------- -->
+      
+
+      <div class="main-content">
+
+
+          <!-- ---------------------Create post section----------------------- -->
+          
+
+          <!-- <div class="create-post">
+              <div class="img-write-post">
+                  <div class="profile-img">
+                      <a href="#"><img src="{{ user_profile_picture }}" alt="Profile"></a>
+                  </div>
+                  <div class="writepost">
+                      <textarea name="writepost" id="write-post" placeholder="Add post" rows="1"></textarea>
+                  </div>
+              </div>
+              <div class="options">
+                  <div class="post-options">
+                      <a href="">
+                          <img src="{% static 'img/Img/photo.png' %}">
+                          <span>Media</span>
+                      </a>
+                  </div>
+                  <div class="post-options">
+                      <a href="">
+                          <img src="{% static 'img/Img/calendar.png' %}">
+                          <span>Event</span>
+                      </a>
+                  </div>
+                  <div class="post-options post">
+                      <button>
+                          <span>POST</span>
+                      </button>
+                  </div>
+              </div>
+          </div>     -->
+
+
+          <div class="main-post" style="margin-top: 0px; padding-top: 0px;">
+            
+             
+            <div class="product-section">
+              <div class="product-details">
+                  <p>Donate: <a href="#">Mobile Money</a> | <a href="#">Gifts</a> | <a href="#">Banks</a> | <a href="#">Coupons</a></p>
+                  <div class="flash-sale">
+                      <h2>Goal</h2>
+                      <div class="price">
+                          <span class="new-price">UGX {{ goal_amount }}</span>
+                          <span class="old-price">UGX {{ raised_amount }}</span>
+                          <span class="discount">100%</span>
+                      </div>
+                      <p class="stock-info">Time left</p>
+                      <div class="time-left">
+                          <span>Time Started: {{ open_date }}</span>
+                          <span>Time End: {{ closing_date }}</span>
+                      </div>
+                  </div>
+                  <button class="add-to-cart" style="padding-top: 5px; margin-top: 12px;">Thank you</button>
+              </div>
+          </div>
+
+          </div>
+
+
+          <div class="main-post">
+            <div class="user-info">
+                <img src="{{ campaign_image.url }}">
+                <div class="user-info-span">
+                    <span class="post-name" style="font-size: 18px;">{{ title }}</span>
+                    <span>{{ description }}</span>
+                    <span>1h</span>
+                </div>
+            </div>
+            <div class="post-article">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi quos, est facere quod consectetur ex atque, laudantium illum architecto, ipsum placeat unde ad nostrum maxime! <br><br>
+
+            </div>
+            <div class="post-img">
+                <img src="{{ campaign_image.url }}" loading="lazy">
+            </div>
+            <div class="reactions">
+                <span>Rohit and 15 others liked your post</span>
+                <span>3 comments</span>
+            </div>
+            <div class="feed-options">
+                <a href="#"><img src="{% static 'img/Img/like.png' %}"><span>Like</span></a>
+                <a href="#"><img src="{% static 'img/Img/comment.png' %}"><span>Comment</span></a>
+                <a href="#"><img src="{% static 'img/Img/send.png' %}"><span>Send</span></a>
+            </div>
+        </div>
+
+
+
+      </div>
+
+
+      <!-- --------------------------------Right sidebar start---------------------------- -->
+
+
+      <div class="right-sidebar">
+
+          <div class="linkedin-news">
+              <div class="delivery-section">
+                <h2>Support & Now</h2>
+                <div class="location-select">
+                    <label for="region">Choose on how to fund:</label>
+                    <select id="region">
+                        <option>Mobile Money</option>
+                        <option>Bank</option>
+                        <option>Gifts</option>
+                    </select>
+                    <select id="district">
+                        <option>Airtel Money</option>
+                        <option>Mtn Mobile Money</option>
+                    </select>
+                </div>
+                <div class="delivery-options">
+                    <p>Raised amount: <span>UGX {{ raised_amount }}</span></p>
+                    <p>Goal amount: <span>UGX {{ goal_amount }}</span></p>
+                </div>
+            </div>
+      
+            
+          </div>
+
+          <div class="footer sticky">
+              <div class="useful-links">
+                  <span>About</span>
+                  <span>Accessibility</span>
+                  <span>Help Center</span>
+                  <span>Privacy and Terms</span>
+                  <span>AD Choices</span>
+                  <span>Advertising</span>
+                  <span>Business services</span>
+                  <span>Get the CanHub app</span>
+                  <span>More</span>
+                  
+              </div>
+              <div class="footer-tag">CanHub&copy; 2024</div>
+          </div>
+
+      </div>
+
+  </div>
+</div>
+
+
+  
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'ccs/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'ccs/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'ccs/mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'ccs/mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'ccs/js/main.js' %}"></script>
+ 
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+
+<script>
+    // Get the raised amount and goal amount
+    var raisedAmount = 8332; // This value should be dynamic, fetched from your backend
+    var goalAmount = 10389;
+
+    // Calculate the percentage raised
+    var percentageRaised = (raisedAmount / goalAmount) * 100;
+
+    // Update the progress bar width and text
+    var progressBar = document.querySelector('.progress-bar');
+    progressBar.style.width = percentageRaised + '%';
+    progressBar.textContent = Math.round(percentageRaised) + '%';
+
+    // You can add additional logic for animation or further customization if needed
+
+</script>
+
+
+
+
+    {% endblock content %}

@@ -1,0 +1,618 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+<!doctype html>
+<html class="no-js" lang="en" style="background-color: white;">
+
+<head>
+    {% if title %}
+        <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+        <title>CanHub - {{ title }}</title>
+        {% else %}
+        <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+        <title>CanHub</title>
+        {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/PNG" href="{% static 'img/logorbg.png' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- adminpro icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/adminpro-custon-icon.css' %}">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+        <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/modals.css' %}">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- data-table CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-editable.css' %}">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- charts C3 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/c3.min.css' %}">
+    <!-- forms CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/form/all-type-forms.css' %}">
+    <!-- switcher CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/switcher/color-switcher.css' %}">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <!-- Color Css Files
+        ============================================ -->
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-one.css' %}" title="color-one" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-two.css' %}" title="color-two" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-three.css' %}" title="color-three" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-four.css' %}" title="color-four" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-five.css' %}" title="color-five" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-six.css' %}" title="color-six" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-seven.css' %}" title="color-seven" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-eight.css' %}" title="color-eight" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-nine.css' %}" title="color-nine" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-ten.css' %}" title="color-ten" media="screen" />
+
+
+
+
+      <!-- Vendor CSS Files -->
+   <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+   <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+   <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+   <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+   <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">
+
+
+
+
+
+
+   <meta charset="utf-8">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+     <!-- Favicons -->
+  <!-- <link href="assets/img/favicon.png" rel="icon"> -->
+  <link href="{% static 'canhub/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'canhub/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'canhub/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'canhub/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'canhub/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'canhub/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'canhub/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'canhub/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'canhub/assets/css/style.css' %}" rel="stylesheet">
+
+
+
+
+
+
+ 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+      rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'oncisms/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oncisms/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'oncisms/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oncisms/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'oncisms/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oncisms/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  
+    <!-- Template Main CSS File -->
+    <link href="{% static 'oncisms/assets/css/style.css' %}" rel="stylesheet">
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="{% static 'dropdown/css/bootstrap.min.css' %}">
+    <!-- font awesome CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/font-awesome.min.css' %}">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'dropdown/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'dropdown/css/owl.transitions.css' %}">
+    <!-- meanmenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/meanmenu/meanmenu.min.css' %}">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/animate.css' %}">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/normalize.css' %}">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/scrollbar/jquery.mCustomScrollbar.min.css' %}">
+    <!-- Notika icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/notika-custom-icon.css' %}">
+    <!-- wave CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/wave/waves.min.css' %}">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/main.css' %}">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/style.css' %}">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'dropdown/css/responsive.css' %}">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+
+
+
+     <!-- animation library link -->
+     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+
+</head>
+<style> 
+  
+/* CSS for Zoom Effect */
+.dropdown-menu {
+    transform: scale(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+}
+
+footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f5f5f5; 
+            padding: 0px 0;
+        }
+     
+</style>
+
+<body id="body">
+
+
+
+
+   <!-- #21552D; -->
+   <!-- #009970; -->
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top"
+    style="background-color: #028DC9; position: fixed; width: 100%; height: 35px; z-index: 100; border-bottom: 0px solid #028DC9;">
+    <div class="container d-flex justify-content-between" style="margin-left: 0px;">
+      <div class="probootstrap-header-top d-flex align-items-center" style=" margin-top: 4px; font-size: 12px;">
+
+        <div class="container">
+          <div class="row">
+            <div style="color: white;" class="col-lg-12 col-md-9 col-sm-9 probootstrap-top-quick-contact-info">
+              <img style="width: 18px; margin-right: 5px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyIvPjxwYXRoIGQ9Ik0xMiAyYTggOCAwIDAgMC04IDhjMCAxLjg5Mi40MDIgMy4xMyAxLjUgNC41TDEyIDIybDYuNS03LjVjMS4wOTgtMS4zNyAxLjUtMi42MDggMS41LTQuNWE4IDggMCAwIDAtOC04Ii8+PC9nPjwvc3ZnPg==" alt="">
+              <span><i class="icon-location2"></i>Mbarara, Uganda.</span>
+              <img style="width: 18px; margin-left: 21px; margin-right: 5px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTkuMzY2IDEwLjY4MmExMC41NTYgMTAuNTU2IDAgMCAwIDMuOTUyIDMuOTUybC44ODQtMS4yMzhhMSAxIDAgMCAxIDEuMjk0LS4yOTZhMTEuNDIxIDExLjQyMSAwIDAgMCA0LjU4MyAxLjM2NGExIDEgMCAwIDEgLjkyMS45OTd2NC40NjJhMSAxIDAgMCAxLS44OTguOTk1QTE1LjUxIDE1LjUxIDAgMCAxIDE4LjUgMjFDOS45NCAyMSAzIDE0LjA2IDMgNS41YzAtLjUzOC4wMjctMS4wNzIuMDgyLTEuNjAyQTEgMSAwIDAgMSA0LjA3NyAzaDQuNDYyYTEgMSAwIDAgMSAuOTk3LjkyMUExMS40MjEgMTEuNDIxIDAgMCAwIDEwLjkgOC41MDRhMSAxIDAgMCAxLS4yOTYgMS4yOTR6bS0yLjUyMi0uNjU3bDEuOS0xLjM1N0ExMy40MSAxMy40MSAwIDAgMSA3LjY0NyA1SDUuMDFjLS4wMDYuMTY2LS4wMDkuMzMzLS4wMDkuNUM1IDEyLjk1NiAxMS4wNDQgMTkgMTguNSAxOWMuMTY3IDAgLjMzNC0uMDAzLjUtLjAxdi0yLjYzN2ExMy40MSAxMy40MSAwIDAgMS0zLjY2OC0xLjA5N2wtMS4zNTcgMS45YTEyLjQ1IDEyLjQ1IDAgMCAxLTEuNTg4LS43NWwtLjA1OC0uMDMzYTEyLjU1NiAxMi41NTYgMCAwIDEtNC43MDItNC43MDJsLS4wMzMtLjA1OGExMi40NDEgMTIuNDQxIDAgMCAxLS43NS0xLjU4OCIvPjwvc3ZnPg==" alt="">
+              <span><i class="icon-phone2"></i>+256 775 046 515 | +256 755 582 279</span>
+              <img style="width: 18px; margin-left: 21px; margin-right: 5px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTE0LjYwOCAxMi4xNzJjMCAuODQuMjM5IDEuMTc1Ljg2NCAxLjE3NWMxLjM5MyAwIDIuMjgtMS43NzUgMi4yOC00LjcyN2MwLTQuNTEyLTMuMjg4LTYuNjcyLTcuMzkzLTYuNjcyYy00LjIyMyAwLTguMDY0IDIuODMyLTguMDY0IDguMTg0YzAgNS4xMTIgMy4zNiA3Ljg5NiA4LjUyIDcuODk2YzEuNzUyIDAgMi45MjgtLjE5MiA0LjcyNy0uNzkybC4zODYgMS42MDdjLTEuNzc2LjU3Ny0zLjY3NC43NDQtNS4xMzcuNzQ0Yy02Ljc2OCAwLTEwLjM5My0zLjcyLTEwLjM5My05LjQ1NmMwLTUuNzg0IDQuMjAxLTkuNzIgOS45ODUtOS43MmM2LjAyNCAwIDkuMjE1IDMuNiA5LjIxNSA4LjAxNmMwIDMuNzQ0LTEuMTc1IDYuNi00Ljg3MSA2LjZjLTEuNjgxIDAtMi43ODQtLjY3Mi0yLjkyOC0yLjE2MWMtLjQzMiAxLjY1Ni0xLjU4NCAyLjE2MS0zLjE0NSAyLjE2MWMtMi4wODggMC0zLjg0LTEuNjA5LTMuODQtNC44NDhjMC0zLjI2NCAxLjUzNy01LjI4IDQuMjk3LTUuMjhjMS40NjQgMCAyLjM3Ni41NzYgMi43ODIgMS40ODhsLjY5Ny0xLjI3MmgyLjAxNnY3LjA1N3ptLTIuOTUxLTMuMTY4YzAtMS4zMTktLjk4NS0xLjg3Mi0xLjgwMS0xLjg3MmMtLjg4OCAwLTEuODcxLjcxOS0xLjg3MSAyLjgzMmMwIDEuNjguNzQ0IDIuNjE2IDEuODcxIDIuNjE2Yy43OTIgMCAxLjgwMS0uNTA0IDEuODAxLTEuODk2eiIvPjwvc3ZnPg=="
+                alt="">
+              <span><i class="icon-mail"></i>oncims.info@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- #2ecc40 -->
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent"
+    style="background: white; margin-top: 16px;">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-11 d-flex align-items-center justify-content-between">
+          <!-- <h1 class="logo"><a href="index.html">ONCIMS</a></h1> -->
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo"><img style="height: 7cm;" src="assets/img/logoonsim.png" alt="" class="img-fluid"></a> -->
+
+          <li class="" style="list-style: none;"><a href="#"
+              style="margin-right: 30px; font-size: 15px;font-family: Raleway, Arial, sans-serif; padding-top: 0px; padding-bottom: 0px;"><img
+                src="{% static 'img/logo-color.png' %}" width="180px;" alt="" class="px-3 cover"><span
+                style="font-weight:700; font-size: x-large;"></span></a>
+
+          </li>
+          <!-- color: #2ecc40; -->
+          <nav id="navbar" class="navbar" style="margin-left: -40px; margin-top: 18px;">
+            <ul>
+              <li><a class="nav-link scrollto" href="{% url 'website-home'%}" style="text-transform: none;">Home</a></li>
+              <!-- <li><a class="nav-link scrollto" href="#oncim" style="text-transform: none;">Where to Find</a></li>  -->
+              
+
+              <li class="dropdown">
+                <a href="#" class="nav-link scrollto" style="text-transform: none;">Where to Find</a>
+                <ul class="dropdown-menu zoom-effect">
+                    <li><a href="{% url 'website-cancer_units'%}">Cancer Facilities</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                    <!-- <li><a href="{% url 'website-cancer_experts'%}">Cancer Experts</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;"> -->
+                    <li><a href="{% url 'website-cancer_networks'%}">Cancer Network</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                    <li><a href="{% url 'website-cancer_organizations'%}">Cancer Organizations</a></li>
+                </ul>
+            </li>
+              
+              <!-- <li><a class="nav-link scrollto" href="#oncims_ehr" style="text-transform: none;">Cancer Information</a></li> -->
+
+              <li class="dropdown">
+                <a href="#" class="nav-link scrollto" style="text-transform: none;">Cancer Information</a>
+                <ul class="dropdown-menu zoom-effect">
+                    <li><a href="{% url 'website-cancer_types'%}">Cancer Types</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                    <li><a href="{% url 'website-video'%}">Videos</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                    <li><a href="{% url 'website-infographics'%}">Infographics</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                    <li><a href="{% url 'website-presentation'%}">Presentations</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                    <!-- <li><a href="{% url 'website-keynotes'%}">Key Notes</a></li> -->
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                    <li><a href="{% url 'website-faqs'%}">Faqs</a></li>
+                    <hr style="color: #009970; width: 4cm; margin: 0px; padding: 0px;">
+                </ul>
+            </li>
+              
+              <li><a class="nav-link scrollto" href="{% url 'index' %}" style="text-transform: none;">Cancer Social Network</a></li>
+              <li><a class="nav-link scrollto" href="{% url 'website-crowdfunding' %}" style="text-transform: none;">Crowd Funding</a></li>
+              <li><a class="getstarted scrollto" href="#features">Download CanHub App</a></li>
+              
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+
+
+  {% block content %}
+
+    {% endblock content %}
+
+  <footer id="footer" style="padding: 0px 0;">
+
+    <div class="container d-md-flex py-0">
+
+      <div class="me-md-auto text-center " style="margin-left: 11cm; padding-bottom: 12px; padding-top: 0px;">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Canhub</span></strong>. All Rights Reserved
+        </div>
+        <!-- <div class="credits">
+         
+          Designed by <a href="#">Global Auto Systems</a>
+        </div> -->
+      </div>
+      <!-- <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div> -->
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+
+    <!-- Footer End-->
+    <!-- jquery
+        ============================================ -->
+    <script src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="{% static 'js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/counterup/counterup-active.js' %}"></script>
+    <!-- peity JS
+        ============================================ -->
+    <script src="{% static 'js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'js/peity/peity-active.js' %}"></script>
+        <!-- rounded-counter JS
+        ============================================ -->
+    <script src="{% static 'js/rounded-counter/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.appear.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/knob-active.js' %}"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="{% static 'js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+        ============================================ -->
+    <script src="{% static 'js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.spline.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'js/flot/Chart.min.js' %}"></script>
+    <script src="{% static 'js/flot/flot-active.js' %}"></script>
+    <!-- map JS
+        ============================================ -->
+    <script src="{% static 'js/map/raphael.min.js' %}"></script>
+    <script src="{% static 'js/map/jquery.mapael.js' %}"></script>
+    <script src="{% static 'js/map/france_departments.js' %}"></script>
+    <script src="{% static 'js/map/world_countries.js' %}"></script>
+    <script src="{% static 'js/map/usa_states.js' %}"></script>
+    <script src="{% static 'js/map/map-active.js' %}"></script>
+    <!-- data table JS
+        ============================================ -->
+    <script src="{% static 'js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-export.js' %}"></script>
+    <!-- switcher JS
+        ============================================ -->
+    <script src="{% static 'js/switcher/styleswitch.js' %}"></script>
+    <script src="{% static 'js/switcher/switch-active.js' %}"></script>
+    <!-- modal JS
+        ============================================ -->
+    <script src="{% static 'js/modal-active.js' %}"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="{% static 'js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/icheck/icheck-active.js' %}"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+
+
+
+
+      <!-- Vendor JS Files -->
+  <script src="{% static 'canhub/assets/vendor/purecounter/purecounter.js' %}"></script>
+  <script src="{% static 'canhub/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'canhub/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'canhub/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'canhub/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'canhub/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'canhub/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'canhub/assets/js/main.js' %}"></script>
+
+
+
+
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'oncisms/assets/vendor/purecounter/purecounter.js' %}"></script>
+    <script src="{% static 'oncisms/assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'oncisms/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'oncisms/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'oncisms/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'oncisms/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'oncisms/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+    <script src="{% static 'oncisms/assets/vendor/php-email-form/validate.js' %}"></script>
+  
+    <!-- Template Main JS File -->
+    <script src="{% static 'oncisms/assets/js/main.js' %}"></script>
+    <!-- Custom template scripts -->
+    <script src="{% static 'oncisms/assets/js/magister.js' %}"></script>
+
+
+
+
+
+
+
+
+
+    <script src="{% static 'dropdown/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/bootstrap.min.js' %}"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/wow.min.js' %}"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/jquery-price-slider.js' %}"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/owl.carousel.min.js' %}"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/jquery.scrollUp.min.js' %}"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/meanmenu/jquery.meanmenu.js' %}"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'dropdown/js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'dropdown/js/counterup/counterup-active.js' %}"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'dropdown/js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'dropdown/js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'dropdown/js/flot/flot-active.js' %}"></script>
+    <!-- knob JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/knob/jquery.knob.js' %}"></script>
+    <script src="{% static 'dropdown/js/knob/jquery.appear.js' %}"></script>
+    <script src="{% static 'dropdown/js/knob/knob-active.js' %}"></script>
+    <!--  wave JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/wave/waves.min.js' %}"></script>
+    <script src="{% static 'dropdown/js/wave/wave-active.js' %}"></script>
+    <!--  animation JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/animation/animation-active.js' %}"></script>
+    <!--  Chat JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/chat/jquery.chat.js' %}"></script>
+    <!--  todo JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/todo/jquery.todo.js' %}"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/plugins.js' %}"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="{% static 'dropdown/js/main.js' %}"></script>
+	<!-- tawk chat JS
+		============================================ -->
+    <!-- <script src="{% static 'dropdown/js/tawk-chat.js' %}"></script> -->
+
+
+    <script>
+      var lastScrollTop = 0;
+      var topbar = document.getElementById("topbar");
+    
+      window.addEventListener("scroll", function () {
+        var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+        if (currentScroll > lastScrollTop) {
+          // Scroll down
+          topbar.style.top = "-40px"; // Hides the topbar by moving it above the viewport
+        } else {
+          // Scroll up
+          topbar.style.top = "0"; // Shows the topbar by bringing it back to its original position
+        }
+    
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+      });
+    </script>
+
+
+ 
+  <!-- animation link -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+      AOS.init();
+  </script>
+
+<script>
+  var lastScrollTop = 0;
+  var header = document.getElementById("header");
+  var topbar = document.getElementById("topbar");
+
+  window.addEventListener("scroll", function () {
+    var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      // Scroll down
+      header.style.top = "-80px"; // Move the header above the viewport
+      topbar.style.top = "-40px"; // Move the topbar above the viewport
+    } else {
+      // Scroll up
+      header.style.top = "1"; // Bring the header back to its original position
+      topbar.style.top = "0"; // Bring the topbar back to its original position
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+  });
+</script>
+
+    
+
+<script>
+  window.embeddedChatbotConfig = {
+  chatbotId: "XsG_WzbjhGbZRaIW8SfPC",
+  domain: "www.chatbase.co"
+  }
+  </script>
+  <script
+  src="https://www.chatbase.co/embed.min.js"
+  chatbotId="XsG_WzbjhGbZRaIW8SfPC"
+  domain="www.chatbase.co"
+  defer>
+  </script>
+  
+</body>
+
+</html>

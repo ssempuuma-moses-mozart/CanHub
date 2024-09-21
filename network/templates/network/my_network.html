@@ -1,0 +1,451 @@
+{% load custom_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CanHub</title>
+  <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/network.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/responsive-network.css' %}" />
+
+  <style>
+    .container2 {
+      position: relative;
+      /* This makes the heading positioning relative to this container */
+    }
+
+    .heading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: 20px;
+      margin-top: 10px;
+      /* Adjust as needed for spacing from the edges */
+      font-size: 14px;
+      /* Adjust as needed */
+      color: #333;
+      /* Adjust as needed */
+      background: rgba(255, 255, 255, 0.8);
+      /* Optional: Add a background to ensure text readability */
+      padding: 2px;
+      /* Optional: Add padding around the text */
+      border-radius: 5px;
+      /* Optional: Rounded corners for the background */
+    }
+
+    .invitations {
+      display: flex;
+      flex-wrap: wrap;
+      /* Allows the items to wrap to the next row */
+      gap: 20px;
+      /* Space between cards */
+      padding-top: 50px;
+    }
+
+    .card {
+      width: calc(25% - 20px);
+      /* 25% of the container width minus the gap */
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+
+    .card img.profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .card img.background {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .card .close-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .card .details {
+      text-align: center;
+      padding: 60px 20px 20px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .card p.title {
+      color: gray;
+      font-size: 14px;
+      padding-top: -20px;
+
+    }
+
+    .card p.profile-info {
+      font-size: 12px;
+      color: #888;
+      padding-top: 12px;
+
+    }
+
+    .card .connect-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #0073b1;
+      color: #0073b1;
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .card .connect-btn:hover {
+      background-color: #0073b1;
+      color: #fff;
+    }
+
+    .card .connect-btn i {
+      margin-right: 5px;
+    }
+
+    .follow-button {
+      /* background-color: #007bff;  */
+      color: black;
+      /* White text color */
+      border: 1;
+      /* Remove default border */
+      border-radius: 15px;
+      /* Rounded corners for button */
+      padding: 5px 10px;
+      /* Padding inside the button */
+      cursor: pointer;
+      /* Pointer cursor on hover */
+      font-size: 16px;
+      /* Font size for button text */
+      margin-top: 5px;
+      /* Space between the name and the button */
+      align-items: center;
+      /* Center items vertically */
+      justify-content: center;
+      /* Center items horizontally */
+
+      /* Auto width to fit content */
+      background-color: transparent;
+      /* Remove background color */
+    }
+
+    .follow-button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+      /* Cursor to indicate the button is disabled */
+    }
+
+    .button {
+      /* background-color: #007bff;  */
+      color: black;
+      /* White text color */
+      border: 1;
+      /* Remove default border */
+      border-radius: 15px;
+      /* Rounded corners for button */
+      padding: 5px 10px;
+      /* Padding inside the button */
+      cursor: pointer;
+      /* Pointer cursor on hover */
+      font-size: 16px;
+      /* Font size for button text */
+      margin-top: 5px;
+      /* Space between the name and the button */
+      align-items: center;
+      /* Center items vertically */
+      justify-content: center;
+      /* Center items horizontally */
+
+      /* Auto width to fit content */
+      background-color: transparent;
+      /* Remove background color */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- -----------Navigation bar-------------------- -->
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-left">
+        <div class="logo">
+          <a href="{% url 'website-home'%}" class="logo"><img src="{% static 'img/logo-color.png' %}" alt="logo"
+              style="width: 120px; height: auto;"></a>
+        </div>
+        <div class="searchbar">
+          <input type="text" name="Search" id="Searchbar" placeholder="Search" />
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <ul>
+          <li>
+            <a href="{% url 'index' %}"><img src="{% static 'img/Img/home.png' %}" class="menu-png" />
+              <span>Home</span></a>
+          </li>
+
+          <li class="active-link">
+            <a href="{% url 'my_network' %}"><img src="{% static 'img/Img/user.png' %}" class="menu-png" />
+              <span>My Network</span></a>
+          </li>
+
+          <li>
+            <a href="{% url 'groups' %}"><img src="{% static 'img/Img/briefcase.png' %}" class="menu-png" />
+              <span>Groups</span></a>
+          </li>
+
+          <li>
+            <a href="{% url 'messaging' %}"><img src="{% static 'img/Img/chat.png' %}" class="menu-png" />
+              <span>Messaging</span></a>
+          </li>
+
+          <li>
+            <a href="{% url 'notifications' %}"><img src="{% static 'img/Img/notification.png' %}" class="menu-png" />
+              <span>Notifications</span></a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="{% static 'img/Img/Profile.jpg' %}" class="menu-png" id="profile" />
+              <span>Me</span></a>
+          </li>
+          <li id="business-border">
+            <a href="#"><img src="{% static 'img/Img/menu.png' %}" class="menu-png" />
+              <span>For Business</span></a>
+          </li>
+          <li id="Premium-link">
+            <a href="#"><span>Try Premium for Free</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ------------------------------Main content start------------------------- -->
+
+  <div class="container0">
+    <div class="container">
+      <div class="sidebar">
+        <div class="heading">
+          <h1>Manage my network</h1>
+        </div>
+        <div class="reference-links">
+          <ul>
+            <li>
+              <a href=""><span>Connections</span><span>1005</span></a>
+            </li>
+            <li>
+              <a href=""><span>Contacts</span><span>395</span></a>
+            </li>
+            <li>
+              <a href=""><span>Following and followers</span><span>1005</span></a>
+            </li>
+            <li>
+              <a href=""><span>Groups</span><span>8</span></a>
+            </li>
+            <li>
+              <a href=""><span>Events</span><span>4</span></a>
+            </li>
+            <li>
+              <a href=""><span>Pages</span><span>50</span></a>
+            </li>
+            <li>
+              <a href=""><span>Newsletters</span><span>10</span></a>
+            </li>
+            <li>
+              <a href=""><span>Hashtags</span><span>15</span></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer">
+          <div class="useful-links">
+            <span>About</span>
+            <span>Accessibility</span>
+            <span>Help Center</span>
+            <span>Privacy and Terms</span>
+            <span>AD Choices</span>
+            <span>Advertising</span>
+            <span>Business services</span>
+            <span>Get the CanHub app</span>
+            <span>More</span>
+          </div>
+          <div class="footer-tag">CanHub &copy; 2024</div>
+        </div>
+      </div>
+
+      <div class="main-content">
+
+        <div class="ad">
+
+          <p>
+            No pending invitations
+          </p>
+
+        </div>
+
+        <div class="ad">
+          <h1>Achieve your goals faster with CanHub</h1>
+          <h2>
+            See who's viewed your profile and directly message members outside
+            of your network.
+          </h2>
+          <button>Try Premium for Free</button>
+        </div>
+
+        <div class="container2">
+          <p class="heading">People you may know based on your recent activity</p>
+          <div class="invitations">
+            {% for user in all_users %}
+            <div class="card">
+              {% if user.cover and user.cover.url %}
+              <img class="img1" src="{{ user.cover.url }}" width="100%" height="100px">
+              {% else %}
+              <img class="img1" src="{% static 'images/Background.png' %}" width="100%" height="100px">
+              {% endif %}
+              <img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-pic">
+              <div class="close-icon">×</div>
+              <div class="details">
+                <h3>{{ user.get_full_name }}</h3>
+                <p class="title">Talent Acquisition Specialist, Employee...</p>
+                <p class="profile-info">Based on your profile</p>
+                <!-- <a href="#" class="connect-btn"><i>+</i> Connect</a> -->
+
+                <button id="follow-btn" class="follow-button" data-user-id="{{ user.id }}" style="cursor: pointer;">
+                  {% if follow_statuses|get_item:user.id %}
+                  Following
+                  {% else %}
+                  Follow
+                  {% endif %}
+                </button>
+
+              </div>
+            </div>
+            {% empty %}
+            <p>No users found.</p>
+            {% endfor %}
+
+          </div>
+        </div>
+
+        <div class="container2">
+          <p class="heading">Groups you may know based on your recent activity</p>
+          <div class="invitations">
+            {% for group in groups %}
+            <div class="card">
+              {% if group.cover_photo %}
+              <img class="img1" src="{{ group.cover_photo.url }}" width="100%" height="100px">
+              {% else %}
+              <img class="img1" src="{% static 'images/Background.png' %}" width="100%" height="100px">
+              {% endif %}
+              {% if group.profile_image %}
+              <img src="{{ group.profile_image.url }}" alt="Group Profile Picture" class="profile-pic">
+              {% else %}
+              <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="profile-pic">
+              {% endif %}
+              <div class="close-icon">×</div>
+              <div class="details">
+                <a href="{% url 'group_detail' group.id %}"><h3>{{ group.group_name }}</h3></a>
+                <p class="title">{{ group.description|truncatewords:10 }}</p>
+                <p class="profile-info">{{ group.industry }}, {{ group.location }}</p>
+
+
+                {% if is_logged_in %}
+                {% if is_member|get_item:group.id %}
+                <button class="button" disabled>Member</button>
+                {% else %}
+                <form method="POST" action="{% url 'group_detail' group.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="button" style="width: 100px;">+ Join</button>
+                </form>
+                {% endif %}
+                {% endif %}
+
+                <!-- {% if is_logged_in %}
+                  {% if is_member %}
+                 <a href="{% url 'group_detail' group.id %}"><button id="connect-button" class="connect-button" data-group-id="{{ group.id }}" style="cursor: pointer;">  
+                      Connect
+                  </button></a>
+                  {% endif %}
+                  
+                {% endif %} -->
+
+
+
+
+              </div>
+            </div>
+            {% empty %}
+            <p>No groups found.</p>
+            {% endfor %}
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    // Follow/Unfollow button functionality
+    document.querySelectorAll("#follow-btn").forEach(followBtn => {
+      followBtn.addEventListener("click", function () {
+        var userId = this.getAttribute("data-user-id");
+        var csrftoken = "{{ csrf_token }}";
+
+        fetch(`/follow/${userId}/`, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": csrftoken
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.following) {
+              this.innerText = "Following"; // Change button text to Unfollow
+            } else {
+              this.innerText = "Follow"; // Change button text to Follow
+            }
+            // Optionally update follow count or other UI elements
+            // this.nextElementSibling.innerText = data.follow_count; // Example
+          });
+      });
+    });
+
+  </script>
+
+
+
+</body>
+
+</html>

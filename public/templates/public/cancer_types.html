@@ -1,0 +1,849 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'dropdown/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.theme.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/owl.transitions.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/meanmenu/meanmenu.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/wave/waves.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/wave/button.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/scrollbar/jquery.mCustomScrollbar.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/notika-custom-icon.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/style.css' %}">
+<link rel="stylesheet" href="{% static 'dropdown/css/responsive.css' %}">
+<script src="{% static 'dropdown/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-oVh2AxkA5qrj5nzEq7B/vDJcO+fV+UKFqVx3XMzO0vCoGNn8U7tpr/gUq6na0fjIgZ1F7arC/MI9jmk3BRwX6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    body {
+        background: #f9f9f9;
+        color: #666;
+        font-family: "Roboto", sans-serif;
+    }
+
+    .featured-services .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+.featured-services .icon-box::before {
+  content: "";
+  position: absolute;
+  background: #d9f1f2;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 100%;
+  transition: all 0.3s;
+  z-index: -1;
+}
+.featured-services .icon-box:hover::before {
+  background: #3fbbc0;
+  top: 0;
+  border-radius: 0px;
+}
+.featured-services .icon {
+  margin-bottom: 15px;
+}
+.featured-services .icon i {
+  font-size: 48px;
+  line-height: 1;
+  color: #3fbbc0;
+  transition: all 0.3s ease-in-out;
+}
+.featured-services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.featured-services .title a {
+  color: #111;
+}
+.featured-services .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+.featured-services .icon-box:hover .title a, .featured-services .icon-box:hover .description {
+  color: #fff;
+}
+.featured-services .icon-box:hover .icon i {
+  color: #fff;
+}
+    .content-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .sidebar {
+        flex: 1;
+        max-width: 300px;
+        padding: 20px;
+        background: #fff;
+        border-right: 1px solid #e1e1e1;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        flex: 3;
+        padding: 20px;
+        background: #fff;
+        min-width: 0; /* Fixes flexbox overflow issue */
+    }
+
+    .hm-searchbox {
+        display: flex;
+        position: relative;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #e1e1e1;
+        width: 100%;
+        max-width: 700px;
+        height: 45px;
+        margin-bottom: 20px;
+    }
+
+    .hm-searchbox input {
+        font-size: 13px;
+        color: #a5a5a5;
+        height: 45px;
+        background: transparent;
+        border: none;
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .hm-searchbox button {
+        border: 1px solid #e1e1e1;
+        font-size: 20px;
+        color: #242424;
+        width: 45px;
+        height: 45px;
+        text-align: center;
+        background: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hm-searchbox button:hover {
+        border-color: #fed700;
+        color: #fed700;
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    #data-table-basic {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+    #data-table-basic th, 
+    #data-table-basic td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    #data-table-basic thead th {
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    #data-table-basic tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    #data-table-basic tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    #data-table-basic tfoot th {
+        background-color: #f1f1f1;
+        color: #333;
+        border: none;
+    }
+
+    #data-table-basic td {
+        border-bottom: 1px solid #ddd;
+    }
+
+  #heroCarousel {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 470px; /* Adjust the height value as needed */
+  /* padding: 140px 0 100px 0; */
+  padding: 20px 0 10px 0; /* Adjust these values as needed */
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+   
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 470px; /* Adjust the height value as needed */
+  /* padding: 140px 0 100px 0; */
+  padding: 20px 0 10px 0; /* Adjust these values as needed */
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+#hero::before {
+  content: "";
+  position: absolute;
+  right: -100%;
+  top: 20%;
+  width: 250%;
+  height: 200%;
+  z-index: -1;
+  background-color: #e8ecf5;
+  transform: skewY(135deg);
+}
+#hero h1 {
+  margin: 0 0 10px 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 56px;
+  color: #5777ba;
+  font-family: "Poppins", sans-serif;
+}
+#hero h2 {
+  color: #515f7d;
+  margin-bottom: 50px;
+  font-size: 20px;
+}
+#hero .download-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  display: inline-block;
+  padding: 8px 24px 10px 46px;
+  border-radius: 3px;
+  transition: 0.5s;
+  color: #fff;
+  background: #47536e;
+  position: relative;
+}
+#hero .download-btn:hover {
+  background: #5777ba;
+}
+#hero .download-btn i {
+  font-size: 20px;
+  position: absolute;
+  left: 18px;
+  top: 8.5px;
+}
+#hero .download-btn + .download-btn {
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  #hero {
+    text-align: center;
+  }
+  #hero .download-btn + .download-btn {
+    margin: 0 10px;
+  }
+  #hero .hero-img {
+    text-align: center;
+  }
+  #hero .hero-img img {
+    width: 60%;
+  }
+}
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+  #hero .hero-img img {
+    width: 70%;
+  }
+}
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
+}
+
+
+    .filter-group {
+        margin-bottom: 20px;
+    }
+
+    .filter-group label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .filter-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .content-wrapper {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            max-width: 100%;
+            border-right: none;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .main-content {
+            max-width: 100%;
+            padding-top: 0;
+        }
+
+        .hm-searchbox {
+            flex-direction: column;
+            align-items: stretch;
+            height: auto;
+        }
+
+        .hm-searchbox input {
+            margin-bottom: 10px;
+        }
+
+        .hm-searchbox button {
+            width: 100%;
+        }
+    }
+
+    /*--------------------------------------------------------------
+# App Features
+--------------------------------------------------------------*/
+.features .content {
+  padding: 30px 0;
+}
+.features .content .icon-box {
+  margin-top: 25px;
+}
+.features .content .icon-box h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 5px 0 10px 60px;
+}
+.features .content .icon-box i {
+  font-size: 48px;
+  float: left;
+  color: #5777ba;
+}
+.features .content .icon-box p {
+  font-size: 15px;
+  color: #979aa1;
+  margin-left: 60px;
+}
+@media (max-width: 991px) {
+  .features .image {
+    text-align: center;
+  }
+  .features .image img {
+    max-width: 80%;
+  }
+}
+@media (max-width: 667px) {
+  .features .image img {
+    max-width: 100%;
+  }
+}
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-bg {
+  background-color: #f2f5fa;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top: 0px;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  color: #5777ba;
+  font-family: "Poppins", sans-serif;
+}
+.section-title p {
+  margin-bottom: 0;
+}
+
+/*Header Middle*/
+.header-middle {
+	padding: 30px;
+}
+.hm-searchbox {
+	display: flex;
+	position: relative;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e1e1e1;
+	min-width: 638px;
+	height: 45px;
+	float: left;
+}
+.hm-searchbox .nice-select.select-search-category {
+	width: auto;
+	line-height: 43px;
+	height: 43px;
+	margin: 0;
+	border: 0;
+	padding: 0 28px 0 25px;
+	color: #242424;
+	font-size: 13px;
+	border-radius: 15px 0 0 15px;
+	font-family: 'Rubik',sans-serif;
+	font-weight: 400;
+	position: relative;
+}
+.select-search-category ul.list {
+	height: 440px;
+	overflow-y: auto;
+	overscroll-behavior-x: none;
+}
+.hm-searchbox .current::after {
+	content: "";
+	position: absolute;
+	display: block;
+	height: 22px;
+	width: 1px;
+	background: #e1e1e1;
+	top: 10px;
+	right: -10px;
+	font-size: 13px;
+}
+.hm-searchbox .nice-select.select-search-category::before {
+		right: 30px;
+		top: 25px;
+		color: #7e7e7e;
+}
+.hm-searchbox input {
+		font-size: 13px;
+		color: #a5a5a5;
+		height: 45px;
+		background: transparent;
+		border: none;
+		width: 100%;
+		padding: 0 60px 0 33px;
+}
+/*Header Middle Right*/
+.header-middle-right {
+		display: flex;
+		justify-content: flex-end;
+}
+/*Header Middle Wishlist*/
+.hm-wishlist {
+	float: left;
+	margin-right: 25px;
+	position: relative;
+}
+.hm-wishlist > a {
+	border: 1px solid #e1e1e1;
+	font-size: 20px;
+	color: #242424;
+	width: 45px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+.hm-wishlist > a:hover {
+	border-color: #fed700;
+	color: #fed700;
+}
+/*Header Middle Minicart*/
+.hm-minicart {
+		display: inline-block;
+		position: relative;
+}
+.hm-minicart-trigger {
+		border-radius: 2px;
+		background: #e80f0f;
+		color: #fff;
+		height: 45px;
+		cursor: pointer;
+		display: block;
+		position: relative;
+		padding: 0 15px 0 55px;
+}
+
+
+.li-btn-2 {
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 40px;
+	border: none;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #fed700;
+	padding: 0 20px;
+	text-transform: uppercase;
+	display: inline-block;
+}
+.li-btn-2:focus {
+	background-color: #fed700;
+}
+.li-btn-2:hover {
+	color: #ffffff;
+	background-color: #242424;
+}
+
+
+.new-table-design {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.new-table-design th, .new-table-design td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+.new-table-design thead th {
+    background-color: #f7f7f7;
+    color: #333333;
+    font-weight: bold;
+}
+
+.new-table-design tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.new-table-design tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.new-table-design tfoot th {
+    background-color: #f7f7f7;
+    color: #333333;
+    font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+#items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.icon-box {
+    text-align: center; /* Center-aligns text and images inside icon-box */
+}
+
+.cad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.description {
+    font-size: 16px;
+    color: black;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 38px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #007BC3; /* Blue color for "Marketplace" */
+    /* margin-top: -30px; */
+    text-align: center;
+}
+
+</style>
+
+
+<!-- ======= Hero Section Carousel ======= -->
+<section id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <!-- First Slide -->
+    <div class="carousel-item active" style="background-color: #028DC9;">
+      <div class="">
+        <div class="row">
+          <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+            <div class="container" style="padding-right: 520px; margin-right: 12px; padding-left: 120px;">
+              <h1 style="font-size: 21px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">
+                What are cancer Types?
+              </h1>
+              <p style="color: white; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">
+                Cancer types refer to the various forms of cancer based on the tissue or organ where they originate. 
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+            <img src="{% static 'img/home/logo55.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 95%;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Slide -->
+    <div class="carousel-item" style="background-color: #028DC9;">
+      <div class="">
+        <div class="row">
+          <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+            <div class="container" style="padding-right: 555px; margin-right: 12px; margin-left: 21px; padding-left: 100px;">
+              <h1 style="font-size: 21px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">
+                What do cancer Types do?
+              </h1>
+              <p style="color: white; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">
+                Cancer types identify the origin of cancer, guiding diagnosis, treatment, and management. They help tailor care to each patient's needs.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+            <img src="{% static 'img/home/logo22.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 95%;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Third Slide -->
+     <div class="carousel-item" style="background-color: #028DC9;">
+      <div class="">
+        <div class="row">
+          <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+            <div class="container" style="padding-right: 555px; margin-right: 12px; margin-left: 21px; padding-left: 100px;">
+              <h1 style="font-size: 21px; color: white; font-family: Verdana, Arial, Helvetica, sans-serif;">
+                Where are cancer Types based?
+              </h1>
+              <p style="color: white; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 15px; text-align: justify;">
+                Cancer types are based on the tissue or organ where the cancer originates, such as the breast, lung, prostate, or skin.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+            <img src="{% static 'img/home/logo44.jpg' %}" class="img-fluid" alt="" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; height: 95%;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Carousel Controls -->
+  <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</section>
+<!-- End Hero Section Carousel -->
+
+  <!-- ======= App Features Section ======= -->
+  <section id="features" class="features" style="margin-top: -100px;">
+    <div class="container">
+
+      <div class="section">
+        <h2 class="subtitle" style="font-size: 32px;">Cancer Types</h2>
+        <!-- <h2 style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 21px;">Cancer Types</h2> -->
+        <p style="font-family: Verdana, Arial, Helvetica, sans-serif; text-align: justify;">
+          Cancer encompasses a vast array of conditions characterized by abnormal cell growth and 
+          proliferation. It's not just one disease but rather a collection of diverse conditions 
+          affecting various organs and tissues in the body.
+          Among the most common types is breast cancer, which forms in the cells of the breasts and 
+          predominantly affects women. Lung cancer, primarily caused by smoking, is a leading cause 
+          of cancer-related deaths globally, with two main types: non-small cell lung cancer (NSCLC) 
+          and small cell lung cancer (SCLC).
+          Prostate cancer affects the prostate gland in men and is one of the most prevalent cancers 
+          among men. Colorectal cancer, encompassing cancers of the colon and rectum, ranks as the third
+           most common cancer worldwide.
+          Skin cancer, including melanoma and non-melanoma types, develops due to exposure to UV 
+          radiation. Leukemia, a cancer of the blood and bone marrow, leads to an abnormal increase in 
+          white blood cells.
+          Lymphoma, originating in the lymphatic system, includes Hodgkin lymphoma and non-Hodgkin
+          lymphoma. Brain tumors, whether benign or malignant, arise within or around the brain, 
+          resulting in a wide range of symptoms.
+          Ovarian cancer, though relatively uncommon, often goes undetected until it has spread within 
+          the pelvis and abdomen. Pancreatic cancer, aggressive and difficult to detect early, carries 
+          a poor prognosis.
+          .</p>
+      </div>
+    </div>
+  </section>
+  <!-- End App Features Section -->
+
+  <section style="padding-top: 0px; margin-top: -80px; padding-bottom: 25px;">
+    <div class="">
+        <div class="content-wrapper" style="display: flex; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
+
+          <aside class="container" style="height: 5%; max-width: 100%; margin-left: 400px; margin-bottom: 0px;">
+            <form id="sidebar-filter-form" style="display: flex; flex-direction: row; align-items: center;">
+                <div class="filter-group" style="margin-right: 10px;">
+                    <label for="cancer-type-select" style="margin-right: 5px; font-size: 11px;">Filter by Cancer Type</label>
+                    <select id="cancer-type-select" class="form-select" onchange="filterCards()">
+                        <option value="0">All</option>
+                        <!-- Add cancer types dynamically -->
+                        {% for type in cancer_types %}
+                            <option value="{{ type.cancertype }}">{{ type.cancertype }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <a href="#" onclick="refreshPageAndScroll();">Refresh Page</a>
+            </form>
+        </aside>
+      
+            
+            <div class="container" style="margin-top: -10px;">
+                <!-- Removed the header with the search box -->
+                <section id="service-featured" class="featured-services" style="margin-top: 0px; padding-top: 10px; margin-bottom: 20px; padding-bottom: 20px;">
+                  <div class="container" data-aos="fade-up">
+                    <div id="items-container" class="row">
+                      {% for unit in cancer_types %}
+                      <a href="{% url 'website-cancer_types_info' item_id=unit.id %}" class="cad col-md-2 col-lg-2 d-flex align-items-stretch mb-4 mb-lg-4 item"  data-cancer-type="{{ unit.cancertype }}">
+                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                            <img style="height: 40px; width: 40px;" src="{% static 'img/tc.png' %}" alt="Awesome Image">
+                            <p class="description" style="font-size: 16px; color: black;">{{ unit.cancertype }}</p>
+                        </div>
+                    </a>
+                    
+                      {% endfor %}
+                    </div>
+                  </div>
+                
+                </section>
+            </div>
+
+<script src="{% static 'dropdown/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'dropdown/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'dropdown/js/wow.min.js' %}"></script>
+<script src="{% static 'dropdown/js/jquery-price-slider.js' %}"></script>
+<script src="{% static 'dropdown/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'dropdown/js/jquery.scrollUp.min.js' %}"></script>
+<script src="{% static 'dropdown/js/meanmenu/jquery.meanmenu.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/waypoints.min.js' %}"></script>
+<script src="{% static 'dropdown/js/counterup/counterup-active.js' %}"></script>
+<script src="{% static 'dropdown/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script src="{% static 'dropdown/js/sparkline/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'dropdown/js/sparkline/sparkline-active.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/jquery.flot.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'dropdown/js/flot/flot-active.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/jquery.knob.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/jquery.appear.js' %}"></script>
+<script src="{% static 'dropdown/js/knob/knob-active.js' %}"></script>
+<script src="{% static 'dropdown/js/jasny-bootstrap.min.js' %}"></script>
+<script src="{% static 'dropdown/js/icheck/icheck.min.js' %}"></script>
+<script src="{% static 'dropdown/js/icheck/icheck-active.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/jquery-ui-1.10.4.custom.min.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/jquery-ui-touch-punch.min.js' %}"></script>
+<script src="{% static 'dropdown/js/rangle-slider/rangle-active.js' %}"></script>
+<script src="{% static 'dropdown/js/datapicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'dropdown/js/datapicker/datepicker-active.js' %}"></script>
+<script src="{% static 'dropdown/js/bootstrap-select/bootstrap-select.js' %}"></script>
+<script src="{% static 'dropdown/js/color-picker/farbtastic.min.js' %}"></script>
+<script src="{% static 'dropdown/js/color-picker/color-picker-active.js' %}"></script>
+<script src="{% static 'dropdown/js/notification/bootstrap-growl.min.js' %}"></script>
+<script src="{% static 'dropdown/js/notification/notification-active.js' %}"></script>
+<script src="{% static 'dropdown/js/summernote/summernote-updated.min.js' %}"></script>
+<script src="{% static 'dropdown/js/summernote/summernote-active.js' %}"></script>
+<script src="{% static 'dropdown/js/dropzone/dropzone.js' %}"></script>
+<script src="{% static 'dropdown/js/wave/waves.min.js' %}"></script>
+<script src="{% static 'dropdown/js/wave/wave-active.js' %}"></script>
+<script src="{% static 'dropdown/js/chosen/chosen.jquery.js' %}"></script>
+<script src="{% static 'dropdown/js/chat/jquery.chat.js' %}"></script>
+<script src="{% static 'dropdown/js/todo/jquery.todo.js' %}"></script>
+<script src="{% static 'dropdown/js/plugins.js' %}"></script>
+<script src="{% static 'dropdown/js/data-table/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'dropdown/js/data-table/data-table-act.js' %}"></script>
+<script src="{% static 'dropdown/js/main.js' %}"></script>
+
+
+
+<script>
+  document.getElementById('cancer-type-select').addEventListener('change', filterCards);
+   
+  function filterCards() {
+    var selectedCancerType = document.getElementById('cancer-type-select').value.toLowerCase();
+
+    if (selectedCancerType === null) {
+   
+      var cards = document.querySelectorAll('#items-container .item');
+      cards.forEach(function(card) {
+        card.classList.remove('hidden');
+      });
+    } else {
+    
+      var cards = document.querySelectorAll('#items-container .item');
+
+      cards.forEach(function(card) {
+        var cardCancerType = card.dataset.cancerType.toLowerCase();
+
+        if (selectedCancerType === 'all' || cardCancerType === selectedCancerType) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+  }
+</script>
+
+<script>
+  function refreshPageAndScroll() {
+      location.reload(); // Refresh the page
+      setTimeout(function() {
+          var element = document.getElementById('service-featured');
+          if(element) {
+              element.scrollIntoView({ behavior: 'smooth' }); // Scroll to the service-featured section
+          }
+      }, 500); // Adjust delay if necessary
+      return false; // Prevent default link behavior
+  }
+</script>
+
+{% endblock content %}
